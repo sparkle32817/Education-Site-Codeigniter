@@ -1,0 +1,43 @@
+/*
+* Home page
+*/
+div.emply-list-info p{
+    margin: 0;
+}
+
+div.emply-list-info p.text-ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 204px;
+}
+
+div.emply-list-info .div-location-address{
+    min-height: 55px;
+    margin: 10px 0 0 0;
+}
+
+div.emply-list-info .div-star{
+    margin: 0 0 10px 0;
+}
+
+div.emply-list-info .job-num{
+    font-size:14px;
+}
+
+div.emply-list-info .div-middle{
+    margin: 5px 0;
+}
+
+div.emply-list {
+    width: 366px;
+    height: 228px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-white {
+    color: white;
+}
