@@ -20,12 +20,9 @@ class Tutor extends CI_Controller
 
     public function index()
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -40,12 +37,9 @@ class Tutor extends CI_Controller
 
     public function detail($id)
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -56,7 +50,7 @@ class Tutor extends CI_Controller
 
         $data['information'] = $result;
         $data['curUserType'] = $this->session->userdata('logged_type');
-        $data['offer_able'] = $this->checkCanOfferReview($id);
+        $data['offer_able'] = $this->canOfferReview($id);
         $data['id'] = $id;
 
         $footerData['num'] = $id;
@@ -150,7 +144,7 @@ class Tutor extends CI_Controller
         echo json_encode(array('avg_rating'=>$avg_rating, 'reviews'=>$returnVal));
     }
 
-    function checkCanOfferReview($tutorID)
+    function canOfferReview($tutorID)
     {
         if ($this->session->userdata('logged_type') != 'student')
         {
@@ -159,7 +153,7 @@ class Tutor extends CI_Controller
 
         $studentName = $this->session->userdata('logged_user');
 
-        return $this->Tutor_model->checkCanOfferReview($this->Common_model->getTableID('tbl_student', $studentName), $tutorID);
+        return $this->Tutor_model->canOfferReview($this->Common_model->getTableID('tbl_student', $studentName), $tutorID);
     }
 
     function getJobCount($type, $id)
@@ -185,12 +179,10 @@ class Tutor extends CI_Controller
 
     function loginCheck()
     {
-        if ($this->session->userdata('logged_user'))
+        if (!$this->session->userdata('logged_user'))
         {
-            return true;
+            redirect('login');
         }
-
-        return false;
     }
 
 }

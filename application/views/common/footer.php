@@ -10,16 +10,12 @@
                                 <div class="col-lg-3 column">
                                     <div class="widget">
                                         <div class="about_widget">
-
-
                                             <div class="logo">
                                                 <a href="javascript:;" title=""><img src="<?= base_url('assets/build/images/resource/logo_4_1.png'); ?>" alt="" /></a>
-
-
                                             </div>
                                             <span>Collin Street West, Victor 8007, Hong Kong.</span>
                                             <span>2117 6789</span>
-                                            <span><a href="https://grandetest.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5cccbc3cae5cfcac7cdd0cbd18bc6cac8">suppor@yoursite.com</a></span>
+                                            <span><a href="https://grandetest.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5cccbc3cae5cfcac7cdd0cbd18bc6cac8">support@yoursite.com</a></span>
 
                                             <div class="social">
                                                 <a href="javascript:;" title=""><i class="fa fa-facebook"></i></a>
@@ -100,6 +96,7 @@
         <script src="<?= base_url('assets/build/js/extra-import/cropper.js') ?>" type="text/javascript"></script>
         <script src="<?= base_url('assets/build/js/extra-import/jquery.slimscroll.min.js') ?>" type="text/javascript"></script>
         <script src="<?= base_url('assets/build/js/extra-import/bootstrap-timepicker.min.js') ?>" type="text/javascript"></script>
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js" type="text/javascript"></script>-->
         <script src="<?= base_url('assets/build/js/extra-import/jquery.star-rating-svg.js') ?>" type="text/javascript"></script>
         <script src="<?= base_url('assets/build/js/extra-import/jquery.validate.min.js') ?>" type="text/javascript"></script>
         <script src="<?= base_url('assets/build/js/extra-import/select2.full.min.js') ?>" type="text/javascript"></script>

@@ -22,16 +22,10 @@ class Home extends CI_Controller
 
     public function index()
     {
-        if ($this->loginCheck())
-        {
-            $headerData['loginStatus'] = "success";
-            $headerData['avatar'] = $this->loggedUserInfo['avatar'];
-            $headerData['userName'] = $this->loggedUserInfo['name'];
-        }
-        else
-        {
-            $headerData['loginStatus'] = "fail";
-        }
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
         $headerData['educationNum'] = $this->Education_model->getTotalNum();
         $headerData['tutorNum'] = $this->Tutor_model->getTotalNum();
 
@@ -80,19 +74,9 @@ class Home extends CI_Controller
 
     public function profile()
     {
-        if ($this->loginCheck())
-        {
-            $headerData['loginStatus'] = "success";
-            $headerData['avatar'] = $this->loggedUserInfo['avatar'];
-            $headerData['userName'] = $this->loggedUserInfo['name'];
-        }
-        else
-        {
-            $headerData['loginStatus'] = "fail";
-        }
+        $this->loginCheck();
 
-        $type = $this->session->userdata('logged_type');
-
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -118,7 +102,7 @@ class Home extends CI_Controller
         $data['qualifications'] = $this->Common_model->getQualifications();
         $data['certifications'] = $this->Common_model->getCertification();
         $data['information'] = $information;
-        $data['type'] = $type;
+        $data['type'] = $this->session->userdata('logged_type');
 
         $this->load->view('common/header', $headerData);
         $this->load->view('home/profile', $data);
@@ -144,18 +128,25 @@ class Home extends CI_Controller
         }
     }
 
+    public function membership()
+    {
+        $this->loginCheck();
+
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $data['membership_type'] = $this->loggedUserInfo['membership_type'];
+        $data['loggedUserType'] = $this->session->userdata('logged_type');
+
+        $this->load->view('common/header', $headerData);
+        $this->load->view('home/membership', $data);
+        $this->load->view('common/footer');
+    }
+
     public function faq()
     {
-        if ($this->loginCheck())
-        {
-            $headerData['loginStatus'] = "success";
-            $headerData['avatar'] = $this->loggedUserInfo['avatar'];
-            $headerData['userName'] = $this->loggedUserInfo['name'];
-        }
-        else
-        {
-            $headerData['loginStatus'] = "fail";
-        }
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -166,16 +157,7 @@ class Home extends CI_Controller
 
     public function aboutUs()
     {
-        if ($this->loginCheck())
-        {
-            $headerData['loginStatus'] = "success";
-            $headerData['avatar'] = $this->loggedUserInfo['avatar'];
-            $headerData['userName'] = $this->loggedUserInfo['name'];
-        }
-        else
-        {
-            $headerData['loginStatus'] = "fail";
-        }
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -186,16 +168,7 @@ class Home extends CI_Controller
 
     public function contactUs()
     {
-        if ($this->loginCheck())
-        {
-            $headerData['loginStatus'] = "success";
-            $headerData['avatar'] = $this->loggedUserInfo['avatar'];
-            $headerData['userName'] = $this->loggedUserInfo['name'];
-        }
-        else
-        {
-            $headerData['loginStatus'] = "fail";
-        }
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -206,16 +179,7 @@ class Home extends CI_Controller
 
     public function terms()
     {
-        if ($this->loginCheck())
-        {
-            $headerData['loginStatus'] = "success";
-            $headerData['avatar'] = $this->loggedUserInfo['avatar'];
-            $headerData['userName'] = $this->loggedUserInfo['name'];
-        }
-        else
-        {
-            $headerData['loginStatus'] = "fail";
-        }
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -282,12 +246,10 @@ class Home extends CI_Controller
 
     function loginCheck()
     {
-        if ($this->session->userdata('logged_user'))
+        if (!$this->session->userdata('logged_user'))
         {
-            return true;
+            redirect('login');
         }
-
-        return false;
     }
 
 }

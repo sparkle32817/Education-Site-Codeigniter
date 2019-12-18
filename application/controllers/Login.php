@@ -8,11 +8,15 @@ class Login extends CI_Controller
         parent::__construct();
 
         $this->load->model('Login_model');
+        $this->load->model('Common_model');
     }
 
     public function index()
     {
-        $headerData['loginStatus'] = "fail";
+        $this->session->sess_destroy();
+
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+
         $this->load->view('common/header', $headerData);
         $this->load->view('home/login');
         $this->load->view('common/footer');
@@ -34,7 +38,7 @@ class Login extends CI_Controller
 
     public function recovery()
     {
-        $headerData['loginStatus'] = "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
         $this->load->view('common/header', $headerData);
         $this->load->view('home/forgotPassword');
@@ -43,17 +47,43 @@ class Login extends CI_Controller
 
     public function recoveryPassword()
     {
-        echo "success";
-    }
-
-    function loginCheck()
-    {
-        if ($this->session->userdata('logged_user'))
+        $postedData = $this->input->post('formData');
+        if (!$this->Common_model->isValidEmail($postedData))
         {
-            return true;
+            echo "invalid";
+            exit;
         }
 
-        return false;
+        $password = $this->randomPassword();
+        $result = $this->Common_model->resetPassword($postedData, $password);
+
+        if (!$result)
+        {
+            echo "fail";
+            exit;
+        }
+
+        $to = $postedData['email'];
+        $subject = "Reset Password";
+        $message = "Password:".$password;
+
+        $headers = 'From: education@mail.com' . "\r\n" .
+                    'Reply-To: education@mail.com';
+
+//        mail($to, $subject, $message, $headers);
+
+        echo 'success';
+    }
+
+    function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
 
     public function logout()

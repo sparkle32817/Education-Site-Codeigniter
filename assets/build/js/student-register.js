@@ -56,10 +56,6 @@ $(document).ready(function () {
             timepicker[$(this).attr("day")] = $(this).val();
         })
 
-        // console.log("grade::", $("#student-grade").val().toString());
-        // console.log("subject::", $("#student-subject").val().toString());
-        // console.log("activity::", $("#student-activity").val().toString());
-
         if ($(this).valid())
         {
             if (!$("#checkbox_condition").is(":checked"))
@@ -75,13 +71,13 @@ $(document).ready(function () {
 
             var values = {
                 "avatar": canvas_pic,
-                "grade": $(".select2-grade").val().toString(),
-                "subject": $(".select2-subject").val().toString(),
-                "activity": $(".select2-activity").val().toString(),
-                // "timeline": timepicker
+                "grade": $("#student-grade").val()==null? null: $("#student-grade").val().toString(),
+                "subject": $("#student-subject").val()==null? null: $("#student-subject").val().toString(),
+                "activity": $("#student-activity").val()==null? null: $("#student-activity").val().toString(),
+                "timeline": JSON.stringify(timepicker)
             };
 
-            $.each($('.student-grade').serializeArray(), function(i, field) {
+            $.each($('.student-form').serializeArray(), function(i, field) {
                 if (field.name != "r_password" && field.name != "grade" && field.name != "activity" && field.name != "subject")
                 {
                     values[field.name] = field.value;
@@ -92,8 +88,6 @@ $(document).ready(function () {
                     console.log("other->"+field.name+"::"+field.value);
                 }
             });
-
-            values['timeline'] = JSON.stringify(timepicker);
 
             console.log(values);
 
@@ -113,6 +107,7 @@ $(document).ready(function () {
             if (response == "success")
             {
                 showMessage(container, "success", "Successfully registered!");
+                window.location.href = base_url + "login";
             }
             else if (response == "already")
             {

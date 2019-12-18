@@ -8,7 +8,7 @@
                     <div class="inner-header wform">
                         <div class="job-search-sec">
                             <div class="job-search">
-                                <h4>Welcome Educations</h4>
+                                <h4>Welcome to Education Center</h4>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <h>Location</h>
-                    <select class="chosen education-student-location" name="location" required>
+                    <select id="education-student-location" name="location" required>
                         <option value="">-Select Location-</option>
                         <?php
                         foreach ($locations as $location) {
@@ -36,21 +36,8 @@
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <h>Subject</h>
-                    <select class="chosen education-student-subject" name="subject" required>
-                        <option value="">-Select School Subject-</option>
-                        <?php
-                        foreach ($subjects as $subject) {
-                            ?>
-                            <option value="<?= $subject['id']; ?>"><?= $subject['name']; ?></option>
-                            <?php
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="col-sm-4">
                     <h>Grade</h>
-                    <select class="chosen education-student-grade" name="grade" required>
+                    <select id="education-student-grade" name="grade" required>
                         <option value="">-Select Grade-</option>
                         <?php
                         foreach ($grades as $grade) {
@@ -59,6 +46,12 @@
                             <?php
                         }
                         ?>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <h>Subject</h>
+                    <select id="education-student-subject" name="subject" required>
+                        <option value="">-Select School Subject-</option>
                     </select>
                 </div>
             </div>
@@ -71,11 +64,11 @@
             <div id="pagination-container-on" ></div>
         </div>
         <div class="col-lg-7 column">
-            <h3>Top Tutors</h3>
+            <h3>Tutors</h3>
             <div class="row">
                 <div class="col-sm-4">
-                    <h>Gender</h>
-                    <select class="chosen  education-tutor-gender" style="display: none;">
+                    <h>Gender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h>
+                    <select id="education-tutor-gender">
                         <option value="">-Select Gender-</option>
                         <option value="1">Male</option>
                         <option value="2">Female</option>
@@ -83,8 +76,9 @@
                 </div>
                 <div class="col-sm-4">
                     <h>Hourly Rate</h>
-                    <select class="chosen education-tutor-hourly" style="display: none;">
+                    <select id="education-tutor-hourly">
                         <option value="">-Select Hourly Rate-</option>
+                        <option value="1$ to 100$">1$ to 100$</option>
                         <option value="100$ to 200$">100$ to 200$</option>
                         <option value="200$ to 300$">200$ to 300$</option>
                         <option value="300$ to 400$">300$ to 400$</option>
@@ -92,7 +86,7 @@
                 </div>
                 <div class="col-sm-4">
                     <h>Qualification</h>
-                    <select class="chosen education-tutor-qualification" required>
+                    <select id="education-tutor-qualification">
                             <option value="">-Select Qualification-</option>
                             <?php
                             foreach ($qualifications as $qualification) {

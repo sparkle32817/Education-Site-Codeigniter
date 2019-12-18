@@ -58,13 +58,16 @@ $route['recovery'] = 'login/recovery';
 $route['registerEducation'] = 'register/education';
 $route['educationMembership'] = 'register/educationMembership';
 $route['educationPay'] = 'register/educationPay';
+$route['purchaseEducationMembership'] = 'register/purchaseEducationMembership';
 $route['registerTutor'] = 'register/tutor';
 $route['tutorMembership'] = 'register/tutorMembership';
-$route['tutorPay'] = 'register/tutorPay';
+$route['tutorPay/(:any)'] = 'register/tutorPay/$1';
+$route['purchaseTutorMembership/(:any)'] = 'register/purchaseTutorMembership/$1';
 $route['registerStudent'] = 'register/student';
 
 //Home
 $route['profile'] = 'home/profile';
+$route['membership'] = 'home/membership';
 $route['faq'] = 'home/faq';
 $route['aboutUs'] = 'home/aboutUs';
 $route['contactUs'] = 'home/contactUs';

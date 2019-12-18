@@ -18,7 +18,7 @@ class Register extends CI_Controller
 
     public function education()
     {
-        $headerData['loginStatus'] = "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
         $data['activities'] = array();
         $data['subjects'] = $this->Common_model->getAllSubjects();
@@ -33,7 +33,7 @@ class Register extends CI_Controller
     {
         $postedData = $this->input->post('formData');
         
-        $result = $this->Education_model->register($postedData);
+        $result = $this->Common_model->register('tbl_education', $postedData);
 
         if ($result == 'success')
         {
@@ -46,7 +46,7 @@ class Register extends CI_Controller
 
     public function educationMembership()
     {
-        $headerData['loginStatus'] = "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
         if ($this->session->userdata('registered_type') != 'education')
         {
@@ -61,40 +61,44 @@ class Register extends CI_Controller
     public function educationPay()
     {
         //Set variables for paypal form
-        $returnURL = base_url().'register/purchaseEducationMembership/1'; //payment success url
+        $returnURL = base_url().'purchaseEducationMembership'; //payment success url
         $cancelURL = base_url().'educationMembership'; //payment cancel url
         $notifyURL = base_url().'paypal/ipn'; //ipn url
         //get particular product data
         $amount = $this->Membership_model->getEducationAmount();
         $logo = base_url().'assets/build/images/logo_4_1.png';
 
-
         $this->paypal_lib->add_field('return', $returnURL);
         $this->paypal_lib->add_field('cancel_return', $cancelURL);
         $this->paypal_lib->add_field('notify_url', $notifyURL);
-        $this->paypal_lib->add_field('item_name', "Membership");
-//        $this->paypal_lib->add_field('custom', $userID);
-//        $this->paypal_lib->add_field('item_number',  $product['id']);
+        $this->paypal_lib->add_field('item_name', "Membership-Education");
         $this->paypal_lib->add_field('amount',  $amount);
         $this->paypal_lib->image($logo);
 
         $this->paypal_lib->paypal_auto_form();
     }
 
-    public function purchaseEducationMembership($type)
+    public function purchaseEducationMembership()
     {
-        $id = $this->Common_model->getTableID($this->session->userdata('registered_email'));
+        $id = $this->Common_model->getTableID('tbl_education', $this->session->userdata('registered_email'));
         $data = array(
-            'membership_type' => $type,
+            'membership_type' => 1,
             'membership_updated_date' => date('Y-m-d H:i:s')
         );
 
-        $this->Common_model->updateMembershipInfo('tbl_education', $id, $data);
+        if ($this->Common_model->updateMembershipInfo('tbl_education', $id, $data))
+        {
+            $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+
+            $this->load->view('common/header', $headerData);
+            $this->load->view('register/purchaseEducationMembership');
+            $this->load->view('common/footer');
+        }
     }
 
     public function tutor()
     {
-        $headerData['loginStatus'] = "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
         $data['activities'] = array();
         $data['subjects'] = $this->Common_model->getAllSubjects();
@@ -111,11 +115,13 @@ class Register extends CI_Controller
     public function registerTutor()
     {
         $postedData = $this->input->post('formData');
-        $result = $this->Tutor_model->register($postedData);
+
+        $result = $this->Common_model->register('tbl_tutor', $postedData);
 
         if ($result == 'success')
         {
             $this->session->set_userdata('registered_type', 'tutor');
+            $this->session->set_userdata('registered_email', $postedData['email']);
         }
 
         echo $result;
@@ -123,7 +129,7 @@ class Register extends CI_Controller
 
     public function tutorMembership()
     {
-        $headerData['loginStatus'] = "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
         if ($this->session->userdata('registered_type') != 'tutor')
         {
@@ -138,30 +144,44 @@ class Register extends CI_Controller
     public function tutorPay($type)
     {
         //Set variables for paypal form
-        $returnURL = base_url().'paypal/success'; //payment success url
-        $cancelURL = base_url().'paypal/cancel'; //payment cancel url
-        $notifyURL = base_url().'paypal/ipn'; //ipn url
+        $returnURL = base_url().'register/purchaseTutorMembership/1';
+        $cancelURL = base_url().'tutorMembership';
+        $notifyURL = base_url().'paypal/ipn';
         //get particular product data
-        $product = $this->product->getRows($id);
-        $userID = 1; //current user id
-        $logo = base_url().'assets/images/codexworld-logo.png';
-
+        $amount = $this->Membership_model->getTutorAmount($type);
+        $logo = base_url().'assets/build/images/logo_4_1.png';
 
         $this->paypal_lib->add_field('return', $returnURL);
         $this->paypal_lib->add_field('cancel_return', $cancelURL);
         $this->paypal_lib->add_field('notify_url', $notifyURL);
-        $this->paypal_lib->add_field('item_name', $product['name']);
-        $this->paypal_lib->add_field('custom', $userID);
-        $this->paypal_lib->add_field('item_number',  $product['id']);
-        $this->paypal_lib->add_field('amount',  $product['price']);
+        $this->paypal_lib->add_field('item_name', "Membership-Tutor");
+        $this->paypal_lib->add_field('amount',  $amount);
         $this->paypal_lib->image($logo);
 
         $this->paypal_lib->paypal_auto_form();
     }
 
+    public function purchaseTutorMembership($type)
+    {
+        $id = $this->Common_model->getTableID('tbl_tutor', $this->session->userdata('registered_email'));
+        $data = array(
+            'membership_type' => $type,
+            'membership_updated_date' => date('Y-m-d H:i:s')
+        );
+
+        if ($this->Common_model->updateMembershipInfo('tbl_tutor', $id, $data))
+        {
+            $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+
+            $this->load->view('common/header', $headerData);
+            $this->load->view('register/purchaseTutorMembership');
+            $this->load->view('common/footer');
+        }
+    }
+
     public function student()
     {
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
         $data['activities'] = array();
         $data['subjects'] = $this->Common_model->getAllSubjects();
@@ -175,7 +195,7 @@ class Register extends CI_Controller
 
     public function registerStudent()
     {
-        echo $this->Student_model->register($this->input->post('formData'));
+        echo $this->Common_model->register('tbl_student', $this->input->post('formData'));
     }
 
     public function getSubjects()
@@ -230,13 +250,4 @@ class Register extends CI_Controller
         echo json_encode($returnVal);
     }
 
-    function loginCheck()
-    {
-        if ($this->session->userdata('logged_user'))
-        {
-            return true;
-        }
-
-        return false;
-    }
 }

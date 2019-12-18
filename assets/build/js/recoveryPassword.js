@@ -41,7 +41,7 @@ $(document).ready(function () {
             }
             else
             {
-                showMessage($(".recovery-form"), "danger", "Username or password is wrong!");
+                showMessage($(".recovery-form"), "danger", "Please enter valid email!");
             }
         }
         else

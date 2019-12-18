@@ -9,25 +9,6 @@ class Student_model extends CI_Model
         $this->load->database();
     }
 
-    public function register($postData)
-    {
-        $this->db->where('email', $postData['email']);
-        $this->db->or_where('name', $postData['name']);
-        if ($this->db->get('tbl_student')->num_rows() > 0)
-        {
-            return 'already';
-        }
-
-        $postData['password'] = md5($postData['password']);
-        $postData['registered_date'] = date('Y-m-d H:i:s');
-        if($this->db->insert('tbl_student', $postData))
-        {
-            return 'success';
-        }
-
-        return 'fail';
-    }
-
     public function getFifthData()
     {
         return $this->db->order_by('id', 'DESC')->limit(5)->get('tbl_student')->result_array();
@@ -35,27 +16,29 @@ class Student_model extends CI_Model
 
     public function getStudent($postedData)
     {
-        if ($postedData['total'] != 'all')
+        if (!empty($postedData['location']))
         {
-            if (!empty($postedData['location']))
-            {
-                $this->db->where('location', $postedData['location']);
-            }
+            $this->db->where('location', $postedData['location']);
+        }
 
-            if (!empty($postedData['subject']))
-            {
-                $this->db->group_start();
-                $this->db->like('subject', $postedData['subject'], 'none');
-                $this->db->or_like('subject', ' '.$postedData['subject'].',', 'both');
-                $this->db->or_like('subject', $postedData['subject'].',', 'after');
-                $this->db->or_like('subject', ' '.$postedData['subject'], 'before');
-                $this->db->group_end();
-            }
+        if (!empty($postedData['subject']))
+        {
+            $this->db->group_start();
+            $this->db->like('subject', $postedData['subject'], 'none');
+            $this->db->or_like('subject', $postedData['subject'].',', 'both');
+            $this->db->or_like('subject', $postedData['subject'].',', 'after');
+            $this->db->or_like('subject', $postedData['subject'], 'before');
+            $this->db->group_end();
+        }
 
-            if (!empty($postedData['grade']))
-            {
-                $this->db->where('grade', $postedData['grade']);
-            }
+        if (!empty($postedData['grade']))
+        {
+            $this->db->group_start();
+            $this->db->like('grade', $postedData['grade'], 'none');
+            $this->db->or_like('grade', $postedData['grade'].',', 'both');
+            $this->db->or_like('grade', $postedData['grade'].',', 'after');
+            $this->db->or_like('grade', $postedData['grade'], 'before');
+            $this->db->group_end();
         }
 
 //        $this->db->get('tbl_student');
@@ -71,8 +54,8 @@ class Student_model extends CI_Model
 
     public function getTodayNum()
     {
-        $this->db->where('reg_date <=', date('Y-m-d 00:00:00'));
-        $this->db->where('reg_date >=', date('Y-m-d 23:59:59'));
+        $this->db->where('registered_date <=', date('Y-m-d 00:00:00'));
+        $this->db->where('registered_date >=', date('Y-m-d 23:59:59'));
         return $this->db->get('tbl_student')->num_rows();
     }
 

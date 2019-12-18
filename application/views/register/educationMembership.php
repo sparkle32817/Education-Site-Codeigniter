@@ -24,26 +24,23 @@
                     </div><!-- Heading -->
                     <div class="plans-sec">
                         <div class="row">
-                            <div class="col-lg-2">
-                            </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 offset-1">
                                 <div class="pricetable">
                                     <div class="pricetable-head">
                                         <h3>Basic Jobs</h3>
                                         <h2>Free Plan</h2>
-
                                     </div><!-- Price Table -->
                                     <ul>
-                                        <li ><span style="margin-right:17px">&#10003;</span>Unlimited access to parents/students info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited access to education centers info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited receipt to the messages</li>
-                                        <li><span style="margin-right:17px"></span>Limited to leave message to the candidate cases and recruit tutors</li>
-                                        <li><span style="margin-right:17px"></span>Limited reply to the messages from the parents/tutor</li>
+                                        <li ><span class="mr-2">&#10003;</span>Unlimited access to parents/students info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to education centers info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited receipt to the messages</li>
+                                        <li>Limited to leave message to the candidate cases and recruit tutors</li>
+                                        <li>Limited reply to the messages from the parents/tutor</li>
                                     </ul>
-                                    <a href="<?= base_url('login'); ?>" title="">BUY NOW</a>
+                                    <a href="javascript:;" title="">PURCHASE NOW</a>
                                 </div>
                             </div>
-                            <div class="col-lg-1">
+                            <div class="col-lg-2">
                             </div>
                             <div class="col-lg-4">
                                 <div class="pricetable active">
@@ -53,16 +50,15 @@
 
                                     </div><!-- Price Table -->
                                     <ul>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited access to parents/students info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited access to education centers info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited receipt to the messages</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited to leave message to the candidate cases and recruit tutors</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited reply to the messages from the parents/tutor</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to parents/students info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to education centers info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited receipt to the messages</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited to leave message to the candidate cases and recruit tutors</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited reply to the messages from the parents/tutor</li>
                                     </ul>
-                                    <a href="<?= base_url('educationPay'); ?>" title="">BUY NOW</a>
+                                    <a href="<?= base_url('educationPay'); ?>" title="" style="pointer-events: none;cursor: default;">PURCHASE NOW</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

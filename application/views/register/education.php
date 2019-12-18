@@ -137,7 +137,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
                                         <span class="pf-title">Description</span>
                                         <div class="pf-field">
                                             <textarea class="m-b-0" name="description" placeholder="(eg. Special for which school etc)"></textarea>

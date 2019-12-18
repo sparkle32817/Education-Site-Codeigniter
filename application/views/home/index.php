@@ -21,11 +21,13 @@
                     <div class="col-lg-12" style="margin-left:0px;">
                         <div class="emply-list-sec">
                             <?php
+                            if (sizeof($educations)>0){
                                 foreach ($educations as $education) {
-                                    ?>
+                            ?>
+                                <a href="<?= base_url('education/detail/'.$education['id']); ?>" title="">
                                     <div class="emply-list">
                                         <div class="emply-list-thumb">
-                                            <a href="javascript:;" title=""><img src="<?= $education['avatar'];?>" alt=""/></a>
+                                            <img src="<?= $education['avatar'];?>" alt=""/>
                                         </div>
                                         <div class="emply-list-info">
                                             <div>
@@ -34,7 +36,7 @@
                                                 </p>
                                             </div>
                                             <div class="div-location-address">
-                                                <p>Location:&nbsp;&nbsp;
+                                                <p class="text-ellipsis">Location:&nbsp;&nbsp;
                                                     <span><?= $education['address'];?></span>
                                                 </p>
                                             </div>
@@ -44,8 +46,18 @@
                                             <p class="job-num"><?= $education['jobs']; ?></p>
                                         </div>
                                     </div>
-                                    <?php
+                                </a>
+                            <?php
                                 }
+                            }
+                            else
+                            {
+                            ?>
+                                <div class="mt-3">
+                                    <h6 class="text-center">There is no data to display</h6>
+                                </div>
+                            <?php
+                            }
                             ?>
                         </div>
                     </div>
@@ -57,36 +69,47 @@
                     <div class="col-lg-12" style="margin-left:0px;">
                         <div class="emply-list-sec">
                             <?php
-                            foreach ($tutors as $tutor) {
-                                ?>
-                                <div class="emply-list">
-                                    <div class="emply-list-thumb">
-                                        <a href="javascript:;" title=""><img
-                                                    src="<?= $tutor['avatar'];?>" alt=""/></a>
+                            if (sizeof($tutors)>0) {
+                                foreach ($tutors as $tutor) {
+                            ?>
+                                <a href="<?= base_url('tutor/detail/'.$tutor['id']); ?>" title="">
+                                    <div class="emply-list">
+                                        <div class="emply-list-thumb">
+                                            <img src="<?= $tutor['avatar']; ?>" alt=""/>
+                                        </div>
+                                        <div class="emply-list-info">
+                                            <div>
+                                                <p>Name:&nbsp;&nbsp;
+                                                    <span><?= $tutor['name']; ?></span>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p class="text-ellipsis">Location:&nbsp;&nbsp;
+                                                    <span><?= $tutor['location']; ?></span>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p class="text-ellipsis">Subject:&nbsp;&nbsp;
+                                                    <span><?= $tutor['subject']; ?></span>
+                                                </p>
+                                            </div>
+                                            <div class="div-star">
+                                                <?= $tutor['ratingHtml']; ?>
+                                            </div>
+                                            <p class="job-num"><?= $tutor['jobs']; ?></p>
+                                        </div>
                                     </div>
-                                    <div class="emply-list-info">
-                                        <div>
-                                            <p>Name:&nbsp;&nbsp;
-                                                <span><?= $tutor['name'];?></span>
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="text-ellipsis">Location:&nbsp;&nbsp;
-                                                <span><?= $tutor['location'];?></span>
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="text-ellipsis">Subject:&nbsp;&nbsp;
-                                                <span><?= $tutor['subject'];?></span>
-                                            </p>
-                                        </div>
-                                        <div class="div-star">
-                                            <?= $tutor['ratingHtml']; ?>
-                                        </div>
-                                        <p class="job-num"><?= $tutor['jobs']; ?></p>
-                                    </div>
+                                </a>
+                            <?php
+                                }
+                            }
+                            else
+                            {
+                            ?>
+                                <div class="mt-3">
+                                    <h6 class="text-center">There is no data to display</h6>
                                 </div>
-                                <?php
+                            <?php
                             }
                             ?>
                         </div>
@@ -99,29 +122,41 @@
                     <div class="col-lg-12" style="margin-left:0px;">
                         <div class="emply-list-sec">
                             <?php
-                            foreach ($students as $student) {
+                            if (sizeof($students)>0){
+                                foreach ($students as $student) {
+                            ?>
+                                <a href="<?= base_url('student/detail/'.$student['id']); ?>" title="">
+                                    <div class="emply-list">
+                                        <div class="emply-list-thumb">
+                                            <img src="<?= $student['avatar'];?>" alt=""/>
+                                        </div>
+                                        <div class="emply-list-info">
+                                            <div>
+                                                <p>Name:&nbsp;&nbsp;
+                                                    <span><?= $student['name'];?></span>
+                                                </p>
+                                            </div>
+                                            <div class="div-location-address">
+                                                <p class="text-ellipsis">Subject:&nbsp;&nbsp;
+                                                    <span><?= $student['subject'];?></span>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p class="text-ellipsis"> Location:&nbsp;&nbsp;
+                                                    <span><?= $student['location']; ?></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            <?php
+                                }
+                            }
+                            else
+                            {
                                 ?>
-                                <div class="emply-list">
-                                    <div class="emply-list-thumb">
-                                        <a href="javascript:;" title=""><img src="<?= $student['avatar'];?>" alt=""/></a>
-                                    </div>
-                                    <div class="emply-list-info">
-                                        <div>
-                                            <p>Name:&nbsp;&nbsp;
-                                                <span><?= $student['name'];?></span>
-                                            </p>
-                                        </div>
-                                        <div class="div-location-address">
-                                            <p>Subject:&nbsp;&nbsp;
-                                                <span><?= $student['subject'];?></span>
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p> Location:&nbsp;&nbsp;
-                                                <span><?= $student['location']; ?></span>
-                                            </p>
-                                        </div>
-                                    </div>
+                                <div class="mt-3">
+                                    <h6 class="text-center">There is no data to display</h6>
                                 </div>
                                 <?php
                             }
@@ -132,7 +167,7 @@
             </div>
         </div>
     </div>
-    </div>
+    <div id="scroll-here"></div>
 </section>
 
 <section>

@@ -23,6 +23,8 @@ $(document).ready(function () {
     $("#education-grade").on("change", function () {
         setSubject($(this).val());
 
+        console.log("changed");
+
         if ($(this).val()==null || $(this).val()=="")
         {
             $('.select2-activity').prop('disabled',false);
@@ -62,7 +64,7 @@ $(document).ready(function () {
         let timepicker = {};
         $(".time-picker-table .timepicker").each(function (index, obj) {
             timepicker[$(this).attr("day")+"_"+$(this).attr("status")] = $(this).val();
-        })
+        });
 
         if ($(this).valid())
         {
@@ -79,10 +81,10 @@ $(document).ready(function () {
 
             var values = {
                 "avatar": canvas_pic,
-                "grade": $(".select2-grade").val().toString(),
-                "subject": $(".select2-subject").val().toString(),
-                "activity": $(".select2-activity").val().toString(),
-                // "timeline": timepicker
+                "grade": $("#education-grade").val()==null? null: $("#education-grade").val().toString(),
+                "subject": $("#education-subject").val()==null? null: $("#education-subject").val().toString(),
+                "activity": $("#education-activity").val()==null? null: $("#education-activity").val().toString(),
+                "timeline": JSON.stringify(timepicker)
             };
 
             $.each($('.education-form').serializeArray(), function(i, field) {
@@ -96,8 +98,6 @@ $(document).ready(function () {
                     console.log("other->"+field.name+"::"+field.value);
                 }
             });
-
-            values['timeline'] = JSON.stringify(timepicker);
 
             console.log(values);
 

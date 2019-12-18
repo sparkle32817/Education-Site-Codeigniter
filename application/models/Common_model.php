@@ -9,6 +9,66 @@ class Common_model extends CI_Model
         $this->load->database();
     }
 
+    public function register($tableName, $postData)
+    {
+        //---Check all user tables to prevent duplicated registration---//
+        /* Education Table */
+        $this->db->where('email', $postData['email']);
+        $this->db->or_where('name', $postData['name']);
+        if ($this->db->get('tbl_education')->num_rows() > 0)
+        {
+            return 'already';
+        }
+
+        /* Tutor Table */
+        $this->db->where('email', $postData['email']);
+        $this->db->or_where('name', $postData['name']);
+        if ($this->db->get('tbl_tutor')->num_rows() > 0)
+        {
+            return 'already';
+        }
+
+        /* Student Table */
+        $this->db->where('email', $postData['email']);
+        $this->db->or_where('name', $postData['name']);
+        if ($this->db->get('tbl_student')->num_rows() > 0)
+        {
+            return 'already';
+        }
+
+        $postData['registered_date'] = date('Y-m-d H:i:s');
+        $postData['password'] = md5($postData['password']);
+        if($this->db->insert($tableName, $postData))
+        {
+            return 'success';
+        }
+
+        return 'fail';
+    }
+
+    public function isValidEmail($postedData)
+    {
+        $this->db->where('email', $postedData['email']);
+        $result = $this->db->get('tbl_'.$postedData['type']);
+
+        if ($result->num_rows()>0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function resetPassword($postedData, $password)
+    {
+        $this->db->where('email', $postedData['email']);
+        if ($this->db->update('tbl_'.$postedData['type'], array('password'=>$password)))
+        {
+            return true;
+        }
+
+        return false;
+    }
     public function updateUserInfo($tableName, $id, $postedData)
     {
         $this->db->where('id', $id);
@@ -26,10 +86,10 @@ class Common_model extends CI_Model
         $this->db->where('id', $id);
         if ($this->db->update($tableName, $postedData))
         {
-            return $this->db->where('id', $id)->get($tableName)->row_array();
+            return true;
         }
 
-        return $this->db->last_query();
+        return false;
 //        return false;
     }
 

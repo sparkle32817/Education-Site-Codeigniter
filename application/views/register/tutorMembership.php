@@ -26,21 +26,19 @@
                     <div class="plans-sec">
                         <div class="row">
                             <div class="col-lg-4">
-
                                 <div class="pricetable">
                                     <div class="pricetable-head">
                                         <h3>Basic Jobs</h3>
                                         <h2>Free Plan</h2>
-
                                     </div><!-- Price Table -->
                                     <ul>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited access to parents/students info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimite access to education centers info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited recept to the messages</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>limite to leave messae to the candidate cases and limite recuirt tutors</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>limite reply to the message from the parents.</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to parents/students info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to education centers info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited receipt to the messages</li>
+                                        <li>limit to leave message to the candidate cases and limit recruit tutors</li>
+                                        <li>limit reply to the message from the parents.</li>
                                     </ul>
-                                    <a href="<?= base_url('login'); ?>" title="">BUY NOW</a>
+                                    <a href="<?= base_url('login'); ?>" title="">PURCHASE NOW</a>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -51,13 +49,13 @@
 
                                     </div><!-- Price Table -->
                                     <ul>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited access to parents/students info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimite access to education centers info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited recept to the messages</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>10/montn leave messae to the candidate cases and limite recuirt tutors</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>10/month to the message from the parents.</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to parents/students info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to education centers info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited receipt to the messages</li>
+                                        <li><span class="mr-2">&#10003;</span>10/month leave message to the candidate cases and limite recuirt tutors</li>
+                                        <li><span class="mr-2">&#10003;</span>10/month to the message from the parents.</li>
                                     </ul>
-                                    <a href="<?= base_url('login'); ?>" title="">BUY NOW</a>
+                                    <a href="<?= base_url('tutorPay/1'); ?>" title="">PURCHASE NOW</a>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -68,16 +66,15 @@
 
                                     </div><!-- Price Table -->
                                     <ul>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited access to parents/students info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimite access to education centers info</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimited recept to the messages</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimite to leave messae to the candidate cases and limite recuirt tutors</li>
-                                        <li><span style="margin-right:17px">&#10003;</span>Unlimite reply to the message from the parents.</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to parents/students info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited access to education centers info</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited receipt to the messages</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited to leave message to the candidate cases and limit recruit tutors</li>
+                                        <li><span class="mr-2">&#10003;</span>Unlimited reply to the message from the parents.</li>
                                     </ul>
-                                    <a href="<?= base_url('login'); ?>" title="">BUY NOW</a>
+                                    <a href="<?= base_url('tutorPay/2'); ?>" title="">PURCHASE NOW</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

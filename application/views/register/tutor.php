@@ -75,7 +75,7 @@
 
                                         <span class="pf-title">Service Area</span>
                                         <div class="pf-field">
-                                            <select class="form-control select2-location width-100" name="location" title="Select Service Area" multiple>
+                                            <select class="form-control select2-location width-100" id="tutor-service-area" name="location" title="Select Service Area" multiple>
                                                 <?php
                                                 foreach ($locations as $location) {
                                                     ?>

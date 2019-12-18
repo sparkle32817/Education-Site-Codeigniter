@@ -5,6 +5,16 @@ div.emply-list-info p{
     margin: 0;
 }
 
+.emply-list-thumb > img {
+    float: left;
+    width: 100%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
 div.emply-list-info p.text-ellipsis{
     white-space: nowrap;
     overflow: hidden;
@@ -13,8 +23,8 @@ div.emply-list-info p.text-ellipsis{
 }
 
 div.emply-list-info .div-location-address{
-    min-height: 55px;
-    margin: 10px 0 0 0;
+    min-height: 45px;
+    margin: 15px 0 0 0;
 }
 
 div.emply-list-info .div-star{

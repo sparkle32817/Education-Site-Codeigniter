@@ -310,7 +310,7 @@ CREATE TABLE `tbl_student` (
   `private_group` text DEFAULT NULL,
   `avatar` longtext NOT NULL,
   `timeline` text DEFAULT NULL,
-  `reg_date` datetime NOT NULL
+  `registered_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --

@@ -20,12 +20,9 @@ class Inbox extends CI_Controller
 
     public function index()
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
         $commonData['inboxNum'] = $this->Inbox_model->getInboxCount($this->loggedUserInfo['id']);
@@ -38,12 +35,9 @@ class Inbox extends CI_Controller
 
     public function sent()
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
         $commonData['inboxNum'] = $this->Inbox_model->getInboxCount($this->loggedUserInfo['id']);
@@ -56,12 +50,9 @@ class Inbox extends CI_Controller
 
     public function detail($id)
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
         $commonData['inboxNum'] = $this->Inbox_model->getInboxCount($this->loggedUserInfo['id']);
@@ -75,12 +66,9 @@ class Inbox extends CI_Controller
 
     public function trash()
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
         $commonData['inboxNum'] = $this->Inbox_model->getInboxCount($this->loggedUserInfo['id']);
@@ -93,12 +81,9 @@ class Inbox extends CI_Controller
 
     public function newMessage()
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
         $commonData['inboxNum'] = $this->Inbox_model->getInboxCount($this->loggedUserInfo['id']);
@@ -201,12 +186,10 @@ class Inbox extends CI_Controller
 
     function loginCheck()
     {
-        if ($this->session->userdata('logged_user'))
+        if (!$this->session->userdata('logged_user'))
         {
-            return true;
+            redirect('login');
         }
-
-        return false;
     }
 
 }

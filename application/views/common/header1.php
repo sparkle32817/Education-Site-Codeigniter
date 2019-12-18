@@ -49,7 +49,7 @@
         </div>
         <div class="responsive-opensec">
             <?php
-            if ($loginStatus == 'success') {
+            if (isset($loggedUserType)) {
                 ?>
                 <div class="btns-profiles-sec">
                     <span>
@@ -60,9 +60,22 @@
                         <li>
                             <a href="<?= base_url('profile'); ?>">
                                 <i class="la la-user"></i>
-                                Profile
+                                My Profile
                             </a>
                         </li>
+                        <?php
+                        if ($loggedUserType != 'student')
+                        {
+                            ?>
+                            <li>
+                                <a href="<?= base_url('membership'); ?>">
+                                    <i class="fa fa-credit-card"></i>
+                                    My Membership
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                         <li>
                             <a href="<?= base_url('inbox'); ?>">
                                 <i class="la la-paper-plane"></i>
@@ -85,24 +98,57 @@
                     <li class="menu_widgets">
                         <a href="<?= base_url('home'); ?>" title="">Home</a>
                     </li>
-                    <li class="menu_widgets">
-                        <a href="<?= base_url('education'); ?>" title="">Education Center</a>
+                    <?php
+                    if (!isset($loggedUserType)) {
+                        ?>
+                        <li class="menu_widgets">
+                            <a href="<?= base_url('education'); ?>" title="">Education Center</a>
 
-                    </li>
-                    <li class="menu_widgets">
-                        <a href="<?= base_url('tutor'); ?>" title="">Tutor Center</a>
-                    </li>
-                    <li class="menu_widgets">
-                        <a href="<?= base_url('student'); ?>" title="">Parent Center</a>
+                        </li>
+                        <li class="menu_widgets">
+                            <a href="<?= base_url('tutor'); ?>" title="">Tutor Center</a>
+                        </li>
+                        <li class="menu_widgets">
+                            <a href="<?= base_url('student'); ?>" title="">Parent Center</a>
 
-                    </li>
+                        </li>
+                        <?php
+                    }
+                    else
+                    {
+                        if ($loggedUserType == 'education')
+                        {
+                            ?>
+                            <li class="menu_widgets">
+                                <a href="<?= base_url('education'); ?>" title="">Education Center</a>
+                            </li>
+                            <?php
+                        }
+                        else if ($loggedUserType == 'tutor')
+                        {
+                            ?>
+                            <li class="menu_widgets">
+                                <a href="<?= base_url('tutor'); ?>" title="">Tutor Center</a>
+                            </li>
+                            <?php
+                        }
+                        else if ($loggedUserType == 'student')
+                        {
+                            ?>
+                            <li class="menu_widgets">
+                                <a href="<?= base_url('student'); ?>" title="">Parent Center</a>
+                            </li>
+                            <?php
+                        }
+                    }
+                    ?>
                     <li class="menu_widgets">
                         <a href="<?= base_url('faq'); ?>" title="">FAQ</a>
 
                     </li>
                     <?php
-                    if ($loginStatus != 'success') {
-                        ?>
+                    if (!isset($loggedUserType)) {
+                    ?>
                         <li class="menu-item-has-children">
                             <a href="javascript:;">
                                 <i class="la la-key"></i>
@@ -120,7 +166,7 @@
                                 Login
                             </a>
                         </li>
-                        <?php
+                    <?php
                     }
                     ?>
                 </ul>
@@ -135,7 +181,7 @@
                     <a href="<?= base_url('home'); ?>" title=""><img src="<?= base_url('assets/build/images/resource/logo4.png'); ?>" alt="" /></a>
                 </div>
                 <?php
-                if ($loginStatus == 'success') {
+                if (isset($loggedUserType)) {
                     ?>
                     <div class="btns-profiles-sec">
                         <span>
@@ -146,9 +192,22 @@
                             <li>
                                 <a href="<?= base_url('profile'); ?>">
                                     <i class="la la-user"></i>
-                                    Profile
+                                    My Profile
                                 </a>
                             </li>
+                            <?php
+                            if ($loggedUserType != 'student')
+                            {
+                                ?>
+                                <li>
+                                    <a href="<?= base_url('membership'); ?>">
+                                        <i class="fa fa-credit-card"></i>
+                                        My Membership
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                            ?>
                             <li>
                                 <a href="<?= base_url('inbox'); ?>">
                                     <i class="la la-paper-plane"></i>
@@ -169,23 +228,57 @@
                 <nav>
                     <ul class="menu_color">
                         <li class="menu_widgets">
-                            <a href="<?= base_url('home'); ?>" title="">Home</a>
+                            <a href="<?= base_url('home'); ?>" class="<?= isset($loggedUserType)? 'text-white': ''; ?>" title="">Home</a>
                         </li>
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('education'); ?>" title="">Education Center</a>
+                        <?php
+                        if (!isset($loggedUserType)) {
+                            ?>
+                            <li class="menu_widgets">
+                                <a href="<?= base_url('education'); ?>" title="">Education Center</a>
 
-                        </li>
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('tutor'); ?>" title="">Tutor Center</a>
-                        </li>
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('student'); ?>" class="simple-text-block" title="">Parent Center</a>
-                        </li>
+                            </li>
+                            <li class="menu_widgets">
+                                <a href="<?= base_url('tutor'); ?>" title="">Tutor Center</a>
+                            </li>
+                            <li class="menu_widgets">
+                                <a href="<?= base_url('student'); ?>" title="">Parent Center</a>
+
+                            </li>
+                            <?php
+                        }
+                        else
+                        {
+                            if ($loggedUserType == 'education')
+                            {
+                                ?>
+                                <li class="menu_widgets">
+                                    <a href="<?= base_url('education'); ?>" class="text-white" title="">Education Center</a>
+                                </li>
+                                <?php
+                            }
+                            else if ($loggedUserType == 'tutor')
+                            {
+                                ?>
+                                <li class="menu_widgets">
+                                    <a href="<?= base_url('tutor'); ?>" class="text-white" title="">Tutor Center</a>
+                                </li>
+                                <?php
+                            }
+                            else if ($loggedUserType == 'student')
+                            {
+                                ?>
+                                <li class="menu_widgets">
+                                    <a href="<?= base_url('student'); ?>" class="text-white" title="">Parent Center</a>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?>
                         <li class="menu_widgets">
                             <a href="<?= base_url('faq'); ?>" class="text-white" title="">FAQ</a>
                         </li>
                         <?php
-                        if ($loginStatus != 'success') {
+                        if (!isset($loggedUserType)) {
                             ?>
                             <li class="menu-item-has-children">
                                 <a href="javascript:;" class="text-white">
@@ -241,7 +334,7 @@
                             </div>
                         </div>
                         <div class="scroll-to style2">
-                            <a href="#bottom_line" title=""><i class="la la-arrow-down"></i></a>
+                            <a href="#scroll-here" title=""><i class="la la-arrow-down"></i></a>
                         </div>
                     </div>
                 </div>

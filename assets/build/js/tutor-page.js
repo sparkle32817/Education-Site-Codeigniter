@@ -95,10 +95,6 @@ $(document).ready(function () {
                                         <i class="la la-map-marker"></i> &nbsp;&nbsp;<span>` + tutor.location + `</span>
                                     </h6>
                                     <h6>
-                                        Lessons/week &nbsp;&nbsp;<span>` + tutor.lesson_week + `</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Private/Group &nbsp;&nbsp;<span>` + tutor.private_group + `</span>
-                                    </h6>
-                                    <h6>
                                         Subject &nbsp;&nbsp;<span>` + tutor.subject + `</span>
                                     </h6>
                                     <a href="` + base_url + `tutor/detail/` + tutor.id +`">

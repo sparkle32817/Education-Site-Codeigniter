@@ -72,10 +72,11 @@ $(document).ready(function () {
 
             var values = {
                 "avatar": canvas_pic,
-                "grade": $(".select2-grade").val().toString(),
-                "subject": $(".select2-subject").val().toString(),
-                "activity": $(".select2-activity").val().toString(),
-                // "timeline": JSON.stringify(timepicker)
+                "grade": $("#tutor-grade").val()==null? null: $("#tutor-grade").val().toString(),
+                "subject": $("#tutor-subject").val()==null? null: $("#tutor-subject").val().toString(),
+                "activity": $("#tutor-activity").val()==null? null: $("#tutor-activity").val().toString(),
+                "location": $("#tutor-service-area").val().toString(),
+                "timeline": JSON.stringify(timepicker)
             };
 
             $.each($('.tutor-form').serializeArray(), function(i, field) {
@@ -89,8 +90,6 @@ $(document).ready(function () {
                     console.log("other->"+field.name+"::"+field.value);
                 }
             });
-
-            values['timeline'] = JSON.stringify(timepicker);
 
             console.log(values);
 

@@ -35,19 +35,19 @@
                                 </div>
                                 <div class="my-profile-left-side" style="text-align: left;">
                                     <div class="col-lg-12">
-                                        <h6>Name</h6>
+                                        <span class="pf-title mt-0">Name</span>
                                         <div class="pf-field">
                                             <input type="text" class="name" name="name" value="<?= $information['name'] ?>" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <h6>Tel</h6>
+                                        <span class="pf-title mt-0">Tel</span>
                                         <div class="pf-field">
                                             <input type="text" class="telephone" name="phone" value="<?= $information['phone'] ?>" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <h6>Email</h6>
+                                        <span class="pf-title mt-0">Email</span>
                                         <div class="pf-field">
                                             <input type="text" class="email" name="email" value="<?= $information['email'] ?>" readonly/>
                                         </div>
@@ -57,34 +57,10 @@
                                     {
                                         ?>
                                         <div class="col-lg-12">
-                                            <h6>Address</h6>
+                                            <span class="pf-title mt-0">Address</span>
                                             <div class="pf-field">
                                                 <input type="text" class="address" name="address" value="<?= $information['address'] ?>" readonly/>
                                             </div>
-                                        </div>
-                                        <?php
-                                    }
-                                    else if ($type == 'tutor')
-                                    {
-                                        ?>
-                                        <div class="col-lg-12">
-                                            <h6>Age</h6>
-                                            <div class="pf-field">
-                                                <input type="text" name="age" value="<?= $information['age'] ?>" readonly/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <h6>Gender</h6>
-                                            <div class="pf-field">
-                                                <input type="text" name="gender" value="<?= $information['gender'] == 1? "Male": "Female"; ?>" readonly/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <h6>Service Area</h6>
-                                            <select class="select2-location width-100" name="location" multiple disabled>
-                                            </select>
                                         </div>
                                         <?php
                                     }
@@ -92,38 +68,53 @@
                                     {
                                         ?>
                                         <div class="col-lg-12">
-                                            <h6>Age</h6>
+                                            <span class="pf-title mt-0">Age</span>
                                             <div class="pf-field">
                                                 <input type="text" name="age" value="<?= $information['age'] ?>" readonly/>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-12">
-                                            <h6>Gender</h6>
+                                            <span class="pf-title mt-0">Gender</span>
                                             <div class="pf-field">
-                                                <input type="text" name="gender" value="<?= $information['gender'] == 1? "Male": "Female"; ?>" readonly/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <h6>Location</h6>
-                                            <div class="pf-field">
-                                                <select class="chosen" name="location" disabled>
-                                                    <option value="home"
-                                                        <?= $information['location'] == 'home' ? 'selected' : '' ?>
-                                                    >Home</option>
-                                                    <option value="not_home"
-                                                        <?= $information['location'] != 'home' ? 'selected' : '' ?>
-                                                    >Not Home</option>
+                                                <select class="mb-4" name="gender" disabled>
+                                                    <option value="1" <?= $information['gender'] == 1 ? 'selected' : '' ?> >Male</option>
+                                                    <option value="2" <?= $information['gender'] == 2 ? 'selected' : '' ?> >Female</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-lg-12">
                                         <?php
+                                        if ($type == 'tutor')
+                                        {
+                                            ?>
+                                            <span class="pf-title mt-0">Service Area</span>
+                                            <select class="select2 select2-location width-100" name="location" multiple disabled></select>
+                                            <?php
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                            <span class="pf-title mt-0">Location</span>
+                                            <div class="pf-field">
+                                                <select name="location" disabled>
+                                                    <?php foreach ($locations as $location){?>
+                                                    <option value="<?= $location['id']; ?>"
+                                                        <?= $information['location'] == $location['id'] ? 'selected' : '' ?>
+                                                    ><?= $location['name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                        </div>
+                                    <?php
                                     }
                                     ?>
-                                    <div class="col-lg-12">
-                                        <span style="height: 100px;">&nbsp;</span>
-                                    </div>
+<!--                                    <div class="col-lg-12">-->
+<!--                                        <span style="height: 150px;">&nbsp;</span>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
 
@@ -148,34 +139,34 @@
                                         if ($type == 'education' || $type == 'tutor')
                                         {
                                             ?>
-                                            <h6>Grade that can teach</h6>
+                                            <span class="pf-title mt-0">Grade that can teach</span>
                                             <?php
                                         }
                                         else
                                         {
                                             ?>
-                                            <h6>Grade</h6>
+                                            <span class="pf-title mt-0">Grade</span>
                                             <?php
                                         }
                                         ?>
-                                        <select class="select2-grade width-100" name="grade" multiple disabled>
+                                        <select class="form-control select2 select2-grade width-100" name="grade" multiple disabled>
                                         </select>
                                         <div class="error profile-select2"></div>
-                                        <h6>School subject</h6>
-                                        <select class="select2-subject width-100" name="subject" multiple disabled>
+                                        <span class="pf-title mt-0">School subject</span>
+                                        <select class="form-control select2 select2-subject width-100" name="subject" multiple disabled>
                                         </select>
                                         <div class="error profile-select2"></div>
-                                        <h6>Extra activity</h6>
-                                        <select class="select2-activity width-100" name="activity" multiple disabled>
+                                        <span class="pf-title mt-0">Extra activity</span>
+                                        <select class="form-control select2 select2-activity width-100" name="activity" multiple disabled>
                                         </select>
                                         <div class="error profile-select2"></div>
                                         <?php
                                         if ($type == 'tutor')
                                         {
                                             ?>
-                                            <h6>Personal highest qualification</h6>
+                                            <span class="pf-title mt-0">Personal highest qualification</span>
                                             <div class="pf-field profile-select2">
-                                                <select class="chosen" name="qualification" disabled>
+                                                <select name="qualification" disabled>
                                                     <option value="">-Select Qualification-</option>
                                                     <?php
                                                     foreach ($qualifications as $qualification) {
@@ -190,9 +181,9 @@
                                                 <div class="error"></div>
                                             </div>
 
-                                            <h6>Personal certification</h6>
+                                            <span class="pf-title mt-0">Personal certification</span>
                                             <div class="pf-field profile-select2">
-                                                <select class="chosen" name="certification" disabled>
+                                                <select name="certification" disabled>
                                                     <option value="">-Select Certification-</option>
                                                     <?php
                                                     foreach ($certifications as $certification) {
@@ -207,14 +198,14 @@
                                                 <div class="error"></div>
                                             </div>
 
-                                            <h6>Expect hourly rate</h6>
+                                            <span class="pf-title mt-0">Expect hourly rate</span>
                                             <div class="pf-field profile-select2">
                                                 <input type="text" name="hourly_rate" value="<?= $information['hourly_rate']; ?>" readonly/>
                                             </div>
                                             <?php
                                         }
                                         ?>
-                                        <h6>Avialable time</h6>
+                                        <span class="pf-title mt-0">Avialable time</span>
                                         <div class="pf-field profile-select2">
                                             <?php $timeline = json_decode($information['timeline'], true); ?>
                                             <table class="table time-picker-table">
@@ -234,36 +225,36 @@
                                                 <tr>
                                                     <td><input type="text" value="From" readonly/>
                                                     </td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="mon" status="start"
                                                                value="<?= $timeline['mon_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="tue" status="start"
                                                                value="<?= $timeline['tue_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="wen" status="start"
                                                                value="<?= $timeline['wen_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="thi" status="start"
                                                                value="<?= $timeline['thi_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="fri" status="start"
                                                                value="<?= $timeline['fri_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="sat" status="start"
                                                                value="<?= $timeline['sat_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="sun" status="start"
                                                                value="<?= $timeline['sun_start'] ?>" readonly/></td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="text" value="To" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="mon" status="end"
                                                                value="<?= $timeline['mon_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="tue" status="end"
                                                                value="<?= $timeline['tue_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="wen" status="end"
                                                                value="<?= $timeline['wen_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="thi" status="end"
                                                                value="<?= $timeline['thi_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="fri" status="end"
                                                                value="<?= $timeline['fri_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="sat" status="end"
                                                                value="<?= $timeline['sat_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker"
+                                                    <td><input type="text" class="timepicker" day="sun" status="end"
                                                                value="<?= $timeline['sun_end'] ?>" readonly/></td>
                                                 </tr>
                                                 </tbody>
@@ -273,7 +264,7 @@
                                         if ($type == 'education' || $type == 'tutor')
                                         {
                                             ?>
-                                            <h6>Self description</h6>
+                                            <span class="pf-title mt-0">Self description</span>
                                             <div class="pf-field">
                                                 <textarea name="description" placeholder="(eg. Special for which school etc)" readonly><?= $information['description']; ?></textarea>
                                             </div>
@@ -282,12 +273,12 @@
                                         else
                                         {
                                             ?>
-                                            <h6>Lessons per week</h6>
+                                            <span class="pf-title mt-0">Lessons per week</span>
                                             <div class="pf-field profile-select2">
                                                 <input type="text" name="lesson_week" value="<?= $information['lesson_week']; ?>" readonly/>
                                             </div>
 
-                                            <h6>Private/Group</h6>
+                                            <span class="pf-title mt-0">Private/Group</span>
                                             <div class="pf-field">
                                                 <input type="text" name="private_group" value="<?= $information['private_group']; ?>" readonly/>
                                             </div>

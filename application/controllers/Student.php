@@ -20,12 +20,9 @@ class Student extends CI_Controller
 
     public function index()
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
         $data['qualifications'] = $this->Common_model->getQualifications();
@@ -37,12 +34,9 @@ class Student extends CI_Controller
 
     public function detail($id)
     {
-        if (!$this->loginCheck())
-        {
-            redirect('login');
-        }
+        $this->loginCheck();
 
-        $headerData['loginStatus'] = $this->loginCheck()? "success": "fail";
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
@@ -54,6 +48,7 @@ class Student extends CI_Controller
         $data['information'] = $result;
         $data['curUserType'] = $this->session->userdata('logged_type');
         $data['id'] = $id;
+        $data['hasPermission'] = $this->canSendMessage();
 
         $footerData['num'] = $id;
 
@@ -65,6 +60,8 @@ class Student extends CI_Controller
     public function getStudent()
     {
         $results = $this->Student_model->getStudent($this->input->post());
+
+        //echo $results; exit;
 
         $returnVal = array();
         foreach ($results as $result)
@@ -100,13 +97,24 @@ class Student extends CI_Controller
         echo $this->Student_model->postMessage($userID, $userName, $userType, $this->input->post());
     }
 
-    function loginCheck()
+    function canSendMessage()
     {
-        if ($this->session->userdata('logged_user'))
+        $userInfo = $this->Common_model->getLoggedUserInfo();
+
+        if ($userInfo['membership_type'] != 0)
         {
             return true;
         }
 
         return false;
     }
+
+    function loginCheck()
+    {
+        if (!$this->session->userdata('logged_user'))
+        {
+            redirect('login');
+        }
+    }
+
 }

@@ -13,7 +13,7 @@ $(document).ready(function () {
                                 <div class="emply-pstn">
                                     ` + getRatingHtml(review.rating) +`
                                 </div>
-                                <h3><a href="#" title="">Name</a></h3>
+                                <h3><a href="#" title="">Name:&nbsp;&nbsp;</a>` + review.name + `</h3>
                                 <p style="font-size:14px;">Time: &nbsp&nbsp<span>` + review.time + `</span></p>
                                 <p style="font-size:14px;">Description: &nbsp&nbsp<span>` + review.description + `</span></p>
                             </div>

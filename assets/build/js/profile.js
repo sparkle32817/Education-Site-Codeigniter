@@ -11,24 +11,43 @@ $(document).ready(function () {
         InitLocation();
     }
 
-    $('.timepicker').timepicker({
-        autoclose: true,
-        minuteStep: 5,
-        showSeconds: false,
-        showMeridian: false,
-        change: function(time) {
-            // the input field
-            var element = $(this), text;
-            // get access to this Timepicker instance
-            var timepicker = element.timepicker();
-            text = 'Selected time is: ' + timepicker.format(time);
-            console.log("time", text);
-            element.siblings('span.help-line').text(text);
+    $("select[name=grade]").on("change", function () {
+        $('.select2-grade').selectpicker('refresh');
+
+        setSubject($(this).val());
+
+        if ($(this).val()==null || $(this).val()=="")
+        {
+            $('.select2-activity').prop('disabled',false);
+            $('.select2-activity').selectpicker('refresh');
+        }
+        else
+        {
+            $(".select2-activity").selectpicker('val', []);
+            $('.select2-activity').prop('disabled',true);
+            $('.select2-activity').selectpicker('refresh');
         }
     });
-    
-    $(".select2-grade").on("change", function () {
-        setSubject($(this).val());
+
+    $("select[name=activity]").on("change", function () {
+
+        if ($(this).val()==null || $(this).val()=="")
+        {
+            $('.select2-grade').prop('disabled',false);
+            $('.select2-grade').selectpicker('refresh');
+
+            $('.select2-subject').prop('disabled',false);
+            $('.select2-subject').selectpicker('refresh');
+        }
+        else
+        {
+            $(".select2-grade").selectpicker('val', []);
+            $('.select2-grade').prop('disabled',true);
+            $('.select2-grade').selectpicker('refresh');
+
+            $('.select2-subject').prop('disabled',true);
+            $('.select2-subject').selectpicker('refresh');
+        }
     });
 
     $(".profile-form").on("submit", function (e) {
@@ -53,9 +72,10 @@ $(document).ready(function () {
         {
             var values = {
                 "avatar": canvas_pic,
-                "grade": $(".select2-grade").val().toString(),
-                "subject": $(".select2-subject").val().toString(),
-                "activity": $(".select2-activity").val().toString(),
+                "grade": $("select[name=grade]").val()==null? null: $("select[name=grade]").val().toString(),
+                "subject": $("select[name=subject]").val()==null? null: $("select[name=subject]").val().toString(),
+                "activity": $("select[name=activity]").val()==null? null: $("select[name=activity]").val().toString(),
+                "timeline": JSON.stringify(timepicker)
             };
 
             $.each($('.profile-form').serializeArray(), function(i, field) {
@@ -183,12 +203,11 @@ $(document).ready(function () {
                     });
                     subject_html += `</optgroup>`;
                 });
-                $(".select2-subject").trigger("destroy");
+
+                $(".select2-subject").selectpicker("destroy");
                 $(".select2-subject").html("");
                 $(".select2-subject").html(subject_html);
-                $(".select2-subject").select2({
-                    placeholder: 'Select School Subject'
-                });
+                $(".select2-subject").selectpicker();
             }
         });
     }
@@ -205,15 +224,11 @@ $(document).ready(function () {
                 $.each(result.grades, function (index, grade) {
                     grade_html += `<option value="` + grade.id + `">` + grade.text + `</option>`;
                 });
-                $(".select2-grade").trigger("destroy");
+
+                $(".select2-grade").selectpicker("destroy");
                 $(".select2-grade").html("");
                 $(".select2-grade").html(grade_html);
-                $(".select2-grade").select2({
-                    placeholder: 'Select Grade'
-                });
-
-                $('.select2-grade').val(result.curInfo.split(","));
-                $('.select2-grade').trigger('change');
+                $(".select2-grade").selectpicker('val', result.curInfo.split(","));
 
                 InitSubject(result.curInfo.split(","));
             }
@@ -224,6 +239,12 @@ $(document).ready(function () {
 
         console.log(gradIDs);
 
+        if (gradIDs == null || gradIDs == "")
+        {
+            $(".select2-subject").selectpicker('val', []);
+            return;
+        }
+
         $.ajax( {
             url: base_url + 'common/getInitSubjects',
             method: "post",
@@ -231,8 +252,6 @@ $(document).ready(function () {
             dataType: "json",
             async: false,
             success: function (result) {
-
-                console.log("subjects", result);
 
                 let subject_html = "";
                 $.each(result.subjects, function (index, subject) {
@@ -242,15 +261,11 @@ $(document).ready(function () {
                     });
                     subject_html += `</optgroup>`;
                 });
-                $(".select2-subject").trigger("destroy");
+
+                $(".select2-subject").selectpicker("destroy");
                 $(".select2-subject").html("");
                 $(".select2-subject").html(subject_html);
-                $(".select2-subject").select2({
-                    placeholder: 'Select School Subject'
-                });
-
-                $('.select2-subject').val(result.curInfo.split(","));
-                $('.select2-subject').trigger('change');
+                $(".select2-subject").selectpicker('val', result.curInfo.split(","));
 
             }
         });
@@ -272,16 +287,11 @@ $(document).ready(function () {
                     });
                     activity_html += `</optgroup>`;
                 });
-                $(".select2-activity").trigger("destroy");
+
+                $(".select2-activity").selectpicker("destroy");
                 $(".select2-activity").html("");
                 $(".select2-activity").html(activity_html);
-                $(".select2-activity").select2({
-                    placeholder: 'Select Extra Activity'
-                });
-
-                $('.select2-activity').val(result.curInfo.split(","));
-                $('.select2-activity').trigger('change');
-
+                $(".select2-activity").selectpicker('val', result.curInfo.split(","));
             }
         });
     }
@@ -308,7 +318,6 @@ $(document).ready(function () {
                 $('.select2-location').val(result.curInfo.split(","));
                 $('.select2-location').trigger('change');
 
-                InitSubject(result.curInfo.split(","));
             }
         });
     }
@@ -323,12 +332,29 @@ $(document).ready(function () {
 
         $(".profile-form").find(".alert").find(".close").click();
 
+        $(".timepicker").timepicker({
+            autoclose: true,
+            minuteStep: 5,
+            showSeconds: false,
+            showMeridian: false
+        });
+
         $.each($('.profile-form input'), function(i, element) {
-            $(this).prop("readonly", false);
+            if ($(this).attr("class")==null || !$(this).attr("class").includes("timepicker"))
+            {
+                $(this).prop("readonly", false);
+            }
         });
 
         $.each($('.profile-form select'), function(i, element) {
-            $(this).prop("disabled", false);
+            if ($(this).val() != null)
+            {
+                $(this).prop("disabled", false);
+                if ($(this).attr("class")!=null && $(this).attr("class").includes("select2"))
+                {
+                    $(this).selectpicker('refresh');
+                }
+            }
         });
 
         $('.profile-form textarea').prop("readonly", false);
@@ -343,11 +369,20 @@ $(document).ready(function () {
     function disabledForm() {
 
         $.each($('.profile-form input'), function(i, element) {
-            $(this).prop("readonly", true);
+            if ($(this).attr("class")!=null && $(this).attr("class").includes("timepicker"))
+            {
+                // $(this).timepicker('destroy');
+                $(this).removeClass("timepicker");
+            }
+            else
+            {
+                $(this).prop("readonly", true);
+            }
         });
 
         $.each($('.profile-form select'), function(i, element) {
             $(this).prop("disabled", true);
+            $(this).selectpicker('refresh');
         });
 
         $('.profile-form textarea').prop("readonly", true);

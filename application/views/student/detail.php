@@ -26,7 +26,7 @@
                         <div class="can-detail-s" style="text-align: left;">
                             <h7 id="student-name" style="font-color:red;"><?= $information['name'] ?></h7>
                             <span>Age: <i><?= $information['age'] ?></i></span>
-                            <span>Gender: <i><?= $information['gender'] ?></i></span>
+                            <span>Gender: <i><?= $information['gender'] == 1? "Male": "Female"; ?></i></span>
                             <span>Grade: <i><?= $information['grade'] ?></i></span>
                             <span>Tel: <i><?= $information['phone'] ?></i></span>
                             <span>Subject: <i><?= $information['subject'] ?></i></span>
@@ -95,7 +95,7 @@
                                 <h6 style="margin: 0;">Lessons/week &nbsp;&nbsp; <span><?= $information['lesson_week']; ?></span> lessons per week</h6>
                                 <h6>Priavte/Group &nbsp;&nbsp; <span><?= $information['private_group']; ?></span></h6>
                                 <?php
-                                if ($curUserType != 'student') {
+                                if ($curUserType != 'student' && $hasPermission) {
                                     ?>
                                     <h6>Message</h6>
                                     <div class="commentform-sec">

@@ -1,88 +1,83 @@
 $(document).ready(function () {
 
-    let total_tutor = 'all';
-    let gender = '';
-    let hourly = '';
-    let qualification = '';
-
-    let total_student = 'all';
-    let location = '';
-    let subject = '';
-    let grade = '';
-
     $("div.list-tutor").html(getTutorList());
     $("div.list-student").html(getStudentList());
 
-    console.log("getTutorList");
-    
     /*
     *   Events
      */
+    $("#education-student-grade").on("change", function () {
+
+        let gradeID = $("#education-student-grade").val();
+
+        if (gradeID == "")
+        {
+            $("#education-student-subject").html("<option value=\"\">-Select School Subject-</option>");
+            return;
+        }
+
+        $.ajax( {
+            url: base_url + 'common/getSubjectsBySingle',
+            method: "post",
+            data: {gradeId: gradeID},
+            dataType: "json",
+            async: false,
+            success: function (subjects) {
+
+                console.log("subjects", subjects);
+
+                let subject_html = "<option value=\"\">-Select School Subject-</option>";
+                $.each(subjects, function (index, subject) {
+                    subject_html += `<option value="` + subject.id + `">` + subject.text + `</option>`;
+                });
+
+                $("#education-student-subject").html(subject_html);
+                console.log("subject_html", subject_html);
+
+            }
+        });
+    });
+
     $("#tutor-search-button").on("click", function () {
-        gender = $(".education-tutor-gender").val();
-        hourly = $(".education-tutor-hourly").val();
-        qualification = $(".education-tutor-qualification").val();
-
-        if (gender == '' && hourly == '' && qualification == '' )
-        {
-            total_tutor = 'all';
-        }
-        else
-        {
-            total_tutor = 'part';
-        }
-
         $("div.list-tutor").html(getTutorList());
     });
 
     $("#tutor-clear-button").on("click", function () {
-        gender = "";
-        hourly = "";
-        qualification = "";
 
-        total_tutor = 'all';
+        $("#education-tutor-gender").val("");
+        $("#education-tutor-hourly").val("");
+        $("#education-tutor-qualification").val("");
+
 
         $("div.list-tutor").html(getTutorList());
     });
 
     $("#student-search-button").on("click", function () {
-        location = $(".education-student-location").val();
-        subject = $(".education-student-subject").val();
-        grade = $(".education-student-grade").val();
-
-        if (location == null && subject == '' && grade == '' )
-        {
-            total_student = 'all';
-        }
-        else
-        {
-            total_student = 'part';
-        }
-
         $("div.list-student").html(getStudentList());
     });
 
     $("#student-clear-button").on("click", function () {
-        location = "";
-        subject = "";
-        grade = "";
-
-        total_student = 'all';
+        $("#education-student-location").val("");
+        $("#education-student-subject").val("");
+        $("#education-student-grade").val("");
 
         $("div.list-student").html(getStudentList());
     });
 
     /*
     *   Functions
-     */
-
+    */
     function getTutor() {
+
+        let gender = $("#education-tutor-gender").val();
+        let hourly = $("#education-tutor-hourly").val();
+        let qualification = $("#education-tutor-qualification").val();
 
         var response = [];
         $.ajax({
             url: base_url + "tutor/getTutor",
             method: "post",
-            data: {total: total_tutor, gender:gender, hourly_rate: hourly, qualification: qualification},
+            data: {gender:gender, hourly_rate: hourly, qualification: qualification},
             dataType: "json",
             async: false,
             success: function (data) {
@@ -117,6 +112,8 @@ $(document).ready(function () {
                                 </div>
                                 <h6>
                                     Name &nbsp;&nbsp;<span>` + tutor.name + `</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </h6>
+                                <h6>
                                     Gender&nbsp;&nbsp;<span>` + gender + `</span>
                                 </h6>
                                 <h6>
@@ -138,11 +135,15 @@ $(document).ready(function () {
 
     function getStudent() {
 
+        let location = $("#education-student-location").val();
+        let subject = $("#education-student-subject").val();
+        let grade = $("#education-student-grade").val();
+
         var response = [];
         $.ajax({
             url: base_url + "student/getStudent",
             method: "post",
-            data: {total: total_student, location: location, subject: subject, grade: grade},
+            data: {location: location, subject: subject, grade: grade},
             dataType: "json",
             async: false,
             success: function (data) {
@@ -168,7 +169,7 @@ $(document).ready(function () {
                                 <div class="emply-list-info">
                                     <h6>Name &nbsp;&nbsp;<span>` + student.name + `</span></h6>
                                     <h6>Grade &nbsp;&nbsp;<span>` + student.grade + `</span></h6>
-                                    <h6 class="required-subject">Required teaching subject &nbsp;&nbsp;<span>` + student.subject +`</span></h6>
+                                    <h6 class="required-subject">Required subject &nbsp;&nbsp;<span>` + student.subject +`</span></h6>
                                     <h6><i class="la la-map-marker"></i> &nbsp;&nbsp;<span>` + student.location + `</span></h6>
                                     <a href="` + base_url + `student/detail/` + student.id + `">
                                         <button type="button" class="btn btn-outline-primary" style="margin-top: 29px;">More

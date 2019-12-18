@@ -91,6 +91,27 @@ class Common extends CI_Controller
         echo json_encode($returnVal);
     }
 
+    public function getSubjectsBySingle()
+    {
+        $postedData = $this->input->post();
+
+        if (empty($postedData['gradeId']))
+        {
+            echo json_encode(array());
+            exit;
+        }
+
+        $subjects = $this->Common_model->getSubjects($postedData['gradeId']);
+
+        $data = array();
+        foreach ($subjects as $subject)
+        {
+            $data[] = array('id'=>$subject['id'], 'text'=>$subject['name']);
+        }
+
+        echo json_encode($data);
+    }
+
     public function getActivities()
     {
         $results = $this->Common_model->getActivityTitle();
@@ -127,13 +148,4 @@ class Common extends CI_Controller
         echo json_encode($returnVal);
     }
 
-    function loginCheck()
-    {
-        if ($this->session->userdata('logged_user'))
-        {
-            return true;
-        }
-
-        return false;
-    }
 }

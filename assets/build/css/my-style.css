@@ -1,396 +1,421 @@
 /*
 *   Header
 */
-.stick-top.forsticky span {
-    color: white;
-}
+    .stick-top.forsticky span {
+        color: white;
+    }
 
-.stick-top.forsticky.sticky span {
-    color: black;
-}
+    .stick-top.forsticky.sticky span {
+        color: black;
+    }
 
 /*
 *
 */
-label {
-    cursor: default;
-}
+    label {
+        cursor: default;
+    }
 
-.pf-field > input {
-    margin-bottom: 0px;
-}
+    .pf-field > input {
+        margin-bottom: 0px;
+    }
 
-label.error {
-    color: red;
-    font-size: 13px;
-    padding: 0 0 0 1em;
-}
+    label.error {
+        color: red;
+        font-size: 13px;
+        padding: 0 0 0 1em;
+    }
 
-label::before {
-    display: none;
-}
+    label::before {
+        display: none;
+    }
 
-label.browse-button {
-    padding: 10px 0 15px 0;
-    width: 100px;
-    height: 45px;
-    text-align: center;
-    border: 1px solid dodgerblue;
-    border-radius: 40px;
-}
+    label.browse-button {
+        padding: 10px 0 15px 0;
+        width: 100px;
+        height: 45px;
+        text-align: center;
+        border: 1px solid dodgerblue;
+        border-radius: 40px;
+    }
 
-.content-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+    .content-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 
-.upload-button-div {
-    margin: 100px 0 0 20px;
-}
+    .upload-button-div {
+        margin: 100px 0 0 20px;
+    }
 
-.alert-dismissible .close {
-    cursor: pointer;
-    float: right;
-    padding: 10px;
-    /*color: white;*/
-}
+    .alert-dismissible .close {
+        cursor: pointer;
+        float: right;
+        padding: 10px;
+        /*color: white;*/
+    }
 
-table.time-picker-table td {
-    padding: 20px 0;
-    text-align: center;
-}
+    table.time-picker-table td {
+        padding: 20px 0;
+        text-align: center;
+    }
 
-table.time-picker-table tr {
-    padding: 20px 0;
-    text-align: center;
-}
+    table.time-picker-table tr {
+        padding: 20px 0;
+        text-align: center;
+    }
 
-table.time-picker-table tbody tr {
-    border-left: 1px solid #dee2e6;
-    border-right: 1px solid #dee2e6;
-    border-bottom: 1px solid #dee2e6;
-}
+    table.time-picker-table tbody tr {
+        border-left: 1px solid #dee2e6;
+        border-right: 1px solid #dee2e6;
+        border-bottom: 1px solid #dee2e6;
+    }
 
-table.time-picker-table input {
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    background-color: white;
-}
+    table.time-picker-table input {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        background-color: white;
+    }
 
-div.pf-field textarea {
-    resize: none;
-}
+    div.pf-field textarea {
+        resize: none;
+    }
 
-h6.text-self-description {
-    height: 45px;
-    max-width: 537px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    h6.text-self-description {
+        height: 27px;
+        padding: 0 10px;
+        max-width: 537px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 15px;
+    }
 
-h6.text-self-description-1 {
-    height: 45px;
-    max-width: 433px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    h6.text-self-description-1 {
+        height: 45px;
+        padding: 0 10px;
+        max-width: 433px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 15px;
+    }
 
-h6.text-self-description-2 {
-    height: 22px;
-    max-width: 433px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    h6.text-self-description-2 {
+        height: 22px;
+        padding: 0 10px;
+        max-width: 433px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 15px;
+    }
 
-h6.required-subject {
-    max-width: 328px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    h6.required-subject {
+        max-width: 328px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-div.chosen-container.chosen-container-multi ul.chosen-choices {
-    border: none;
-    height: 46px;
-    padding: 10px;
-}
+    div.chosen-container.chosen-container-multi ul.chosen-choices {
+        border: none;
+        height: 46px;
+        padding: 10px;
+    }
 
-div.chosen-container.chosen-container-multi ul.chosen-choices li {
-    font-size: 14px;
-}
+    div.chosen-container.chosen-container-multi ul.chosen-choices li {
+        font-size: 14px;
+    }
 
-.btn-search-clear {
-    margin: 0 10px;
-}
+    .btn-search-clear {
+        margin: 0 10px;
+    }
 
-table.time-picker-table input {
-    font-size: 15px;
-}
-
-/*
-* Register page
- */
-.bootstrap-timepicker-widget table td a {
-    display: table;
-}
-
-.bootstrap-timepicker-widget table td {
-    /*display: flex;*/
-    align-items: center;
-    justify-content: center;
-}
-
-.bootstrap-timepicker-widget input {
-    padding: 0;
-    width: 66px !important;
-    background-color: white;
-}
-
-.bootstrap-timepicker-widget.timepicker-orient-left:before {
-    left: 24px;
-}
-
-.bootstrap-timepicker-widget.timepicker-orient-left:after {
-    left: 25px;
-}
-
-.bootstrap-timepicker-widget.timepicker-orient-bottom:before {
-    top: 95px;
-}
-
-.bootstrap-timepicker-widget.timepicker-orient-bottom:after {
-    top: 95px;
-}
-
-.profile-form-edit > form button:hover {
-    background: #ffffff;
-    color: black;
-    border: 2px solid #e8ecec;
-}
-
-.profile-form-edit > form button {
-    border: 2px solid #e8ecec;
-}
-
-.bootstrap-select .dropdown-toggle .filter-option {
-    padding: 10px;
-}
-
-.btn-light:not(:disabled):not(.disabled):active, .btn-light.dropdown-toggle, .btn-light:not(:disabled):not(.disabled):hover{
-    background-color: white;
-}
-
-.bootstrap-select .dropdown-toggle .filter-option-inner-inner {
-    font-size: 13px;
-    padding-top: 3px;
-    padding-left: 5px;
-}
-
-.dropup .dropdown-toggle::after, .dropdown-toggle::after {
-    display: none;
-}
-
-/*
-* Education page
- */
-div.p-top-50{
-    padding-top: 50px;
-}
-
-div.emply-list-sec.list-wrapper {
-    margin-top: 50px;
-}
-
-div.emply-list span {
-    font-size: 15px;
-}
-
-div.t-top-30 {
-    margin-top: 30px;
-}
-
-.min-height-500 {
-    min-height: 500px;
-}
+    table.time-picker-table input {
+        font-size: 15px;
+    }
 
 /*
 * Login page
  */
 
-.account-popup {
-    margin: 0px auto;
-    width: 600px;
-    text-align: center;
-    padding: 40px 60px;
-    left: 25%;
-}
+    .account-popup {
+        margin: 0px auto;
+        width: 600px;
+        text-align: center;
+        padding: 40px 60px;
+        left: 25%;
+    }
 
-.btn-recovery-login:hover {
-    color: red;
-    text-decoration: red;
-}
+    .btn-recovery-login:hover {
+        color: red;
+        text-decoration: red;
+    }
+
+/*
+* Register page
+ */
+    .bootstrap-timepicker-widget table td a {
+        display: table;
+    }
+
+    .bootstrap-timepicker-widget table td {
+        /*display: flex;*/
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bootstrap-timepicker-widget input {
+        padding: 0;
+        width: 66px !important;
+        background-color: white;
+    }
+
+    .bootstrap-timepicker-widget.timepicker-orient-left:before {
+        left: 24px;
+    }
+
+    .bootstrap-timepicker-widget.timepicker-orient-left:after {
+        left: 25px;
+    }
+
+    .bootstrap-timepicker-widget.timepicker-orient-bottom:before {
+        top: 95px;
+    }
+
+    .bootstrap-timepicker-widget.timepicker-orient-bottom:after {
+        top: 95px;
+    }
+
+    .profile-form-edit > form button:hover {
+        background: #ffffff;
+        color: black;
+        border: 2px solid #e8ecec;
+    }
+
+    .profile-form-edit > form button {
+        border: 2px solid #e8ecec;
+    }
+
+    .bootstrap-select .dropdown-toggle .filter-option {
+        padding: 10px;
+    }
+
+    .btn-light:not(:disabled):not(.disabled):active, .btn-light.dropdown-toggle, .btn-light:not(:disabled):not(.disabled):hover{
+        background-color: white;
+    }
+
+    .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+        font-size: 13px;
+        padding-top: 3px;
+        padding-left: 5px;
+    }
+
+    .dropup .dropdown-toggle::after, .dropdown-toggle::after {
+        display: none;
+    }
+
+/*
+* Education page
+ */
+    div.p-top-50{
+        padding-top: 50px;
+    }
+
+    div.emply-list-sec.list-wrapper {
+        margin-top: 50px;
+    }
+
+    div.emply-list span {
+        font-size: 15px;
+    }
+
+    div.t-top-30 {
+        margin-top: 30px;
+    }
+
+    .min-height-500 {
+        min-height: 500px;
+    }
+
+    select {
+        font-size: 13px;
+        float: left;
+        text-align: left;
+        border-radius: 8px;
+        box-shadow: none !important;
+        border: 2px solid #e8ecec;
+        padding: 13px;
+        width: 100%;
+    }
 
 /*
 *   Detail Page
 */
-div.can-detail-s span {
-    font-size: 16px;
-}
+    div.can-detail-s span {
+        font-size: 16px;
+    }
 
-div.profile-form-edit h6 {
-    margin: 40px 0 20px 0;
-}
+    div.profile-form-edit h6 {
+        margin: 40px 0 20px 0;
+    }
 
-div.profile-form-edit h6 span {
-    font-size: 18px;
-}
+    div.profile-form-edit h6 span {
+        font-size: 18px;
+    }
 
-table.time-picker-table {
-    margin-left: 20px;
-}
+    table.time-picker-table {
+        margin-left: 20px;
+    }
 
-div.commentform-sec {
-    margin: 0;
-}
+    div.commentform-sec {
+        margin: 0;
+    }
 
-span.recommend-rating-text {
-    font-size: 30px;
-    margin-left: 10px;
-    color: hotPink;
-    top: -3px;
-    position: relative;
-}
+    span.recommend-rating-text {
+        font-size: 30px;
+        margin-left: 10px;
+        color: hotPink;
+        top: -3px;
+        position: relative;
+    }
 
-.float-right {
-    float: right !important;
-}
+    .float-right {
+        float: right !important;
+    }
 
-.p-l-10 {
-    padding-left: 10px;
-}
+    .p-l-10 {
+        padding-left: 10px;
+    }
 
-.p-r-20 {
-    padding-right: 20px;
-}
+    .p-r-20 {
+        padding-right: 20px;
+    }
 
-.m-b-40
-{
-    margin-bottom: 40px;
-}
+    .m-b-40
+    {
+        margin-bottom: 40px;
+    }
 
-.m-b-20
-{
-    margin-bottom: 20px;
-}
+    .m-b-20
+    {
+        margin-bottom: 20px;
+    }
 
-.m-t-0
-{
-    margin-top: 0;
-}
+    .m-t-0
+    {
+        margin-top: 0;
+    }
 
-.m-r-20
-{
-    margin-right: 20px;
-}
+    .m-r-20
+    {
+        margin-right: 20px;
+    }
 
-.text-error {
-    color: red;
-    font-size: 13px;
-    padding: 0 0 0 1em;
-}
+    .text-error {
+        color: red;
+        font-size: 13px;
+        padding: 0 0 0 1em;
+    }
 
-.width-100 {
-    width: 100%
-}
+    .width-100 {
+        width: 100%
+    }
 
-.border-left {
-    border-left: 1px solid #edeff7;
-}
+    .border-left {
+        border-left: 1px solid #edeff7;
+    }
 
 /*
 *   My Profile
 */
 
-.my-profile-title {
-    padding: 30px;
-    border-bottom: 1px solid #edeff7;
-}
+    .my-profile-title {
+        padding: 30px;
+        border-bottom: 1px solid #edeff7;
+    }
 
-.my-profile-form {
-    padding: 40px 0 0 40px;
-}
+    .my-profile-form {
+        padding: 40px 0 0 40px;
+    }
 
-.profile-select2 {
-    margin-bottom: 20px;
-}
+    .profile-select2 {
+        margin-bottom: 20px;
+    }
 
-.my-profile-left-side .pf-field > input {
-    margin-bottom: 20px;
-}
+    .my-profile-left-side .pf-field > input {
+        margin-bottom: 20px;
+    }
 
 /*
 *   Multi-select
 */
-.select2-container--default .select2-selection--multiple {
-    background-color: white;
-    border: 2px solid #e9ecef !important;
-    border-radius: 8px;
-    cursor: text;
-    font-size: 13px;
-    padding: 5px 10px;
-}
+    .select2-container--default .select2-selection--multiple {
+        background-color: white;
+        border: 2px solid #e9ecef !important;
+        border-radius: 8px;
+        cursor: text;
+        font-size: 13px;
+        padding: 5px 10px;
+    }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background: #fb9678;
-    color: #fff;
-    border-color: #fb9678;
-}
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background: #fb9678;
+        color: #fff;
+        border-color: #fb9678;
+    }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    float: right;
-    color: #fff;
-    margin-right: 0px;
-    margin-left: 4px;
-}
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+        float: right;
+        color: #fff;
+        margin-right: 0px;
+        margin-left: 4px;
+    }
 
-ul li.select2-results__option {
-    color: #212529;
-    position: relative;
-    margin-bottom: 0;
-    font-size: 13px;
-}
+    ul li.select2-results__option {
+        color: #212529;
+        position: relative;
+        margin-bottom: 0;
+        font-size: 13px;
+    }
 
-ul.select2-selection__rendered li.select2-search {
-    margin-top: 8px !important;
-    margin-bottom: 7px;
-    position: relative;
-}
+    ul.select2-selection__rendered li.select2-search {
+        margin-top: 8px !important;
+        margin-bottom: 7px;
+        position: relative;
+    }
 
-ul.select2-selection__rendered li.select2-selection__choice {
-    margin-top: 12px !important;
-    margin-bottom: 5px;
-    position: relative;
-}
+    ul.select2-selection__rendered li.select2-selection__choice {
+        margin-top: 12px !important;
+        margin-bottom: 5px;
+        position: relative;
+    }
 
-.select2-container--default .select2-results__group {
-    font-size: 13px;
-}
+    .select2-container--default .select2-results__group {
+        font-size: 13px;
+    }
 
-.select2-container--default .select2-results__option .select2-results__option {
-    font-size: 13px;
-}
+    .select2-container--default .select2-results__option .select2-results__option {
+        font-size: 13px;
+    }
 
-.select2-container--default.select2-container--disabled .select2-selection--multiple {
-    background-color: white;
-    cursor: default;
-}
+    .select2-container--default.select2-container--disabled .select2-selection--multiple {
+        background-color: white;
+        cursor: default;
+    }
 
-.chosen-disabled {
-    opacity: 1 !important;
-}
+    .chosen-disabled {
+        opacity: 1 !important;
+    }
+
+/*
+*   Membership Page
+ */
+    a.selected {
+        pointer-events: none;
+        cursor: default;
+    }
