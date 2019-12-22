@@ -76,6 +76,8 @@ class Home extends CI_Controller
     {
         $this->loginCheck();
 
+//        echo 'user-info::'; print_r($this->loggedUserInfo);
+
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
@@ -112,20 +114,19 @@ class Home extends CI_Controller
     public function editProfile()
     {
         $postedData = $this->input->post('formData');
+        $id = $this->loggedUserInfo['id'];
 
         $userType = $this->session->userdata('logged_type');
-        $result = $this->Common_model->updateUserInfo('tbl_'.$userType, $this->loggedUserInfo['id'], $postedData);
+        $result = $this->Common_model->updateUserInfo('tbl_'.$userType, $id, $postedData);
 
-        if (gettype($result)=="array")
+        if ($result)
         {
-            $this->loggedUserInfo = $result;
+            $this->loggedUserInfo = $this->Common_model->getUserInfo('tbl_'.$userType, $id);
+            $this->session->set_userdata('logged_user', $this->loggedUserInfo['name']);
 
             echo 'success';
         }
-        else
-        {
-            print_r($result);
-        }
+//        print_r($this->loggedUserInfo);
     }
 
     public function membership()
@@ -144,14 +145,36 @@ class Home extends CI_Controller
         $this->load->view('common/footer');
     }
 
-    public function faq()
+    public function faqEducation()
     {
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
         $this->load->view('common/header', $headerData);
-        $this->load->view('faq/index');
+        $this->load->view('faq/education');
+        $this->load->view('common/footer');
+    }
+
+    public function faqTutor()
+    {
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $this->load->view('common/header', $headerData);
+        $this->load->view('faq/tutor');
+        $this->load->view('common/footer');
+    }
+
+    public function faqStudent()
+    {
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $this->load->view('common/header', $headerData);
+        $this->load->view('faq/student');
         $this->load->view('common/footer');
     }
 
@@ -185,6 +208,39 @@ class Home extends CI_Controller
 
         $this->load->view('common/header', $headerData);
         $this->load->view('termsCondition/index');
+        $this->load->view('common/footer');
+    }
+
+    public function howToWork()
+    {
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $this->load->view('common/header', $headerData);
+        $this->load->view('howToWork/index');
+        $this->load->view('common/footer');
+    }
+
+    public function privatePolicy()
+    {
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $this->load->view('common/header', $headerData);
+        $this->load->view('privatePolicy/index');
+        $this->load->view('common/footer');
+    }
+
+    public function personalInfoCollection()
+    {
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $this->load->view('common/header', $headerData);
+        $this->load->view('personalInfoCollection/index');
         $this->load->view('common/footer');
     }
 

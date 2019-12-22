@@ -51,3 +51,9 @@ div.emply-list {
 .text-white {
     color: white;
 }
+
+.menu-item-has-children a:hover {
+    color: #f40909 !important;
+    padding-left: 36px !important;
+}
+

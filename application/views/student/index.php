@@ -7,7 +7,7 @@
                     <div class="inner-header wform">
                         <div class="job-search-sec">
                             <div class="job-search">
-                                <h4>Welcome Students</h4>
+                                <h4>Welcome Student Center</h4>
                             </div>
                         </div>
                     </div>
@@ -21,28 +21,27 @@
         <div class="col-lg-6 column" style="margin-top: 50px;">
             <h3>Top Tutors</h3>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h>Gender</h>
-                    <select class="chosen student-tutor-gender" style="display: none;">
+                    <select id="student-tutor-gender">
                         <option value="">-Select Gender-</option>
                         <option value="1">Male</option>
                         <option value="2">Female</option>
                     </select>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h>Hourly Rate</h>
-                    <select class="chosen student-tutor-hourly" style="display: none;">
+                    <select id="student-tutor-hourly">
                         <option value="">-Select Hourly Rate-</option>
+                        <option value="1$ to 100$">1$ to 100$</option>
                         <option value="100$ to 200$">100$ to 200$</option>
                         <option value="200$ to 300$">200$ to 300$</option>
                         <option value="300$ to 400$">300$ to 400$</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h>Qualification</h>
-                    <select class="chosen student-tutor-qualification" style="display: none;">
+                    <select id="student-tutor-qualification">
                         <option value="">-Select Qualification-</option>
                         <?php
                         foreach ($qualifications as $qualification) {
@@ -53,13 +52,10 @@
                         ?>
                     </select>
                 </div>
-                <div class="col-sm-6">
-                    <h>&nbsp;</h>
-                    <div>
-                        <button type="button" class="btn btn-outline-danger" id="tutor-search-button">Search</button>
-                        <button type="button" class="btn btn-outline-primary btn-search-clear" id="tutor-clear-button">Clear Filter</button>
-                    </div>
-                </div>
+            </div>
+            <div class="mt-4">
+                <button type="button" class="btn btn-outline-danger" id="tutor-search-button">Search</button>
+                <button type="button" class="btn btn-outline-primary btn-search-clear" id="tutor-clear-button">Clear Filter</button>
             </div>
             <div class="emply-list-sec list-wrapper list-tutor" style="margin-top: 50px;">
             </div>
@@ -69,32 +65,32 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h>Location</h>
-                    <select class="chosen student-education-location" style="display: none;">
-                        <option>Location</option>
-                        <option>Web Designing</option>
-                        <option>Art &amp; Culture</option>
-                        <option>Reading &amp; Writing</option>
+                    <select id="student-education-location">
+                        <option value="">-Select Location-</option>
+                        <?php
+                        foreach ($locations as $location) {
+                            if ($location['name'] != 'Home') {
+                                ?>
+                                <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="col-sm-6">
                     <h>Ratings</h>
-                    <select class="chosen student-education-rating" style="display: none;">
-                        <option>Ratings</option>
-                        <option>Meezan Job</option>
-                        <option>Speicalize Jobs</option>
-                        <option>Business Jobs</option>
+                    <select id="student-education-rating">
+                        <option value="">-Select Ratings-</option>
+                        <option value="1">Meezan Job</option>
+                        <option value="2">Speicalize Jobs</option>
+                        <option value="3">Business Jobs</option>
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6"></div>
-                <div class="col-sm-6" style="margin-bottom: 18px;">
-                    <h>&nbsp;</h>
-                    <div>
-                        <button type="button" class="btn btn-outline-danger" id="education-search-button">Search</button>
-                        <button type="button" class="btn btn-outline-primary btn-search-clear" id="education-clear-button">Clear Filter</button>
-                    </div>
-                </div>
+            <div class="mt-4">
+                <button type="button" class="btn btn-outline-danger" id="education-search-button">Search</button>
+                <button type="button" class="btn btn-outline-primary btn-search-clear" id="education-clear-button">Clear Filter</button>
             </div>
             <div class="emply-list-sec list-wrapper list-education" style="margin-top: 50px;">
                 <div class="emply-list list-item">

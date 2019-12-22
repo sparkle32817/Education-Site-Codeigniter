@@ -59,7 +59,7 @@ class Education extends CI_Controller
 
     public function getEducation()
     {
-        $results = $this->Education_model->getAllEducation();
+        $results = $this->Education_model->getAllEducation($this->input->post());
 
         $returnVal = array();
         foreach ($results as $result)

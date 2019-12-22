@@ -103,7 +103,6 @@ class paypal_lib {
 		$this->submit_btn = '<input type="image" name="add" src="' . site_url($this->button_path .'/'. $file) . '" border="0" />';
 	}
 
-
 	function add_field($field, $value) 
 	{
 		// adds a key=>value pair to the fields array, which is what will be 

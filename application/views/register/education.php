@@ -73,7 +73,7 @@
                                         </div>
                                         <span class="pf-title">Grade that can teach</span>
                                         <div class="pf-field">
-                                            <select class="form-control select2-grade width-100" id="education-grade" title="Select Grade" name="grade" required="required" multiple>
+                                            <select class="form-control select2-grade width-100" id="education-grade" title="Select Grade" name="grade" multiple>
                                                 <?php
                                                 foreach ($grades as $grade) {
                                                     ?>
@@ -86,14 +86,14 @@
                                         </div>
                                         <span class="pf-title">School Subject</span>
                                         <div class="pf-field">
-                                            <select class="form-control select2-subject width-100" id="education-subject" title="Select School Subject" name="subject" required="required" multiple>
+                                            <select class="form-control select2-subject width-100" id="education-subject" title="Select School Subject" name="subject" multiple>
                                             </select>
                                             <div class="error"></div>
                                         </div>
 
                                         <span class="pf-title">Extra Activity</span>
                                         <div class="pf-field">
-                                            <select class="form-control select2-activity width-100" id="education-activity" title="Select Extra Activity" name="activity" required="required" multiple>
+                                            <select class="form-control select2-activity width-100" id="education-activity" title="Select Extra Activity" name="activity" multiple>
                                             </select>
                                             <div class="error"></div>
                                         </div>
@@ -105,9 +105,9 @@
                                                     <tr>
                                                         <th scope="col"></th>
                                                         <th scope="col">MON</th>
-                                                        <th scope="col">THU</th>
+                                                        <th scope="col">TUE</th>
                                                         <th scope="col">WEN</th>
-                                                        <th scope="col">THI</th>
+                                                       <th scope="col">THU</th>
                                                         <th scope="col">FRI</th>
                                                         <th scope="col">SAT</th>
                                                         <th scope="col">SUN</th>
@@ -115,41 +115,101 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" value="From" /></td>
-                                                        <td><input type="text" class="timepicker" day="mon" status="start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="tue" status="start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="wen" status="start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="thi" status="start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="fri" status="start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sat" status="start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sun" status="start" value="09:00" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" value="To" /></td>
-                                                        <td><input type="text" class="timepicker" day="mon" status="end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="tue" status="end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="wen" status="end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="thi" status="end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="fri" status="end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sat" status="end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sun" status="end" value="10:00" /></td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" value="From" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" value="To" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="mon">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="tue">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="wen">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="thu">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="fri">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="sat">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="sun">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <span class="pf-title">Description</span>
                                         <div class="pf-field">
-                                            <textarea class="m-b-0" name="description" placeholder="(eg. Special for which school etc)"></textarea>
+                                            <textarea class="mb-0" name="description" placeholder="(eg. Special for which school etc)"></textarea>
                                         </div>
 
-                                        <div class="widget">
-                                            <div class="specialism_widget">
-                                                <div class="simple-checkbox">
-                                                    <div class="custom-control custom-checkbox mr-sm-2">
-                                                        <input type="checkbox" class="custom-control-input checkbox" id="checkbox_condition">
-                                                        <label class="custom-control-label" for="checkbox_condition">I agree to above <a href="<?= base_url('terms'); ?>"><b>terms</b></a> and register accordingly</label>
-                                                        <div class="error"></div>
-                                                    </div>
+                                        <div class="pf-field mt-3">
+                                            <div class="simple-checkbox">
+                                                <div class="custom-control custom-checkbox mr-sm-2 pl-0">
+                                                    <input type="checkbox" class="custom-control-input checkbox" id="checkbox_condition">
+                                                    <label class="custom-control-label" for="checkbox_condition">I agree to above <a href="<?= base_url('terms'); ?>"><b>terms</b></a> and register accordingly</label>
+                                                    <div class="error"></div>
                                                 </div>
                                             </div>
                                         </div>

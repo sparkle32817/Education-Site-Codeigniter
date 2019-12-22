@@ -55,7 +55,7 @@
                                         <li><span class="mr-2">&#10003;</span>10/month leave message to the candidate cases and limite recuirt tutors</li>
                                         <li><span class="mr-2">&#10003;</span>10/month to the message from the parents.</li>
                                     </ul>
-                                    <a href="<?= base_url('tutorPay/1'); ?>" title="">PURCHASE NOW</a>
+                                    <a href="<?= base_url('payTMR/1'); ?>" title="">PURCHASE NOW</a>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -72,7 +72,7 @@
                                         <li><span class="mr-2">&#10003;</span>Unlimited to leave message to the candidate cases and limit recruit tutors</li>
                                         <li><span class="mr-2">&#10003;</span>Unlimited reply to the message from the parents.</li>
                                     </ul>
-                                    <a href="<?= base_url('tutorPay/2'); ?>" title="">PURCHASE NOW</a>
+                                    <a href="<?= base_url('payTMR/2'); ?>" title="">PURCHASE NOW</a>
                                 </div>
                             </div>
                         </div>

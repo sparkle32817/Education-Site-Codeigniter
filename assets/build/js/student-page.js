@@ -1,14 +1,5 @@
 $(document).ready(function () {
 
-    let total_tutor = 'all';
-    let gender = '';
-    let hourly = '';
-    let qualification = '';
-
-    let total_education = 'all';
-    let location = '';
-    let rating = '';
-
     $("div.list-tutor").html(getTutorList());
     $("div.list-education").html(getEducationList());
 
@@ -16,58 +7,26 @@ $(document).ready(function () {
     *   Events
      */
     $("#tutor-search-button").on("click", function () {
-        gender = $(".student-tutor-gender").val();
-        hourly = $(".student-tutor-hourly").val();
-        qualification = $(".student-tutor-qualification").val();
-
-        console.log("clicked");
-
-        if (gender == '' && hourly == '' && qualification == '' )
-        {
-            total_tutor = 'all';
-        }
-        else
-        {
-            total_tutor = 'part';
-        }
-
         $("div.list-tutor").html(getTutorList());
     });
 
     $("#tutor-clear-button").on("click", function () {
-        gender = "";
-        hourly = "";
-        qualification = "";
 
-        total_tutor = 'all';
+        $("#student-tutor-gender").val("");
+        $("#student-tutor-hourly").val("");
+        $("#student-tutor-qualification").val("");
 
         $("div.list-tutor").html(getTutorList());
     });
 
     $("#education-search-button").on("click", function () {
-        location = $(".student-education-location").val();
-        rating = $(".student-education-rating").val();
-
-        console.log("clicked");
-
-        if (location == '' && rating == '')
-        {
-            total_tutor = 'all';
-        }
-        else
-        {
-            total_tutor = 'part';
-        }
-
         $("div.list-education").html(getEducationList());
     });
 
     $("#education-clear-button").on("click", function () {
-        gender = "";
-        hourly = "";
-        qualification = "";
 
-        total_tutor = 'all';
+        $("#student-education-location").val("");
+        $("#student-education-rating").val("");
 
         $("div.list-education").html(getEducationList());
     });
@@ -78,11 +37,15 @@ $(document).ready(function () {
 
     function getTutor() {
 
+        let gender = $("#student-tutor-gender").val();
+        let hourly = $("#student-tutor-hourly").val();
+        let qualification = $("#student-tutor-qualification").val();
+
         var response = [];
         $.ajax({
             url: base_url + "tutor/getTutor",
             method: "post",
-            data: {total: total_tutor, gender:gender, hourly_rate: hourly, qualification: qualification},
+            data: {gender:gender, hourly_rate: hourly, qualification: qualification},
             dataType: "json",
             async: false,
             success: function (data) {
@@ -140,11 +103,14 @@ $(document).ready(function () {
 
     function getEducation() {
 
+        let location = $("#student-education-location").val();
+        let rating = $("#student-education-rating").val();
+
         var response = [];
         $.ajax({
             url: base_url + "education/getEducation",
             method: "post",
-            data: {total: total_education, location: location, rating: rating},
+            data: {location: location, rating: rating},
             dataType: "json",
             async: false,
             success: function (data) {

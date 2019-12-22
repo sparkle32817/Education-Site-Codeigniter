@@ -58,9 +58,10 @@ class Inbox_model extends CI_Model
     public function getDetailMessage($id)
     {
         $result = $this->db->where('id', $id)->get('tbl_message')->row_array();
-        return $this->db->select('a.title, b.avatar, b.name, b.email, a.message')
+        return $this->db->select('a.title, b.id, b.avatar, b.name, b.email, a.message, a.sender_type')
                     ->from('tbl_message a')
                     ->join('tbl_'.$result['sender_type'].' b', 'a.sender_id=b.id')
+                    ->where('a.id', $id)
                     ->get()
                     ->row_array();
     }

@@ -58,44 +58,6 @@ class Register extends CI_Controller
         $this->load->view('common/footer');
     }
 
-    public function educationPay()
-    {
-        //Set variables for paypal form
-        $returnURL = base_url().'purchaseEducationMembership'; //payment success url
-        $cancelURL = base_url().'educationMembership'; //payment cancel url
-        $notifyURL = base_url().'paypal/ipn'; //ipn url
-        //get particular product data
-        $amount = $this->Membership_model->getEducationAmount();
-        $logo = base_url().'assets/build/images/logo_4_1.png';
-
-        $this->paypal_lib->add_field('return', $returnURL);
-        $this->paypal_lib->add_field('cancel_return', $cancelURL);
-        $this->paypal_lib->add_field('notify_url', $notifyURL);
-        $this->paypal_lib->add_field('item_name', "Membership-Education");
-        $this->paypal_lib->add_field('amount',  $amount);
-        $this->paypal_lib->image($logo);
-
-        $this->paypal_lib->paypal_auto_form();
-    }
-
-    public function purchaseEducationMembership()
-    {
-        $id = $this->Common_model->getTableID('tbl_education', $this->session->userdata('registered_email'));
-        $data = array(
-            'membership_type' => 1,
-            'membership_updated_date' => date('Y-m-d H:i:s')
-        );
-
-        if ($this->Common_model->updateMembershipInfo('tbl_education', $id, $data))
-        {
-            $headerData['loggedUserType'] = $this->session->userdata('logged_type');
-
-            $this->load->view('common/header', $headerData);
-            $this->load->view('register/purchaseEducationMembership');
-            $this->load->view('common/footer');
-        }
-    }
-
     public function tutor()
     {
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
@@ -139,44 +101,6 @@ class Register extends CI_Controller
         $this->load->view('common/header', $headerData);
         $this->load->view('register/tutorMembership');
         $this->load->view('common/footer');
-    }
-
-    public function tutorPay($type)
-    {
-        //Set variables for paypal form
-        $returnURL = base_url().'register/purchaseTutorMembership/1';
-        $cancelURL = base_url().'tutorMembership';
-        $notifyURL = base_url().'paypal/ipn';
-        //get particular product data
-        $amount = $this->Membership_model->getTutorAmount($type);
-        $logo = base_url().'assets/build/images/logo_4_1.png';
-
-        $this->paypal_lib->add_field('return', $returnURL);
-        $this->paypal_lib->add_field('cancel_return', $cancelURL);
-        $this->paypal_lib->add_field('notify_url', $notifyURL);
-        $this->paypal_lib->add_field('item_name', "Membership-Tutor");
-        $this->paypal_lib->add_field('amount',  $amount);
-        $this->paypal_lib->image($logo);
-
-        $this->paypal_lib->paypal_auto_form();
-    }
-
-    public function purchaseTutorMembership($type)
-    {
-        $id = $this->Common_model->getTableID('tbl_tutor', $this->session->userdata('registered_email'));
-        $data = array(
-            'membership_type' => $type,
-            'membership_updated_date' => date('Y-m-d H:i:s')
-        );
-
-        if ($this->Common_model->updateMembershipInfo('tbl_tutor', $id, $data))
-        {
-            $headerData['loggedUserType'] = $this->session->userdata('logged_type');
-
-            $this->load->view('common/header', $headerData);
-            $this->load->view('register/purchaseTutorMembership');
-            $this->load->view('common/footer');
-        }
     }
 
     public function student()

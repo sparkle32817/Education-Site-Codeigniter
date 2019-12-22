@@ -7,7 +7,7 @@
                     <div class="inner-header wform">
                         <div class="job-search-sec">
                             <div class="job-search">
-                                <h4>Welcome Tutors</h4>
+                                <h4>Welcome Tutor Center</h4>
                             </div>
                         </div>
                     </div>
@@ -16,66 +16,88 @@
         </div>
     </div>
 </section>
-<section>
-    <div class="block remove-top">
-        <div class="container">
-            <div class="row no-gape">
-                <aside class="col-lg-5 column min-height-500">
-                    <div class="col-lg-8" style="margin-top: 50px;">
-                        <h2>Tutors</h2>
-                        <div class="pf-field">
-                            <h>Location</h>
-                            <select class="chosen tutor-location" name="location" required>
-                                <option value="">-Select Location-</option>
-                                <?php
-                                foreach ($locations as $location) {
-                                    ?>
-                                    <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
-                                    <?php
-                                }
+<div class="container">
+    <div class="row pb-3">
+        <div class="col-lg-6 column mt-5">
+            <h3>Education</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h>Location</h>
+                    <select id="tutor-education-location">
+                        <option value="">-Select Location-</option>
+                        <?php
+                        foreach ($locations as $location) {
+                            if ($location['name'] != 'Home') {
                                 ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="pf-field">
-                            <h>Fee</h>
-                            <input type="text" class="name" name="name" value="" />
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="pf-field">
-                            <h>Grade</h>
-                            <select class="chosen tutor-grade" name="grade" required>
-                                <option value="">-Select Grade-</option>
+                                <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
                                 <?php
-                                foreach ($grades as $grade) {
-                                    ?>
-                                    <option value="<?= $grade['id']; ?>"><?= $grade['name']; ?></option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="pf-field">
-                            <h>&nbsp;</h>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <button type="button" class="btn btn-outline-danger" id="tutor-search-button">Search</button>
-                        <button type="button" class="btn btn-outline-primary btn-search-clear" id="tutor-clear-button">Clear Filter</button>
-                    </div>
-                </aside>
-
-                <div class="col-lg-7 column">
-                    <div class="emply-list-sec list-wrapper list-tutor" style="margin-top: 80px;">
-                    </div>
-                    <div id="pagination-container"></div>
-                    <script src="<?= base_url('assets/build/js/system/pagenation.js') ?>" type="text/javascript"></script>
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <h>Ratings</h>
+                    <select id="tutor-education-rating">
+                        <option value="">-Select Ratings-</option>
+                        <option value="1">Meezan Job</option>
+                        <option value="2">Speicalize Jobs</option>
+                        <option value="3">Business Jobs</option>
+                    </select>
                 </div>
             </div>
+            <div class="t-top-30">
+                <button type="button" class="btn btn-outline-danger" id="education-search-button">Search</button>
+                <button type="button" class="btn btn-outline-primary btn-search-clear" id="education-clear-button">Clear Filter</button>
+            </div>
+            <div class="emply-list-sec list-wrapper mt-3 list-education">
+            </div>
+            <div id="pagination-container-on"></div>
+            <script src="<?= base_url('assets/build/js/system/pagenation.js') ?>" type="text/javascript"></script>
+        </div>
+        <div class="col-lg-6 column mt-5">
+            <h3>Students</h3>
+            <div class="row">
+                <div class="col-sm-4">
+                    <h>Location</h>
+                    <select id="tutor-student-location" name="location" required>
+                        <option value="">-Select Location-</option>
+                        <?php
+                        foreach ($locations as $location) {
+                            ?>
+                            <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <h>Grade</h>
+                    <select id="tutor-student-grade" name="grade" required>
+                        <option value="">-Select Grade-</option>
+                        <?php
+                        foreach ($grades as $grade) {
+                            ?>
+                            <option value="<?= $grade['id']; ?>"><?= $grade['name']; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <h>Subject</h>
+                    <select id="tutor-student-subject" name="subject" required>
+                        <option value="">-Select School Subject-</option>
+                    </select>
+                </div>
+            </div>
+            <div class="t-top-30">
+                <button type="button" class="btn btn-outline-danger" id="student-search-button">Search</button>
+                <button type="button" class="btn btn-outline-primary btn-search-clear" id="student-clear-button">Clear Filter</button>
+            </div>
+            <div class="emply-list-sec list-wrapper mt-3 list-student">
+            </div>
+            <div id="pagination-container-on" ></div>
         </div>
     </div>
-</section>
+</div>

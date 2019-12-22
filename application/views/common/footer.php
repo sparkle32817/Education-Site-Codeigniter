@@ -26,30 +26,25 @@
                                         </div><!-- About Widget -->
                                     </div>
                                 </div>
-                                <div class="col-lg-4 column">
+                                <div class="col-lg-3 column">
                                     <div class="widget">
                                         <div class="link_widgets1">
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <a href="<?= base_url('terms')?>" title="">Term&Condition </a>
-                                                    <a href="javascript:;" title="">Disclamier</a>
-                                                    <a href="javascript:;" title="">Copyright </a>
-
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <a href="javascript:;" title="">How to work </a>
-                                                    <a href="javascript:;" title="">Job search </a>
+                                                <div class="col-lg-12">
+                                                    <a href="<?= base_url('terms')?>" title=""> Term & Condition </a>
+                                                    <a href="<?= base_url('privatePolicy')?>" title=""> Privacy Policy </a>
+                                                    <a href="<?= base_url('personalInfoCollection')?>" title=""> Personal Info Collection Statement </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 column">
+                                <div class="col-lg-3 column">
                                     <div class="widget">
                                         <div class="link_widgets1">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <a href="<?= base_url('faq')?>" title="">FAQ</a>
+                                                    <a href="<?= base_url('howToWork')?>" title="">How to work </a>
                                                     <a href="<?= base_url('aboutUs')?>" title="">About Us</a>
                                                     <a href="<?= base_url('contactUs')?>" title="">Contact Us</a>
                                                 </div>
@@ -171,6 +166,10 @@
 
         <?php if (urldecode(uri_string()) == 'inbox/newMessage'){ ?>
             <script src="<?= base_url('assets/build/js/inbox-new.js') ?>" type="text/javascript"></script>
+        <?php } ?>
+
+        <?php if (isset($id) && urldecode(uri_string()) == 'inbox/reply/'.$id){ ?>
+            <script src="<?= base_url('assets/build/js/inbox-reply.js') ?>" type="text/javascript"></script>
         <?php } ?>
 
         <?php if (urldecode(uri_string()) == 'profile'){ ?>

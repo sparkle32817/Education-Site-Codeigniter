@@ -9,17 +9,31 @@ $(document).ready(function () {
         minuteStep: 5,
         showSeconds: false,
         showMeridian: false,
-        change: function(time) {
-            // the input field
-            var element = $(this), text;
-            // get access to this Timepicker instance
-            var timepicker = element.timepicker();
-            text = 'Selected time is: ' + timepicker.format(time);
-            console.log("time", text);
-            element.siblings('span.help-line').text(text);
+        disableFocus: false
+    });
+
+    $('.timepicker').timepicker().on('changeTime.timepicker', function(e) {
+        let hour = e.time.hours, minute = e.time.minutes;
+        if($(this).attr("status")=="start")
+        {
+            let sibling = $(this).closest("div.schedule").find("input[status=end]"); //find sibling element
+            let time = sibling.val().split(":");
+            if (hour >= time[0])
+            {
+                sibling.timepicker("setTime", (e.time.hours + 1) + ":" + e.time.minutes);
+            }
+        }
+        else
+        {
+            let sibling = $(this).closest("div.schedule").find("input[status=start]"); //find sibling element
+            let time = sibling.val().split(":");
+            if (hour <= time[0])
+            {
+                sibling.timepicker("setTime", (e.time.hours - 1) + ":" + e.time.minutes);
+            }
         }
     });
-    
+
     $("#education-grade").on("change", function () {
         setSubject($(this).val());
 
@@ -41,7 +55,7 @@ $(document).ready(function () {
 
         if ($(this).val()==null || $(this).val()=="")
         {
-            $('.select2-grade').prop('disabled',false);
+            $('').prop('disabled',false);
             $('.select2-grade').selectpicker('refresh');
 
             $('.select2-subject').prop('disabled',false);
@@ -62,21 +76,27 @@ $(document).ready(function () {
         e.preventDefault();
 
         let timepicker = {};
-        $(".time-picker-table .timepicker").each(function (index, obj) {
-            timepicker[$(this).attr("day")+"_"+$(this).attr("status")] = $(this).val();
+        $("input.timepicker").each(function (index, obj) {
+            timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
         });
+
+        checkValidate($("#education-grade"), "grade");
+        checkValidate($("#education-subject"), "subject");
+        checkValidate($("#education-activity"), "activity");
+        checkValidate($("#checkbox_condition"), "terms", true);
 
         if ($(this).valid())
         {
             if (!$("#checkbox_condition").is(":checked"))
             {
-                makeValidation($("#checkbox_condition"), "condition", "Please check terms and conditions");
                 $("#checkbox_condition").focus();
                 return  false;
             }
-            else
-            {
-                makeValidation($("#checkbox_condition"), "condition", "");
+
+            if (!checkValidate($("#education-grade"), "grade")
+                && !checkValidate($("#education-subject"), "subject")
+                && !checkValidate($("#education-activity"), "activity")) {
+                return false;
             }
 
             var values = {
@@ -157,9 +177,6 @@ $(document).ready(function () {
                 equalTo: ".password"
             },
             address: 'required',
-            grade: 'required',
-            subject: 'required',
-            activity: 'required',
             description: 'required',
         },
         messages: {
@@ -182,9 +199,6 @@ $(document).ready(function () {
                 equalTo: 'Confirm password should be same with password'
             },
             address: 'Please enter address',
-            grade: 'Please select grade',
-            subject: 'Please select subject',
-            activity: 'Please select activity',
             description: 'Please enter description',
         },
         submitHandler: function(form) {
@@ -202,6 +216,15 @@ $(document).ready(function () {
                 '</div>');
         l.prependTo(e);
     };
+
+    function checkValidate(element, name) {
+        element.closest("div.pf-field").find("div.error>span.error").remove();
+
+        if ((element.val() == [] || element.val() == null) && !element.prop("disabled"))
+        {
+            element.closest("div.pf-field").find("div.error").append($(`<span id="`+name+`-error" class="error">Please enter `+name+`</span>`));
+        }
+    }
     
     function setSubject(gradIDs) {
         $.ajax( {

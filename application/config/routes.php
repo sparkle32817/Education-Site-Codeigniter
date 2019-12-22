@@ -57,21 +57,39 @@ $route['recovery'] = 'login/recovery';
 //Register
 $route['registerEducation'] = 'register/education';
 $route['educationMembership'] = 'register/educationMembership';
-$route['educationPay'] = 'register/educationPay';
-$route['purchaseEducationMembership'] = 'register/purchaseEducationMembership';
 $route['registerTutor'] = 'register/tutor';
 $route['tutorMembership'] = 'register/tutorMembership';
-$route['tutorPay/(:any)'] = 'register/tutorPay/$1';
-$route['purchaseTutorMembership/(:any)'] = 'register/purchaseTutorMembership/$1';
 $route['registerStudent'] = 'register/student';
+
+//Membership
+//--- For Register ---//
+$route['payEMR'] = 'membership/payCenterForReg';
+$route['purchaseEMR'] = 'membership/purCenterForReg';
+$route['cancelEMR'] = 'membership/cancelCenterForReg';          //cancel url
+$route['payTMR/(:any)'] = 'membership/payTutorForReg/$1';
+$route['purchaseTMR/(:any)'] = 'membership/purTutorForReg/$1';
+$route['cancelTMR'] = 'membership/cancelTutorForReg';           //cancel url
+//--- For Update ---//
+$route['payEMU'] = 'membership/payCenterForUpdate';
+$route['cancelEMU'] = 'membership/cancelCenterForUpdate';          //cancel url
+$route['purchaseEMU'] = 'membership/purCenterForUpdate';
+$route['payTMU/(:any)'] = 'membership/payTutorForUpdate/$1';
+$route['purchaseTMU/(:any)'] = 'membership/purTutorForUpdate/$1';
+$route['cancelTMU'] = 'membership/cancelTutorForUpdate';           //cancel url
+
 
 //Home
 $route['profile'] = 'home/profile';
 $route['membership'] = 'home/membership';
-$route['faq'] = 'home/faq';
+$route['faqEducation'] = 'home/faqEducation';
+$route['faqTutor'] = 'home/faqTutor';
+$route['faqStudent'] = 'home/faqStudent';
 $route['aboutUs'] = 'home/aboutUs';
 $route['contactUs'] = 'home/contactUs';
 $route['terms'] = 'home/terms';
+$route['howToWork'] = 'home/howToWork';
+$route['privatePolicy'] = 'home/privatePolicy';
+$route['personalInfoCollection'] = 'home/personalInfoCollection';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -61,8 +61,8 @@
                 ?>
                 <div class="btns-profiles-sec">
                         <span>
-                            <img src="<?= $avatar; ?>" alt="" style="width: 50px; height: 50px;" />
-                            <?= $userName; ?>
+                            <img class="user-avatar" src="<?= $avatar; ?>" alt="" style="width: 50px; height: 50px;" />
+                            <span class="user-name"><?= $userName; ?></span>
                         </span>
                     <ul>
                         <li>
@@ -150,15 +150,21 @@
                         }
                     }
                     ?>
-                    <li class="menu_widgets">
-                        <a href="<?= base_url('faq'); ?>" title="">FAQ</a>
+                    <li class="menu-item-has-children">
+                        <a href="javascript:;" class="text-white">
+                            FAQ
+                        </a>
+                        <ul>
+                            <li><a href="<?= base_url('faqEducation'); ?>">Education</a></li>
+                            <li><a href="<?= base_url('faqTutor'); ?>">Tutor</a></li>
+                            <li><a href="<?= base_url('faqStudent'); ?>">Parent</a></li>
+                        </ul>
                     </li>
                     <?php
                     if ($loginStatus != 'success') {
                         ?>
                         <li class="menu-item-has-children">
                             <a href="javascript:;">
-                                <i class="la la-key"></i>
                                 Signup
                             </a>
                             <ul>
@@ -192,8 +198,8 @@
                     ?>
                     <div class="btns-profiles-sec">
                         <span>
-                            <img src="<?= $avatar; ?>" alt="" style="width: 50px; height: 50px;" />
-                            <?= $userName; ?>
+                            <img class="user-avatar" src="<?= $avatar; ?>" alt="" style="width: 50px; height: 50px;" />
+                            <span class="user-name"><?= $userName; ?></span>
                         </span>
                         <ul>
                             <li>
@@ -281,15 +287,21 @@
                             }
                         }
                         ?>
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('faq'); ?>" title="">FAQ</a>
+                        <li class="menu-item-has-children">
+                            <a href="javascript:;" class="text-white">
+                                FAQ
+                            </a>
+                            <ul>
+                                <li><a href="<?= base_url('faqEducation'); ?>">Education</a></li>
+                                <li><a href="<?= base_url('faqTutor'); ?>">Tutor</a></li>
+                                <li><a href="<?= base_url('faqStudent'); ?>">Parent</a></li>
+                            </ul>
                         </li>
                         <?php
                         if (!isset($loggedUserType)) {
                             ?>
                             <li class="menu-item-has-children">
                                 <a href="javascript:;">
-                                    <i class="la la-key"></i>
                                     Signup
                                 </a>
                                 <ul>

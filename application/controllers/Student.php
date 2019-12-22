@@ -25,7 +25,9 @@ class Student extends CI_Controller
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
+
         $data['qualifications'] = $this->Common_model->getQualifications();
+        $data['locations'] = $this->Common_model->getLocations();
 
         $this->load->view('common/header', $headerData);
         $this->load->view('student/index', $data);

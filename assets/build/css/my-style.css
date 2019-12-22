@@ -9,6 +9,11 @@
         color: black;
     }
 
+    .menu-item-has-children a:hover {
+        color: #f40909 !important;
+        padding-left: 36px !important;
+    }
+
 /*
 *
 */
@@ -207,6 +212,8 @@
 
     .btn-light:not(:disabled):not(.disabled):active, .btn-light.dropdown-toggle, .btn-light:not(:disabled):not(.disabled):hover{
         background-color: white;
+        border: 2px solid #e8ecec;
+        height: 50px;
     }
 
     .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
@@ -217,6 +224,12 @@
 
     .dropup .dropdown-toggle::after, .dropdown-toggle::after {
         display: none;
+    }
+
+    span.error {
+        color: red;
+        font-size: 13px;
+        padding: 0 0 0 1em;
     }
 
 /*
@@ -352,70 +365,22 @@
     }
 
 /*
-*   Multi-select
-*/
-    .select2-container--default .select2-selection--multiple {
-        background-color: white;
-        border: 2px solid #e9ecef !important;
-        border-radius: 8px;
-        cursor: text;
-        font-size: 13px;
-        padding: 5px 10px;
-    }
-
-    .select2-container--default .select2-selection--multiple .select2-selection__choice {
-        background: #fb9678;
-        color: #fff;
-        border-color: #fb9678;
-    }
-
-    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-        float: right;
-        color: #fff;
-        margin-right: 0px;
-        margin-left: 4px;
-    }
-
-    ul li.select2-results__option {
-        color: #212529;
-        position: relative;
-        margin-bottom: 0;
-        font-size: 13px;
-    }
-
-    ul.select2-selection__rendered li.select2-search {
-        margin-top: 8px !important;
-        margin-bottom: 7px;
-        position: relative;
-    }
-
-    ul.select2-selection__rendered li.select2-selection__choice {
-        margin-top: 12px !important;
-        margin-bottom: 5px;
-        position: relative;
-    }
-
-    .select2-container--default .select2-results__group {
-        font-size: 13px;
-    }
-
-    .select2-container--default .select2-results__option .select2-results__option {
-        font-size: 13px;
-    }
-
-    .select2-container--default.select2-container--disabled .select2-selection--multiple {
-        background-color: white;
-        cursor: default;
-    }
-
-    .chosen-disabled {
-        opacity: 1 !important;
-    }
-
-/*
 *   Membership Page
  */
     a.selected {
         pointer-events: none;
         cursor: default;
     }
+
+/*
+*   FAQ Page
+*/
+div.contentbox > p, div.terms > p {
+    float: left;
+    width: 100%;
+    font-size: 15px;
+    line-height: 24px;
+    color: #555555;
+    margin: 0;
+    padding-right: 35px;
+}

@@ -14,7 +14,7 @@ class Education_model extends CI_Model
         return $this->db->order_by('id', 'DESC')->limit(5)->get('tbl_education')->result_array();
     }
 
-    public function getAllEducation()
+    public function getAllEducation($postedData)
     {
         return $this->db->get('tbl_education')->result_array();
     }

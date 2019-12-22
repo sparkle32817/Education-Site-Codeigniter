@@ -1,57 +1,78 @@
 $(document).ready(function () {
 
-    let total_tutor = 'all';
-    let location = '';
-    let subject = '';
-    let grade = '';
-
-    $("div.list-tutor").html(getTutorList());
+    $("div.list-education").html(getEducationList());
+    $("div.list-student").html(getStudentList());
 
     /*
     *   Events
      */
-    $("#tutor-search-button").on("click", function () {
-        location = $(".tutor-location").val();
-        subject = $(".tutor-subject").val();
-        grade = $(".tutor-grade").val();
+    $("#tutor-student-grade").on("change", function () {
 
-        console.log("location::", location);
-        console.log("subject::", subject);
-        console.log("grade::", grade);
+        let gradeID = $(this).val();
 
-        if (location == '' && subject == '' && grade == '' )
+        if (gradeID == "")
         {
-            total_tutor = 'all';
-        }
-        else
-        {
-            total_tutor = 'part';
+            $("#tutor-student-subject").html("<option value=\"\">-Select School Subject-</option>");
+            return;
         }
 
-        $("div.list-tutor").html(getTutorList());
+        $.ajax( {
+            url: base_url + 'common/getSubjectsBySingle',
+            method: "post",
+            data: {gradeId: gradeID},
+            dataType: "json",
+            async: false,
+            success: function (subjects) {
+
+                console.log("subjects", subjects);
+
+                let subject_html = "<option value=\"\">-Select School Subject-</option>";
+                $.each(subjects, function (index, subject) {
+                    subject_html += `<option value="` + subject.id + `">` + subject.text + `</option>`;
+                });
+
+                $("#tutor-student-subject").html(subject_html);
+
+            }
+        });
     });
 
-    $("#tutor-clear-button").on("click", function () {
-        location = "";
-        subject = "";
-        grade = "";
+    $("#education-search-button").on("click", function () {
+        $("div.list-education").html(getEducationList());
+    });
 
-        total_tutor = 'all';
+    $("#education-clear-button").on("click", function () {
+        $("#tutor-education-location").val("");
+        $("#tutor-education-rating").val("");
 
-        $("div.list-tutor").html(getTutorList());
+        $("div.list-education").html(getEducationList());
+    });
+
+    $("#student-search-button").on("click", function () {
+        $("div.list-student").html(getStudentList());
+    });
+
+    $("#student-clear-button").on("click", function () {
+        $("#tutor-student-location").val("");
+        $("#tutor-student-subject").val("");
+        $("#tutor-student-grade").val("");
+
+        $("div.list-student").html(getStudentList());
     });
 
     /*
     *   Functions
      */
+    function getEducation() {
 
-    function getTutor() {
+        let location = $("#tutor-education-location").val();
+        let rating = $("#tutor-education-rating").val();
 
         var response = [];
         $.ajax({
-            url: base_url + "tutor/getTutorFromOwnPage",
+            url: base_url + "education/getEducation",
             method: "post",
-            data: {total: total_tutor, location:location, subject: subject, grade: grade},
+            data: {location: location, rating: rating},
             dataType: "json",
             async: false,
             success: function (data) {
@@ -62,49 +83,92 @@ $(document).ready(function () {
         return response;
     }
 
-    function getTutorList() {
+    function getEducationList() {
 
-        let tutors = getTutor();
-        let tutor_html = '';
+        let educations = getEducation();
+        let education_html = '';
 
-        $.each(tutors, function (index, tutor) {
+        $.each(educations, function (index, education) {
 
-            let gender = tutor.gender==1? "Male": "Female";
-
-            tutor_html += `<div class="emply-list list-item">
-                                <div class="emply-list-thumb">
-                                    <a href="javascript:;" title="">
-                                        <img src="` + tutor.avatar + `" alt="" />
-                                    </a>
-                                </div>
-                                <div class="emply-list-info">
+            education_html += `<div class="emply-list list-item">
+                                    <div class="emply-list-thumb">
+                                        <a href="javascript:;" title="">
+                                            <img src="` + education.avatar + `" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="emply-list-info">
                                     <div class="emply-pstn" style="font-size: 15px;">
                                         <div class="container">
-                                        ` + getRatingHtml(tutor.rating) + `
-                                        ` + tutor.jobs + `
+                                        ` + getRatingHtml(education.rating) + `
+                                        ` + education.jobs + `
                                         </div>
                                     </div>
-                                    <h6>
-                                        Name &nbsp;&nbsp;<span>` + tutor.name + `</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        Expected Fee &nbsp;&nbsp;<span>` + tutor.hourly_rate + `</span>&nbsp;$/hr</h6>
-                                    <h6>
-                                        grade &nbsp;&nbsp;<span>` + tutor.grade + `</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        Available Time &nbsp;&nbsp;<span>14:00-18:00</span>
-                                    </h6>
-                                    <h6>
-                                        <i class="la la-map-marker"></i> &nbsp;&nbsp;<span>` + tutor.location + `</span>
-                                    </h6>
-                                    <h6>
-                                        Subject &nbsp;&nbsp;<span>` + tutor.subject + `</span>
-                                    </h6>
-                                    <a href="` + base_url + `tutor/detail/` + tutor.id +`">
-                                        <button type="button" class="btn btn-outline-primary">More</button>
+                                        <h6>
+                                            Name &nbsp;&nbsp;<span style="color: red">` + education.name + `</span>
+                                        </h6>
+                                        <h6>
+                                            Address&nbsp;&nbsp;<span style="color: red">` + education.address + `</span>
+                                        <h6>Self description</h6>
+                                        <h6 class="text-self-description-1">
+                                            ` + education.description + `
+                                        </h6>
+                                        <a href="` + base_url + `education/detail/` + education.id + `">
+                                            <button type="button" class="btn btn-outline-primary">More</button>
+                                        </a>
+                                    </div>
+                                </div>`;
+        });
+
+        return education_html;
+    }
+
+    function getStudent() {
+
+        let location = $("#tutor-student-location").val();
+        let subject = $("#tutor-student-subject").val();
+        let grade = $("#tutor-student-grade").val();
+
+        var response = [];
+        $.ajax({
+            url: base_url + "student/getStudent",
+            method: "post",
+            data: {location: location, subject: subject, grade: grade},
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                response = data;
+            }
+        });
+
+        return response;
+    }
+
+    function getStudentList() {
+
+        let students = getStudent();
+        let student_html = '';
+
+        $.each(students, function (index, student) {
+
+            student_html += `<div class="emply-list list-item">
+                                <div class="emply-list-thumb">
+                                    <a href="javascript:;" title="">
+                                        <img src="` + student.avatar + `" alt=""></a>
+                                </div>
+                                <div class="emply-list-info">
+                                    <h6>Name &nbsp;&nbsp;<span>` + student.name + `</span></h6>
+                                    <h6>Grade &nbsp;&nbsp;<span>` + student.grade + `</span></h6>
+                                    <h6 class="required-subject">Required subject &nbsp;&nbsp;<span>` + student.subject +`</span></h6>
+                                    <h6><i class="la la-map-marker"></i> &nbsp;&nbsp;<span>` + student.location + `</span></h6>
+                                    <a href="` + base_url + `student/detail/` + student.id + `">
+                                        <button type="button" class="btn btn-outline-primary" style="margin-top: 24px;">More
+                                        </button>
                                     </a>
                                 </div>
                             </div>`;
         });
 
-        return tutor_html;
+        return student_html;
     }
 
     function getRatingHtml(rating) {

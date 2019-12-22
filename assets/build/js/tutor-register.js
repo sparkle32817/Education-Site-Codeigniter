@@ -45,7 +45,30 @@ $(document).ready(function () {
         autoclose: true,
         minuteStep: 5,
         showSeconds: false,
-        showMeridian: false
+        showMeridian: false,
+        disableFocus: false
+    });
+
+    $('.timepicker').timepicker().on('changeTime.timepicker', function(e) {
+        let hour = e.time.hours, minute = e.time.minutes;
+        if($(this).attr("status")=="start")
+        {
+            let sibling = $(this).closest("div.schedule").find("input[status=end]"); //find sibling element
+            let time = sibling.val().split(":");
+            if (hour >= time[0])
+            {
+                sibling.timepicker("setTime", (e.time.hours + 1) + ":" + e.time.minutes);
+            }
+        }
+        else
+        {
+            let sibling = $(this).closest("div.schedule").find("input[status=start]"); //find sibling element
+            let time = sibling.val().split(":");
+            if (hour <= time[0])
+            {
+                sibling.timepicker("setTime", (e.time.hours - 1) + ":" + e.time.minutes);
+            }
+        }
     });
 
     $(".tutor-form").on("submit", function (e) {
@@ -53,21 +76,29 @@ $(document).ready(function () {
         e.preventDefault();
 
         let timepicker = {};
-        $(".time-picker-table .timepicker").each(function (index, obj) {
-            timepicker[$(this).attr("day")] = $(this).val();
+        $("input.timepicker").each(function (index, obj) {
+            timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
         });
+
+        checkValidate($("#tutor-grade"), "grade");
+        checkValidate($("#tutor-subject"), "subject");
+        checkValidate($("#tutor-activity"), "activity");
+        checkValidate($("#tutor-service-area"), "service area");
+        checkValidate($("#checkbox_condition"), "terms", true);
 
         if ($(this).valid())
         {
             if (!$("#checkbox_condition").is(":checked"))
             {
-                makeValidation($("#checkbox_condition"), "condition", "Please check terms and conditions");
                 $("#checkbox_condition").focus();
                 return  false;
             }
-            else
-            {
-                makeValidation($("#checkbox_condition"), "condition", "");
+
+            if (!checkValidate($("#tutor-grade"), "grade")
+                && !checkValidate($("#tutor-subject"), "subject")
+                && !checkValidate($("#tutor-activity"), "activity")
+                && !checkValidate($("#tutor-service-area"), "service area")) {
+                return false;
             }
 
             var values = {
@@ -221,6 +252,29 @@ $(document).ready(function () {
         l.prependTo(e);
     };
 
+    function checkValidate(element, name, checkbox=false) {
+
+        element.closest("div.pf-field").find("div.error").find("span.error").remove();
+
+        if (checkbox)
+        {
+            if (!element.is(":checked"))
+            {
+                element.closest("div.pf-field").find("div.error").append($(`<span class="error">Please check terms and conditions</span>`));
+                return  false;
+            }
+        }
+        else {
+            if ((element.val() == [] || element.val() == null) && !element.prop("disabled")) {
+                element.closest("div.pf-field").find("div.error").append($(`<span id="` + name.replace(" ", "-") + `-error" class="error">Please enter ` + name + `</span>`));
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     function setSubject(gradIDs) {
         $.ajax( {
             url: base_url + 'register/getSubjects',
@@ -271,9 +325,4 @@ $(document).ready(function () {
         });
     }
 
-    function makeValidation(element, name, error_msg) {
-        let strElement = `<label class="text-error">`+error_msg+`</label>`;
-        console.log("error message::", strElement);
-        element.parent().find("div.error").html(strElement);
-    }
 });

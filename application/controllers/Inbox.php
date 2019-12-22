@@ -10,6 +10,7 @@ class Inbox extends CI_Controller
 
         $this->load->model('Common_model');
         $this->load->model('Inbox_model');
+        $this->load->model('Membership_model');
 
         $loggedUser = $this->session->userdata('logged_user');
         if (isset($loggedUser))
@@ -57,11 +58,33 @@ class Inbox extends CI_Controller
         $headerData['userName'] = $this->loggedUserInfo['name'];
         $commonData['inboxNum'] = $this->Inbox_model->getInboxCount($this->loggedUserInfo['id']);
         $data['information'] = $this->Inbox_model->getDetailMessage($id);
+        $data['id'] = $id;
 
         $this->load->view('common/header', $headerData);
         $this->load->view('inbox/common', $commonData);
         $this->load->view('inbox/detail', $data);
         $this->load->view('common/footer');
+    }
+
+    public function reply($id)
+    {
+        $this->loginCheck();
+
+        $headerData['loggedUserType'] = $this->session->userdata('logged_type');
+        $headerData['avatar'] = $this->loggedUserInfo['avatar'];
+        $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $commonData['inboxNum'] = $this->Inbox_model->getInboxCount($this->loggedUserInfo['id']);
+
+        $data['information'] = $this->Inbox_model->getDetailMessage($id);
+        $data['type'] = $this->session->userdata('logged_type');
+        $data['id'] = $id;
+
+        $this->load->view('common/header', $headerData);
+        $this->load->view('inbox/common', $commonData);
+        $this->load->view('inbox/reply', $data);
+        $this->load->view('common/footer', $data
+        );
     }
 
     public function trash()
@@ -100,7 +123,26 @@ class Inbox extends CI_Controller
         $userName = $this->session->userdata('logged_user');
         $userType = $this->session->userdata('logged_type');
 
-        echo $this->Inbox_model->sendNew($this->loggedUserInfo['id'], $userName, $userType, $this->input->post('formData'));
+        $membershipType = $this->Membership_model->checkMembership($userName, $userType);
+
+//        var_dump($membershipType);
+
+//        echo 'type::'.$membershipType.'<br/>';
+//        echo $this->Membership_model->getMessageCount($userName, $userType).'<br/>';
+
+        if ($membershipType == 0
+            || ($userType == 'tutor'
+                && $membershipType == 1
+                && $this->Membership_model->getMessageCount($userName, $userType) >= 10)
+        )
+        {
+            echo 'membership';
+        }
+        else
+        {
+            echo $this->Inbox_model->sendNew($this->loggedUserInfo['id'], $userName, $userType, $this->input->post('formData'));
+        }
+
     }
 
     public function sendToTrash()

@@ -5,11 +5,84 @@ $(document).ready(function () {
     InitGrade();
     InitActivity();
 
+    $(".timepicker").timepicker({
+        autoclose: true,
+        minuteStep: 5,
+        showSeconds: false,
+        showMeridian: false,
+        disableFocus: false,
+        showInputs: false,
+        change: function(time) {
+            // the input field
+            var element = $(this), text;
+            // get access to this Timepicker instance
+            var timepicker = element.timepicker();
+            text = 'Selected time is: ' + timepicker.format(time);
+            console.log("time", text);
+            element.siblings('span.help-line').text(text);
+        }
+    });
+
+    $(".timepicker").timepicker('hideWidget');
+
+    $('.timepicker').on('click',function(e) {
+        if ($(".btn-edit-profile").attr("status") == "readonly") {
+            $(this).timepicker('hideWidget');
+        } else {
+            $(this).timepicker('showWidget');
+        }
+    });
+
+    $('.timepicker').timepicker().on('changeTime.timepicker', function(e) {
+        let hour = e.time.hours, minute = e.time.minutes;
+        if($(this).attr("status")=="start")
+        {
+            let sibling = $(this).closest("div.schedule").find("input[status=end]"); //find sibling element
+            let time = sibling.val().split(":");
+            if (hour >= time[0])
+            {
+                sibling.timepicker("setTime", (e.time.hours + 1) + ":" + e.time.minutes);
+            }
+        }
+        else
+        {
+            let sibling = $(this).closest("div.schedule").find("input[status=start]"); //find sibling element
+            let time = sibling.val().split(":");
+            if (hour <= time[0])
+            {
+                sibling.timepicker("setTime", (e.time.hours - 1) + ":" + e.time.minutes);
+            }
+        }
+    });
+
     if ($(".select2-location").length > 0)
     {
         console.log("there is location");
         InitLocation();
     }
+
+    let location = '';
+    $("#location1").on("change", function () {
+
+        if ($(this).val()==1)
+        {
+            location = '1';
+
+            $("#location2").css("display", "none");
+            $("#location2").prop("required", false);
+        }
+        else if ($(this).val()==0)
+        {
+            location = '';
+
+            $("#location2").css("display", "block");
+            $("#location2").prop("required", true);
+        }
+    });
+
+    $("#location2").on("change", function () {
+        location = $(this).val();
+    });
 
     $("select[name=grade]").on("change", function () {
         $('.select2-grade').selectpicker('refresh');
@@ -56,16 +129,14 @@ $(document).ready(function () {
 
         if ($(".btn-edit-profile").attr("status")=="readonly")
         {
-            console.log("readonly->write");
-
             enabledForm();
 
             return false;
         }
 
         let timepicker = {};
-        $(".time-picker-table .timepicker").each(function (index, obj) {
-            timepicker[$(this).attr("day")+"_"+$(this).attr("status")] = $(this).val();
+        $("input.timepicker").each(function (index, obj) {
+            timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
         });
 
         if ($(this).valid())
@@ -79,7 +150,11 @@ $(document).ready(function () {
             };
 
             $.each($('.profile-form').serializeArray(), function(i, field) {
-                if (field.name != "grade" && field.name != "activity" && field.name != "subject")
+                if (field.name == "student-location")
+                {
+                    values["location"] = location;
+                }
+                else if (field.name != "grade" && field.name != "activity" && field.name != "subject")
                 {
                     values[field.name] = field.value;
                 }
@@ -102,6 +177,9 @@ $(document).ready(function () {
             let container = $(".profile-form").find(".row").find("div.col-lg-8");
             if (response == "success")
             {
+                $("img.user-avatar").attr("src", canvas_pic);
+                $("span.user-name").text(values["name"]);
+
                 showMessage(container, "success", "Successfully changed!");
 
                 disabledForm();
@@ -306,17 +384,15 @@ $(document).ready(function () {
 
                 let location_html = "";
                 $.each(result.locations, function (index, location) {
-                    location_html += `<option value="` + location.id + `">` + location.text + `</option>`;
+                    if (location.text != "Home")
+                    {
+                        location_html += `<option value="` + location.id + `">` + location.text + `</option>`;
+                    }
                 });
-                $(".select2-location").trigger("destroy");
+                $(".select2-location").selectpicker("destroy");
                 $(".select2-location").html("");
                 $(".select2-location").html(location_html);
-                $(".select2-location").select2({
-                    placeholder: 'Select Location'
-                });
-
-                $('.select2-location').val(result.curInfo.split(","));
-                $('.select2-location').trigger('change');
+                $(".select2-location").selectpicker('val', result.curInfo.split(","));
 
             }
         });
@@ -331,13 +407,6 @@ $(document).ready(function () {
     function enabledForm() {
 
         $(".profile-form").find(".alert").find(".close").click();
-
-        $(".timepicker").timepicker({
-            autoclose: true,
-            minuteStep: 5,
-            showSeconds: false,
-            showMeridian: false
-        });
 
         $.each($('.profile-form input'), function(i, element) {
             if ($(this).attr("class")==null || !$(this).attr("class").includes("timepicker"))
@@ -363,16 +432,13 @@ $(document).ready(function () {
 
         $(".btn-edit-profile").attr("status", "write");
         $(".btn-edit-profile span").text("Save Profile");
-
     }
 
     function disabledForm() {
-
         $.each($('.profile-form input'), function(i, element) {
             if ($(this).attr("class")!=null && $(this).attr("class").includes("timepicker"))
             {
-                // $(this).timepicker('destroy');
-                $(this).removeClass("timepicker");
+                $(this).timepicker('hideWidget');
             }
             else
             {
@@ -382,7 +448,10 @@ $(document).ready(function () {
 
         $.each($('.profile-form select'), function(i, element) {
             $(this).prop("disabled", true);
-            $(this).selectpicker('refresh');
+            if ($(this).attr("class")!=null && $(this).attr("class").includes("select2"))
+            {
+                $(this).selectpicker('refresh');
+            }
         });
 
         $('.profile-form textarea').prop("readonly", true);

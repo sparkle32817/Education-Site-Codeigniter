@@ -69,28 +69,17 @@ class Common_model extends CI_Model
 
         return false;
     }
+
     public function updateUserInfo($tableName, $id, $postedData)
     {
         $this->db->where('id', $id);
-        if ($this->db->update($tableName, $postedData))
-        {
-            return $this->db->where('id', $id)->get($tableName)->row_array();
-        }
 
-        return $this->db->last_query();
-//        return false;
+        return $this->db->update($tableName, $postedData);
     }
 
-    public function updateMembershipInfo($tableName, $id, $postedData)
+    public function getUserInfo($tableName, $id)
     {
-        $this->db->where('id', $id);
-        if ($this->db->update($tableName, $postedData))
-        {
-            return true;
-        }
-
-        return false;
-//        return false;
+        return $this->db->where('id', $id)->get($tableName)->row_array();
     }
 
     public function getActivityTitle()

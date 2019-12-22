@@ -56,7 +56,7 @@
                                         <li><span class="mr-2">&#10003;</span>Unlimited to leave message to the candidate cases and recruit tutors</li>
                                         <li><span class="mr-2">&#10003;</span>Unlimited reply to the messages from the parents/tutor</li>
                                     </ul>
-                                    <a href="<?= base_url('educationPay'); ?>" title="" style="pointer-events: none;cursor: default;">PURCHASE NOW</a>
+                                    <a href="<?= base_url('payEMR'); ?>" title="" style="pointer-events: none;cursor: default;">PURCHASE NOW</a>
                                 </div>
                             </div>
                         </div>

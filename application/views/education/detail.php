@@ -56,9 +56,9 @@
                                             <tr>
                                                 <th scope="col"></th>
                                                 <th scope="col">MON</th>
-                                                <th scope="col">THU</th>
+                                                <th scope="col">TUE</th>
                                                 <th scope="col">WEN</th>
-                                                <th scope="col">THI</th>
+                                               <th scope="col">THU</th>
                                                 <th scope="col">FRI</th>
                                                 <th scope="col">SAT</th>
                                                 <th scope="col">SUN</th>
@@ -70,7 +70,7 @@
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['mon_start'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['tue_start'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['wen_start'] ?>" readonly/></td>
-                                                <td><input type="text" class="timepicker" value="<?= $timeline['thi_start'] ?>" readonly/></td>
+                                                <td><input type="text" class="timepicker" value="<?= $timeline['thu_start'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['fri_start'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['sat_start'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['sun_start'] ?>" readonly/></td>
@@ -80,7 +80,7 @@
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['mon_end'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['tue_end'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['wen_end'] ?>" readonly/></td>
-                                                <td><input type="text" class="timepicker" value="<?= $timeline['thi_end'] ?>" readonly/></td>
+                                                <td><input type="text" class="timepicker" value="<?= $timeline['thu_end'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['fri_end'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['sat_end'] ?>" readonly/></td>
                                                 <td><input type="text" class="timepicker" value="<?= $timeline['sun_end'] ?>" readonly/></td>

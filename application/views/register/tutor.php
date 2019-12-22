@@ -67,7 +67,8 @@
 
                                         <span class="pf-title">Gender</span>
                                         <div class="pf-field">
-                                            <select data-placeholder="Allow In Search" name="gender" class="chosen">
+                                            <select name="gender">
+                                                <option value="">-Select Gender-</option>
                                                 <option value="1">Male</option>
                                                 <option value="2">Female</option>
                                             </select>
@@ -78,17 +79,20 @@
                                             <select class="form-control select2-location width-100" id="tutor-service-area" name="location" title="Select Service Area" multiple>
                                                 <?php
                                                 foreach ($locations as $location) {
-                                                    ?>
-                                                    <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
-                                                    <?php
+                                                    if ($location['name'] != 'Home') {
+                                                        ?>
+                                                        <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
+                                                        <?php
+                                                    }
                                                 }
                                                 ?>
                                             </select>
+                                            <div class="error"></div>
                                         </div>
 
                                         <span class="pf-title">Grade that can teach</span>
                                         <div class="pf-field">
-                                            <select class="form-control select2-grade width-100" id="tutor-grade" name="grade" title="Select Grade" required="required" multiple>
+                                            <select class="form-control select2-grade width-100" id="tutor-grade" name="grade" title="Select Grade" multiple>
                                                 <?php
                                                 foreach ($grades as $grade) {
                                                     ?>
@@ -104,21 +108,21 @@
                                         </div>
                                         <span class="pf-title">School Subject</span>
                                         <div class="pf-field">
-                                            <select class="form-control select2-subject width-100" id="tutor-subject" name="subject" title="Select School Subject" required="required" multiple>
+                                            <select class="form-control select2-subject width-100" id="tutor-subject" name="subject" title="Select School Subject" multiple>
                                             </select>
                                             <div class="error"></div>
                                         </div>
 
                                         <span class="pf-title">Extra Activity</span>
                                         <div class="pf-field">
-                                            <select class="form-control select2-activity" id="tutor-activity" name="activity" title="Select Extra Activity" required="required" multiple>
+                                            <select class="form-control select2-activity" id="tutor-activity" name="activity" title="Select Extra Activity" multiple>
                                             </select>
                                             <div class="error"></div>
                                         </div>
 
                                         <span class="pf-title">Personal highest qualification</span>
                                         <div class="pf-field">
-                                            <select class="chosen" name="qualification">
+                                            <select name="qualification">
                                                 <option value="">-Select Qualification-</option>
                                                 <?php
                                                 foreach ($qualifications as $qualification) {
@@ -133,7 +137,7 @@
 
                                         <span class="pf-title">Personal Certification</span>
                                         <div class="pf-field">
-                                            <select class="chosen" name="certification">
+                                            <select name="certification">
                                                 <option value="">-Select Certification-</option>
                                                 <?php
                                                 foreach ($certifications as $certification) {
@@ -158,9 +162,9 @@
                                                     <tr>
                                                         <th scope="col"></th>
                                                         <th scope="col">MON</th>
-                                                        <th scope="col">THU</th>
+                                                        <th scope="col">TUE</th>
                                                         <th scope="col">WEN</th>
-                                                        <th scope="col">THI</th>
+                                                       <th scope="col">THU</th>
                                                         <th scope="col">FRI</th>
                                                         <th scope="col">SAT</th>
                                                         <th scope="col">SUN</th>
@@ -168,24 +172,86 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" value="From" /></td>
-                                                        <td><input type="text" class="timepicker" day="mon_start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="tue_start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="wen_start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="thi_start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="fri_start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sat_start" value="09:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sun_start" value="09:00" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" value="To" /></td>
-                                                        <td><input type="text" class="timepicker" day="mon_end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="tue_end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="wen_end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="thi_end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="fri_end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sat_end" value="10:00" /></td>
-                                                        <td><input type="text" class="timepicker" day="sun_end" value="10:00" /></td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" value="From" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" value="To" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="mon">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="tue">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="wen">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="thu">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="fri">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="sat">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-12 m-0 p-0 row schedule" day="sun">
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="start" value="09:00" readonly/>
+                                                                </div>
+                                                                <div class="col-md-12 px-0 my-1">
+                                                                    <input type="text" class="timepicker" status="end" value="10:00" readonly/>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -193,17 +259,15 @@
 
                                         <span class="pf-title">Description</span>
                                         <div class="pf-field">
-                                            <textarea name="description" placeholder="(eg. Special for which school etc)"></textarea>
+                                            <textarea class="mb-0" name="description" placeholder="(eg. Special for which school etc)"></textarea>
                                         </div>
 
-                                        <div class="widget">
-                                            <div class="specialism_widget">
-                                                <div class="simple-checkbox">
-                                                    <div class="custom-control custom-checkbox mr-sm-2">
-                                                        <input type="checkbox" class="custom-control-input checkbox" id="checkbox_condition">
-                                                        <label class="custom-control-label" for="checkbox_condition">I agree to above <a href="<?= base_url('terms'); ?>"><b>terms</b></a> and register accordingly</label>
-                                                        <div class="error"></div>
-                                                    </div>
+                                        <div class="pf-field mt-3">
+                                            <div class="simple-checkbox">
+                                                <div class="custom-control custom-checkbox mr-sm-2 pl-0">
+                                                    <input type="checkbox" class="custom-control-input checkbox" id="checkbox_condition">
+                                                    <label class="custom-control-label" for="checkbox_condition">I agree to above <a href="<?= base_url('terms'); ?>"><b>terms</b></a> and register accordingly</label>
+                                                    <div class="error"></div>
                                                 </div>
                                             </div>
                                         </div>

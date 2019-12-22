@@ -23,9 +23,6 @@
                 ?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="heading">
-                            <h4>One of our jobs has some kind of flexibility option - such as telecommuting,<br/> a part-time schedule or a flexible or flextime schedule.</h4>
-                        </div><!-- Heading -->
                         <div class="plans-sec">
                             <div class="row">
                                 <div class="col-lg-4 offset-1">
@@ -60,7 +57,7 @@
                                             <li><span class="mr-2">&#10003;</span>Unlimited to leave message to the candidate cases and recruit tutors</li>
                                             <li><span class="mr-2">&#10003;</span>Unlimited to reply to the messages from the parents/tutor</li>
                                         </ul>
-                                        <a class="<?= $membership_type==1? 'selected': ''; ?>" href="<?= base_url('educationPay'); ?>" title=""><?= $membership_type==1? 'SELECTED': 'UPGRADE'; ?></a>
+                                        <a class="<?= $membership_type==1? 'selected': ''; ?>" href="<?= base_url('payEMU'); ?>" title=""><?= $membership_type==1? 'SELECTED': 'UPGRADE'; ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +66,7 @@
                 </div>
                 <?php
             }
-            else if (isset($loggedUserType) && $loggedUserType=='education')
+            else if (isset($loggedUserType) && $loggedUserType=='tutor')
             {
                 ?>
                 <div class="row">
@@ -86,7 +83,7 @@
                                 <li>Limited to leave message to the candidate cases</li>
                                 <li>Limited to reply the message to the parents</li>
                             </ul>
-                            <a class="<?= $membership_type==0? 'selected': ''; ?>" href="<?= base_url(); ?>" title=""><?= $membership_type==0? 'SELECTED': 'DOWNGRADE'; ?></a>
+                            <a class="<?= $membership_type==0? 'selected': ''; ?>" href="<?= /*base_url()*/'javascript:;'; ?>" title=""><?= $membership_type==0? 'SELECTED': 'DOWNGRADE'; ?></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -100,10 +97,10 @@
                                 <li><span class="mr-2">&#10003;</span>Unlimited access to parents/students info</li>
                                 <li><span class="mr-2">&#10003;</span>Unlimited access to education centers info</li>
                                 <li><span class="mr-2">&#10003;</span>Unlimited receipt to the messages</li>
-                                <li><span class="mr-2">&#10003;</span>Limited to leave 10 messages/month  to the candidate cases</li>
+                                <li style="font-size: 12px;"><span class="mr-2">&#10003;</span>Limited to leave 10 messages/month  to the candidate cases</li>
                                 <li><span class="mr-2">&#10003;</span>Limited to reply the 10 messages/month to the parents</li>
                             </ul>
-                            <a class="<?= $membership_type==1? 'selected': ''; ?>" href="<?= base_url('tutorPay/'.$membership_type); ?>" title=""><?php if ($membership_type==1){echo 'SELECTED';}elseif($membership_type<1){echo 'UPGRADE';}else{echo 'DOWNGRADE';} ?></a>
+                            <a class="<?= $membership_type==1? 'selected': ''; ?>" href="<?= $membership_type<1? base_url('payTMU/1'): 'javascript:;'; ?>" title=""><?php if ($membership_type==1){echo 'SELECTED';}elseif($membership_type<1){echo 'UPGRADE';}else{echo 'DOWNGRADE';} ?></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -120,7 +117,7 @@
                                 <li><span class="mr-2">&#10003;</span>Unlimited to leave message to the candidate cases</li>
                                 <li><span class="mr-2">&#10003;</span>Unlimited to reply to the message from the parents</li>
                             </ul>
-                            <a class="<?= $membership_type==2? 'selected': ''; ?>" href="<?= base_url('tutorPay/'.$membership_type); ?>" title=""><?= $membership_type==2? 'SELECTED': 'UPGRADE'; ?></a>
+                            <a class="<?= $membership_type==2? 'selected': ''; ?>" href="<?= base_url('payTMU/2'); ?>" title=""><?= $membership_type==2? 'SELECTED': 'UPGRADE'; ?></a>
                         </div>
                     </div>
                 </div>
