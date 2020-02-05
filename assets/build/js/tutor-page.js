@@ -100,7 +100,6 @@ $(document).ready(function () {
                                     <div class="emply-pstn" style="font-size: 15px;">
                                         <div class="container">
                                         ` + getRatingHtml(education.rating) + `
-                                        ` + education.jobs + `
                                         </div>
                                     </div>
                                         <h6>

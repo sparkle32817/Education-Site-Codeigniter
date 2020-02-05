@@ -2,19 +2,20 @@ $(document).ready(function () {
 
     $(".new-message-form").on("submit", function (e) {
 
-        let type = $(".select-user").find("span.active").attr("type");
+        // let type = $(".select-user").find("span.active").attr("type");
+        let type = $("#user-type").val();
 
         console.log("type", type);
 
         e.preventDefault();
 
         let container = $(".message-container");
-        if (type == "")
-        {
-            showMessage(container, "warning", "Please select user type!");
-
-            return false;
-        }
+        // if (type == "")
+        // {
+        //     showMessage(container, "warning", "Please select user type!");
+        //
+        //     return false;
+        // }
 
         if ($(this).valid())
         {

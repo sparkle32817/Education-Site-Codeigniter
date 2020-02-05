@@ -43,7 +43,6 @@
                                             <div class="div-star">
                                                 <?= $education['ratingHtml']; ?>
                                             </div>
-                                            <p class="job-num"><?= $education['jobs']; ?></p>
                                         </div>
                                     </div>
                                 </a>
@@ -96,7 +95,6 @@
                                             <div class="div-star">
                                                 <?= $tutor['ratingHtml']; ?>
                                             </div>
-                                            <p class="job-num"><?= $tutor['jobs']; ?></p>
                                         </div>
                                     </div>
                                 </a>

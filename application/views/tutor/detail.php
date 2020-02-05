@@ -46,7 +46,17 @@
                                 </div>
                                 <div class="profile-form-edit">
 
-                                    <h6>Personal Certification:&nbsp;&nbsp;<span><?= $information['certification']; ?></h6>
+                                    <h6>Personal Certification:&nbsp;&nbsp;<span><?= $information['certification']; ?></span></h6>
+                                    <h6>Year of the experience:&nbsp;&nbsp;
+                                        <span>
+                                            <?php
+                                                if ($information['experience']==1){echo '0~1';}
+                                                elseif ($information['experience']==2){echo '2~4';}
+                                                elseif ($information['experience']==3){echo '5~10';}
+                                                elseif ($information['experience']==4){echo '10+';}
+                                            ?>
+                                        </span>
+                                    </h6>
 
                                     <h6>Expecte fee:&nbsp;&nbsp;$<span><?= $information['hourly_rate']; ?></span></h6>
                                     <h6>Avialable time</h6>

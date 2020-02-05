@@ -91,5 +91,11 @@ $route['howToWork'] = 'home/howToWork';
 $route['privatePolicy'] = 'home/privatePolicy';
 $route['personalInfoCollection'] = 'home/personalInfoCollection';
 
+//Inbox
+$route['inboxDetail/(:any)'] = 'inbox/inboxDetail/$1';
+$route['sentDetail/(:any)'] = 'inbox/sentDetail/$1';
+$route['replySent/(:any)'] = 'inbox/replySent/$1';
+$route['replyInbox/(:any)'] = 'inbox/replyInbox/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

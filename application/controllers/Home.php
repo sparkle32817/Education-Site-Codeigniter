@@ -22,6 +22,11 @@ class Home extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata('logged_type'))
+        {
+            redirect($this->session->userdata('logged_type'));
+        }
+
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
@@ -37,7 +42,6 @@ class Home extends CI_Controller
         foreach ($results as $result)
         {
             $result['ratingHtml'] = $this->getAvgRating('education', $result['id']);
-            $result['jobs'] = $this->getJobCount('education', $result['id']);
 
             $returnVal[] = $result;
         }
@@ -61,7 +65,6 @@ class Home extends CI_Controller
             $result['subject'] = $this->getSelectedName('tbl_subject', $result['subject']);
             $result['location'] = $this->getSelectedName('tbl_location', $result['location']);
             $result['ratingHtml'] = $this->getAvgRating('tutor', $result['id']);
-            $result['jobs'] = $this->getJobCount('tutor', $result['id']);
 
             $returnVal[] = $result;
         }
@@ -282,22 +285,6 @@ class Home extends CI_Controller
         }
 
         return $str_rating;
-    }
-
-    function getJobCount($type, $id)
-    {
-        $cnt = $this->Common_model->getJobCount($type, $id);
-
-        if ($cnt == 1)
-        {
-            return '(' . $cnt . ' job completed)';
-        }
-        else if ($cnt > 1)
-        {
-            return '(' . $cnt . ' jobs completed)';
-        }
-
-        return '';
     }
 
     function loginCheck()

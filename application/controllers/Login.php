@@ -48,14 +48,14 @@ class Login extends CI_Controller
     public function recoveryPassword()
     {
         $postedData = $this->input->post('formData');
-        if (!$this->Common_model->isValidEmail($postedData))
+        if (!$this->Login_model->isValidEmail($postedData))
         {
             echo "invalid";
             exit;
         }
 
         $password = $this->randomPassword();
-        $result = $this->Common_model->resetPassword($postedData, $password);
+        $result = $this->Login_model->resetPassword($postedData, $password);
 
         if (!$result)
         {

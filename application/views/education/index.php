@@ -8,7 +8,7 @@
                     <div class="inner-header wform">
                         <div class="job-search-sec">
                             <div class="job-search">
-                                <h4>Welcome to Education Center</h4>
+                                <h4>Welcome <?= $userName; ?></h4>
                             </div>
                         </div>
                     </div>
@@ -19,7 +19,7 @@
 </section>
 <div class="container">
     <div class="row p-top-50">
-        <div class="col-lg-5 column">
+        <div class="col-lg-6 column">
             <h3>Students</h3>
             <div class="row">
                 <div class="col-sm-4">
@@ -63,7 +63,7 @@
             </div>
             <div id="pagination-container-on" ></div>
         </div>
-        <div class="col-lg-7 column">
+        <div class="col-lg-6 column">
             <h3>Tutors</h3>
             <div class="row">
                 <div class="col-sm-4">

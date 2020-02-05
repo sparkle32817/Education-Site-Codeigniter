@@ -50,4 +50,28 @@ class Login_model extends CI_Model
         return "success";
     }
 
+    public function isValidEmail($postedData)
+    {
+      $this->db->where('email', $postedData['email']);
+      $result = $this->db->get('tbl_'.$postedData['type']);
+
+      if ($result->num_rows()>0)
+      {
+        return true;
+      }
+
+      return false;
+    }
+
+    public function resetPassword($postedData, $password)
+    {
+      $this->db->where('email', $postedData['email']);
+      if ($this->db->update('tbl_'.$postedData['type'], array('password'=>$password)))
+      {
+        return true;
+      }
+
+      return false;
+    }
+
 }

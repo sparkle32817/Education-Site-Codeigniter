@@ -2,12 +2,12 @@
         <div class="col-xlg-10 col-lg-9 col-md-8 border-left">
             <div class="card-body">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-danger" id="message-restore">
+                    <button type="button" class="btn btn-danger" id="message-restore" title="Restore">
                         <i class="fa fa-repeat"></i>
                     </button>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-danger" id="message-delete">
+                    <button type="button" class="btn btn-danger" id="message-delete" title="Delete">
                         <i class="la la-trash"></i>
                     </button>
                 </div>

@@ -367,7 +367,7 @@
 /*
 *   Membership Page
  */
-    a.selected {
+    div.pricetable > a.selected {
         pointer-events: none;
         cursor: default;
     }

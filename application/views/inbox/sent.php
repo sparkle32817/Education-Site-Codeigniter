@@ -2,7 +2,7 @@
         <div class="col-xlg-10 col-lg-9 col-md-8 border-left">
             <div class="card-body">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-danger" id="inbox-delete">
+                    <button type="button" class="btn btn-danger" id="inbox-delete" title="Trash">
                         <i class="la la-trash"></i>
                     </button>
                 </div>

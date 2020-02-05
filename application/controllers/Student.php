@@ -26,6 +26,7 @@ class Student extends CI_Controller
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
+        $data['userName'] = $this->loggedUserInfo['name'];
         $data['qualifications'] = $this->Common_model->getQualifications();
         $data['locations'] = $this->Common_model->getLocations();
 

@@ -20,6 +20,6 @@ $config['paypal_lib_ipn_log'] = TRUE;
 $config['paypal_lib_button_path'] = 'buttons';
 
 // What is the default currency?
-$config['paypal_lib_currency_code'] = 'USD';
+$config['paypal_lib_currency_code'] = 'HKD';
 
 ?>

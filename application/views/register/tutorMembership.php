@@ -38,7 +38,7 @@
                                         <li>limit to leave message to the candidate cases and limit recruit tutors</li>
                                         <li>limit reply to the message from the parents.</li>
                                     </ul>
-                                    <a href="<?= base_url('login'); ?>" title="">PURCHASE NOW</a>
+                                    <a href="<?= base_url(); ?>" title="">SELECT</a>
                                 </div>
                             </div>
                             <div class="col-lg-4">

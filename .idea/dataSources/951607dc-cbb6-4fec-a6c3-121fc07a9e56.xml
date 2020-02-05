@@ -1975,49 +1975,55 @@
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="462" parent="352" name="PRIMARY">
+    <column id="462" parent="352" name="experience">
+      <Position>22</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="463" parent="352" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="463" parent="353" name="id">
+    <column id="464" parent="353" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="464" parent="353" name="tutor_id">
+    <column id="465" parent="353" name="tutor_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="465" parent="353" name="student_id">
+    <column id="466" parent="353" name="student_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="466" parent="353" name="rating">
+    <column id="467" parent="353" name="rating">
       <Position>4</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="467" parent="353" name="description">
+    <column id="468" parent="353" name="description">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="468" parent="353" name="post_date">
+    <column id="469" parent="353" name="post_date">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="469" parent="353" name="PRIMARY">
+    <key id="470" parent="353" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

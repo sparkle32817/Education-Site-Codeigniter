@@ -4,32 +4,32 @@
             <h3 class="card-title">Compose New Message</h3>
             <div class="message-container"></div>
             <div class="select-user m-b-20">
-                <input type="hidden" id="user-type" value="<?= $type; ?>">
-                <?php if ($type != 'education')
-                {
-                    ?>
-                    <span class="<?= $information['sender_type']=='education'? 'active': ''; ?>" type="education">Education</span>
-                    <?php
-                }
-                ?>
-                <?php if ($type != 'tutor')
-                {
-                    ?>
-                    <span class="<?= $information['sender_type']=='tutor'? 'active': ''; ?>" type="tutor">Tutor</span>
-                    <?php
-                }
-                ?>
-                <?php if ($type != 'student')
-                {
-                    ?>
-                    <span class="<?= $information['sender_type']=='student'? 'active': ''; ?>" type="student">Student</span>
-                    <?php
-                }
-                ?>
+                <input type="hidden" id="user-type" value="<?= $sender_type; ?>">
+<!--                --><?php //if ($type != 'education')
+//                {
+//                    ?>
+<!--                    <span class="--><?//= $sender_type=='education'? 'active': ''; ?><!--" type="education">Education</span>-->
+<!--                    --><?php
+//                }
+//                ?>
+<!--                --><?php //if ($type != 'tutor')
+//                {
+//                    ?>
+<!--                    <span class="--><?//= $sender_type=='tutor'? 'active': ''; ?><!--" type="tutor">Tutor</span>-->
+<!--                    --><?php
+//                }
+//                ?>
+<!--                --><?php //if ($type != 'student')
+//                {
+//                    ?>
+<!--                    <span class="--><?//= $sender_type=='student'? 'active': ''; ?><!--" type="student">Student</span>-->
+<!--                    --><?php
+//                }
+//                ?>
             </div>
             <form class="new-message-form" action="javascript:;">
                 <div class="form-group">
-                    <input class="form-control" id="receiver" name="receiver" placeholder="To:" value="<?= $information['name']?>">
+                    <input class="form-control bg-white" id="receiver" name="receiver" placeholder="To:" value="<?= $name ?>" readonly>
                 </div>
                 <div class="form-group">
                     <input class="form-control" id="title" name="title" placeholder="Subject:">

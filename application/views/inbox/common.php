@@ -7,7 +7,7 @@
                     <div class="inner-header wform">
                         <div class="job-search-sec">
                             <div class="job-search">
-                                <h4>Welcome Students</h4>
+                                <h4>Welcome <?= $userName; ?></h4>
                             </div>
                         </div>
                     </div>
@@ -20,10 +20,10 @@
     <div class="row">
         <div class="col-lg-3 col-md-4">
             <div class="card-body inbox-panel">
-                <a href="<?= base_url('inbox/newMessage')?>" class="btn btn-danger m-b-20 p-10 btn-block waves-effect waves-light">
-                    <i class="fa fa-plus-circle"></i>
-                    Compose
-                </a>
+<!--                <a href="--><?//= base_url('inbox/newMessage')?><!--" class="btn btn-danger m-b-20 p-10 btn-block waves-effect waves-light">-->
+<!--                    <i class="fa fa-plus-circle"></i>-->
+<!--                    Compose-->
+<!--                </a>-->
                 <ul class="list-group list-group-full">
                     <li class="list-group-item <?php if (urldecode(uri_string()) == 'inbox'){ ?>active<?php } ?>">
                         <a href="<?= base_url('inbox')?>">

@@ -61,6 +61,10 @@ $(document).ready(function () {
 
     });
 
+    $("#checkbox_all").on("click", function () {
+        $(".checkbox").prop("checked", $(this).is(":checked"));
+    });
+
     /*
     *   Functions
     */
@@ -94,7 +98,7 @@ $(document).ready(function () {
                                         <label class="custom-control-label" for="checkbox` + message.id + `"></label>
                                     </div>
                                 </td>
-                                <td class="max-texts"><a href="` + base_url + `message/detail/` + message.id + `">` + message.title.substr(0, 70) + `</a></td>
+                                <td class="max-texts"><a href="` + base_url + message.router + `/` + message.id + `">` + message.title.substr(0, 70) + `</a></td>
                                 <td class="text-right" width="10%"> ` + message.date + ` </td>
                             </tr>`;
         });

@@ -51,36 +51,15 @@ $(document).ready(function () {
     $("#student-grade").on("change", function () {
         setSubject($(this).val());
 
-        if ($(this).val()==null || $(this).val()=="")
-        {
-            $('.select2-activity').prop('disabled',false);
-            $('.select2-activity').selectpicker('refresh');
-        }
-        else
-        {
-            $('.select2-activity').prop('disabled',true);
-            $('.select2-activity').selectpicker('refresh');
-        }
+        checkValidate();
+    });
+
+    $("#student-subject").on("change", function () {
+        checkValidate();
     });
 
     $("#student-activity").on("change", function () {
-
-        if ($(this).val()==null || $(this).val()=="")
-        {
-            $('.select2-grade').prop('disabled',false);
-            $('.select2-grade').selectpicker('refresh');
-
-            $('.select2-subject').prop('disabled',false);
-            $('.select2-subject').selectpicker('refresh');
-        }
-        else
-        {
-            $('.select2-grade').prop('disabled',true);
-            $('.select2-grade').selectpicker('refresh');
-
-            $('.select2-subject').prop('disabled',true);
-            $('.select2-subject').selectpicker('refresh');
-        }
+        checkValidate();
     });
 
     $(".student-form").on("submit", function (e) {
@@ -92,23 +71,19 @@ $(document).ready(function () {
             timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
         });
 
-        checkValidate($("#student-grade"), "grade");
-        checkValidate($("#student-subject"), "subject");
-        checkValidate($("#student-activity"), "activity");
-        checkValidate($("#checkbox_condition"), "terms", true);
+        checkValidate();
 
         if ($(this).valid())
         {
-            if (!$("#checkbox_condition").is(":checked"))
-            {
-                $("#checkbox_condition").focus();
-                return  false;
+            if (!checkValidate()) {
+                return false;
             }
 
-            if (!checkValidate($("#student-grade"), "grade")
-                && !checkValidate($("#student-subject"), "subject")
-                && !checkValidate($("#student-activity"), "activity")) {
-                return false;
+            if (!$("#checkbox_condition").is(":checked"))
+            {
+                $("#checkbox_condition").closest("div.pf-field").find("div.error").append($(`<span class="error">Please check terms and conditions</span>`));
+                $("#checkbox_condition").focus();
+                return  false;
             }
 
             var values = {
@@ -196,9 +171,6 @@ $(document).ready(function () {
             },
             gender: 'required',
             address: 'required',
-            grade: 'required',
-            subject: 'required',
-            activity: 'required',
             available_time: 'required',
             lesson_week: {
                 required: true,
@@ -231,9 +203,6 @@ $(document).ready(function () {
             },
             gender: 'Please select gender',
             address: 'Please enter address',
-            grade: 'Please enter grade',
-            subject: 'Please select subject',
-            activity: 'Please select activity',
             qualification: 'Please enter personal highest qualification',
             certification: 'Please enter personal certification',
             available_time: 'Please enter available time',
@@ -259,23 +228,25 @@ $(document).ready(function () {
         l.prependTo(e);
     };
 
-    function checkValidate(element, name, checkbox=false) {
-        if (checkbox)
-        {
-            if (!$("#checkbox_condition").is(":checked"))
-            {
-                element.closest("div.pf-field").find("div.error").append($(`<span class="error">Please check terms and conditions</span>`));
-                return  false;
-            }
+    function checkValidate() {
+
+        let grade = $("#student-grade");
+        let subject = $("#student-subject");
+        let activity = $("#student-activity");
+        $("div.pf-field").find("div.error>span.error").remove();
+
+        if (grade.val() == null && subject.val() == null && activity.val() == null) {
+            grade.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select grade</span>`));
+            subject.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select subject</span>`));
+            activity.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select activity</span>`));
+
+            return false;
         }
-        else {
-            element.closest("div.pf-field").find("div.error>span.error").remove();
+        else if (grade.val() != null && subject.val() == null)
+        {
+            subject.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select subject</span>`));
 
-            if ((element.val() == [] || element.val() == null) && !element.prop("disabled")) {
-                element.closest("div.pf-field").find("div.error").append($(`<span id="` + name.replace(" ", "-") + `-error" class="error">Please enter ` + name + `</span>`));
-
-                return false;
-            }
+            return false;
         }
 
         return true;

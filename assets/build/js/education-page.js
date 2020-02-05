@@ -107,18 +107,19 @@ $(document).ready(function () {
                                 <div class="emply-pstn" style="font-size: 15px;">
                                     <div class="container">
                                     ` + getRatingHtml(tutor.rating) + `
-                                    ` + tutor.jobs + `
                                     </div>
                                 </div>
                                 <h6>
                                     Name &nbsp;&nbsp;<span>` + tutor.name + `</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 </h6>
                                 <h6>
-                                    Gender&nbsp;&nbsp;<span>` + gender + `</span>
+                                    Gender&nbsp;&nbsp;<span>` + gender + `</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    Age&nbsp;&nbsp;<span>` + tutor.age + `</span>
                                 </h6>
                                 <h6>
-                                    Age&nbsp;&nbsp;<span>` + tutor.age + `</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    Expected Salary&nbsp;&nbsp;<span>` + tutor.hourly_rate + `</span>&nbsp;$/hr</h6>
+                                    Qualification&nbsp;&nbsp;<span>` + tutor.qualification + `</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    Expected Salary&nbsp;&nbsp;<span>` + tutor.hourly_rate + `</span>&nbsp;$/hr
+                                </h6>
                                 <h6>Self description</h6>
                                 <h6 class="text-self-description">
                                     ` + tutor.description + `

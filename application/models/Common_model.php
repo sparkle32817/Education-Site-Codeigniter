@@ -46,30 +46,6 @@ class Common_model extends CI_Model
         return 'fail';
     }
 
-    public function isValidEmail($postedData)
-    {
-        $this->db->where('email', $postedData['email']);
-        $result = $this->db->get('tbl_'.$postedData['type']);
-
-        if ($result->num_rows()>0)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function resetPassword($postedData, $password)
-    {
-        $this->db->where('email', $postedData['email']);
-        if ($this->db->update('tbl_'.$postedData['type'], array('password'=>$password)))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public function updateUserInfo($tableName, $id, $postedData)
     {
         $this->db->where('id', $id);
@@ -143,14 +119,7 @@ class Common_model extends CI_Model
 
     public function getSelectedName($tableName ,$ids)
     {
-        $this->db->select('name');
-
-        foreach (explode(',', $ids) as $id)
-        {
-            $this->db->or_where('id', $id);
-        }
-
-        return $this->db->get($tableName)->result_array();
+        return $this->db->select('name')->where_in(explode(',', $ids))->get($tableName)->result_array();
     }
 
     public function getLoggedUserInfo()
@@ -171,11 +140,6 @@ class Common_model extends CI_Model
     public function getAvgRating($type, $id)
     {
         return $this->db->select('AVG(rating) as avg')->where($type.'_id', $id)->get('tbl_'.$type.'_rating')->row()->avg;
-    }
-
-    public function getJobCount($type, $id)
-    {
-        return $this->db->where($type.'_id', $id)->get('tbl_'.$type.'_rating')->num_rows();
     }
 
 }

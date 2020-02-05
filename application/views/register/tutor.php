@@ -150,6 +150,18 @@
                                             <div class="error"></div>
                                         </div>
 
+                                        <span class="pf-title">Year of the experience</span>
+                                        <div class="pf-field">
+                                            <select name="experience">
+                                                <option value="">-Select year of the experience-</option>
+                                                <option value="1">0~1</option>
+                                                <option value="2">2~4</option>
+                                                <option value="3">5~10</option>
+                                                <option value="4">10+</option>
+                                            </select>
+                                            <div class="error"></div>
+                                        </div>
+
                                         <span class="pf-title">Expect hourly rate</span>
                                         <div class="pf-field">
                                             <input type="text" name="hourly_rate" placeholder="" />

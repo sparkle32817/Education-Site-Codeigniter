@@ -1,4 +1,9 @@
-
+<style>
+    a.btn-hide, a.btn-hide:hover {
+        background-color: #f4f5fa;
+        cursor: default;
+    }
+</style>
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url(<?= base_url('assets/build/images/resource/mslider1.jpg'); ?>) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
@@ -38,7 +43,7 @@
                                             <li>Limited to leave message to the candidate cases and recruit tutors</li>
                                             <li>Limited to  reply to the messages from the parents/tutor</li>
                                         </ul>
-                                        <a class="<?= $membership_type==0? 'selected': ''; ?>" href="javascript:;" title=""><?= $membership_type==0? 'SELECTED': 'DOWNGRADE'; ?></a>
+                                        <a class="<?= $membership_type==0? 'selected': 'hide-button'; ?>" href="javascript:;" title=""><?= $membership_type==0? 'SELECTED': ''; ?></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
@@ -57,7 +62,9 @@
                                             <li><span class="mr-2">&#10003;</span>Unlimited to leave message to the candidate cases and recruit tutors</li>
                                             <li><span class="mr-2">&#10003;</span>Unlimited to reply to the messages from the parents/tutor</li>
                                         </ul>
-                                        <a class="<?= $membership_type==1? 'selected': ''; ?>" href="<?= base_url('payEMU'); ?>" title=""><?= $membership_type==1? 'SELECTED': 'UPGRADE'; ?></a>
+                                        <a class="<?= $membership_type==1? 'selected': ''; ?>" href="<?= $membership_type==1? 'javascript:;': base_url('payEMU'); ?>" title="">
+                                          <?= $membership_type==1? 'SELECTED': 'UPGRADE'; ?>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +90,12 @@
                                 <li>Limited to leave message to the candidate cases</li>
                                 <li>Limited to reply the message to the parents</li>
                             </ul>
-                            <a class="<?= $membership_type==0? 'selected': ''; ?>" href="<?= /*base_url()*/'javascript:;'; ?>" title=""><?= $membership_type==0? 'SELECTED': 'DOWNGRADE'; ?></a>
+                            <a class="<?= $membership_type==0? 'selected': 'btn-hide'; ?>"
+                               href="<?= /*base_url()*/'javascript:;'; ?>"
+                               title=""
+                            >
+                              <?= $membership_type==0? 'SELECTED': ''; ?>
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -100,7 +112,12 @@
                                 <li style="font-size: 12px;"><span class="mr-2">&#10003;</span>Limited to leave 10 messages/month  to the candidate cases</li>
                                 <li><span class="mr-2">&#10003;</span>Limited to reply the 10 messages/month to the parents</li>
                             </ul>
-                            <a class="<?= $membership_type==1? 'selected': ''; ?>" href="<?= $membership_type<1? base_url('payTMU/1'): 'javascript:;'; ?>" title=""><?php if ($membership_type==1){echo 'SELECTED';}elseif($membership_type<1){echo 'UPGRADE';}else{echo 'DOWNGRADE';} ?></a>
+                            <a class="<?php if ($membership_type==1){echo 'selected';}elseif($membership_type>1){echo 'btn-hide';}else{echo '';} ?>"
+                               href="<?= $membership_type<1? base_url('payTMU/1'): 'javascript:;'; ?>"
+                               title=""
+                            >
+                              <?php if ($membership_type==1){echo 'SELECTED';}elseif($membership_type<1){echo 'UPGRADE';}else{echo '';} ?>
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-4">

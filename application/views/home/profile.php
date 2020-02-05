@@ -214,6 +214,18 @@
                                                 <div class="error"></div>
                                             </div>
 
+                                            <span class="pf-title mt-0">Year of the experience</span>
+                                            <div class="pf-field profile-select2">
+                                                <select name="experience" disabled>
+                                                    <option value="">-Select year of the experience-</option>
+                                                    <option value="1" <?= $information['certification']==1? "selected": ""; ?>>0~1</option>
+                                                    <option value="2" <?= $information['certification']==2? "selected": ""; ?>>2~4</option>
+                                                    <option value="3" <?= $information['certification']==3? "selected": ""; ?>>5~10</option>
+                                                    <option value="4" <?= $information['certification']==4? "selected": ""; ?>>10+</option>
+                                                </select>
+                                                <div class="error"></div>
+                                            </div>
+
                                             <span class="pf-title mt-0">Expect hourly rate</span>
                                             <div class="pf-field profile-select2">
                                                 <input type="text" name="hourly_rate" value="<?= $information['hourly_rate']; ?>" readonly/>

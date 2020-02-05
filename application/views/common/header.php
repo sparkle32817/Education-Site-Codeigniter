@@ -103,12 +103,12 @@
             ?>
             <div class="responsivemenu">
                 <ul>
-                    <li class="menu_widgets">
-                        <a href="<?= base_url('home'); ?>" title="">Home</a>
-                    </li>
                     <?php
                     if (!isset($loggedUserType)) {
                         ?>
+                        <li class="menu_widgets">
+                            <a href="<?= base_url('home'); ?>" title="">Home</a>
+                        </li>
                         <li class="menu_widgets">
                             <a href="<?= base_url('education'); ?>" title="">Education Center</a>
 
@@ -240,12 +240,12 @@
                 ?>
                 <nav>
                     <ul class="menu_color">
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('home'); ?>" title="">Home</a>
-                        </li>
                         <?php
                         if (!isset($loggedUserType)) {
                             ?>
+                            <li class="menu_widgets">
+                                <a href="<?= base_url('home'); ?>" title="">Home</a>
+                            </li>
                             <li class="menu_widgets">
                                 <a href="<?= base_url('education'); ?>" title="">Education Center</a>
 

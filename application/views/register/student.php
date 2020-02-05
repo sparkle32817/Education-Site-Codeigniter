@@ -81,8 +81,8 @@
                                         <div class="pf-field">
                                             <select id="location1" name="location" required>
                                                 <option value="">-Select Location-</option>
-                                                <option value="1">Home</option>
-                                                <option value="0">Not home</option>
+                                                <option value="0">Home</option>
+                                                <option value="1">Not home</option>
                                             </select>
 
                                             <select id="location2" class="mt-4" name="location" style="display: none;">

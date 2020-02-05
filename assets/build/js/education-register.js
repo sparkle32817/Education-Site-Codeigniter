@@ -37,38 +37,15 @@ $(document).ready(function () {
     $("#education-grade").on("change", function () {
         setSubject($(this).val());
 
-        console.log("changed");
+        checkValidate();
+    });
 
-        if ($(this).val()==null || $(this).val()=="")
-        {
-            $('.select2-activity').prop('disabled',false);
-            $('.select2-activity').selectpicker('refresh');
-        }
-        else
-        {
-            $('.select2-activity').prop('disabled',true);
-            $('.select2-activity').selectpicker('refresh');
-        }
+    $("#education-subject").on("change", function () {
+        checkValidate();
     });
 
     $("#education-activity").on("change", function () {
-
-        if ($(this).val()==null || $(this).val()=="")
-        {
-            $('').prop('disabled',false);
-            $('.select2-grade').selectpicker('refresh');
-
-            $('.select2-subject').prop('disabled',false);
-            $('.select2-subject').selectpicker('refresh');
-        }
-        else
-        {
-            $('.select2-grade').prop('disabled',true);
-            $('.select2-grade').selectpicker('refresh');
-
-            $('.select2-subject').prop('disabled',true);
-            $('.select2-subject').selectpicker('refresh');
-        }
+        checkValidate();
     });
 
     $(".education-form").on("submit", function (e) {
@@ -80,23 +57,19 @@ $(document).ready(function () {
             timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
         });
 
-        checkValidate($("#education-grade"), "grade");
-        checkValidate($("#education-subject"), "subject");
-        checkValidate($("#education-activity"), "activity");
-        checkValidate($("#checkbox_condition"), "terms", true);
+        checkValidate();
 
         if ($(this).valid())
         {
+            if (!checkValidate()) {
+                return false;
+            }
+
             if (!$("#checkbox_condition").is(":checked"))
             {
                 $("#checkbox_condition").focus();
+                $("#checkbox_condition").closest("div.pf-field").find("div.error").append($(`<span class="error">Please check terms and conditions</span>`));
                 return  false;
-            }
-
-            if (!checkValidate($("#education-grade"), "grade")
-                && !checkValidate($("#education-subject"), "subject")
-                && !checkValidate($("#education-activity"), "activity")) {
-                return false;
             }
 
             var values = {
@@ -217,15 +190,30 @@ $(document).ready(function () {
         l.prependTo(e);
     };
 
-    function checkValidate(element, name) {
-        element.closest("div.pf-field").find("div.error>span.error").remove();
+    function checkValidate() {
 
-        if ((element.val() == [] || element.val() == null) && !element.prop("disabled"))
-        {
-            element.closest("div.pf-field").find("div.error").append($(`<span id="`+name+`-error" class="error">Please enter `+name+`</span>`));
+        let grade = $("#education-grade");
+        let subject = $("#education-subject");
+        let activity = $("#education-activity");
+        $("div.pf-field").find("div.error>span.error").remove();
+
+        if (grade.val() == null && subject.val() == null && activity.val() == null) {
+            grade.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select grade</span>`));
+            subject.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select subject</span>`));
+            activity.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select activity</span>`));
+
+            return false;
         }
+        else if (grade.val() != null && subject.val() == null)
+        {
+            subject.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select subject</span>`));
+
+            return false;
+        }
+
+        return true;
     }
-    
+
     function setSubject(gradIDs) {
         $.ajax( {
             url: base_url + 'register/getSubjects',

@@ -168,7 +168,7 @@
             <script src="<?= base_url('assets/build/js/inbox-new.js') ?>" type="text/javascript"></script>
         <?php } ?>
 
-        <?php if (isset($id) && urldecode(uri_string()) == 'inbox/reply/'.$id){ ?>
+        <?php if (isset($id) && (urldecode(uri_string()) == 'replyInbox/'.$id || urldecode(uri_string()) == 'replySent/'.$id)){ ?>
             <script src="<?= base_url('assets/build/js/inbox-reply.js') ?>" type="text/javascript"></script>
         <?php } ?>
 

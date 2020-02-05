@@ -53,6 +53,23 @@ $(document).ready(function () {
         $(".inbox-container").html(getInboxList());
 
     });
+    
+    $("#checkbox_all").on("click", function () {
+        $(".checkbox").prop("checked", $(this).is(":checked"));
+    });
+
+    $("a.mail-title").on("click", function () {
+        $.ajax({
+            url: base_url + "inbox/markRead",
+            method: "post",
+            data: {id: $(this).attr("l-id")},
+            dataType: "text",
+            async: false,
+            success: function (data) {
+                // alert(data);
+            }
+        });
+    });
 
     /*
     *   Functions
@@ -93,7 +110,7 @@ $(document).ready(function () {
                                     </div>
                                 </td>
                                 <td class="hidden-xs-down" width="15%">` + inbox.sender + `</td>
-                                <td class="max-texts"><a href="` + base_url + `inbox/detail/` + inbox.id + `">` + inbox.title.substr(0, 70) + `</a></td>
+                                <td class="max-texts"><a class="mail-title" href="` + base_url + `inboxDetail/` + inbox.id + `" l-id="` + inbox.id + `">` + inbox.title.substr(0, 70) + `</a></td>
                                 <td class="text-right" width="10%"> ` + inbox.date + ` </td>
                             </tr>`;
         });

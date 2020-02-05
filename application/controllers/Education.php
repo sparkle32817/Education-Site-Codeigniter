@@ -25,6 +25,8 @@ class Education extends CI_Controller
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
         $headerData['avatar'] = $this->loggedUserInfo['avatar'];
         $headerData['userName'] = $this->loggedUserInfo['name'];
+
+        $data['userName'] = $this->loggedUserInfo['name'];
         $data['qualifications'] = $this->Common_model->getQualifications();
         $data['subjects'] = $this->Common_model->getAllSubjects();
         $data['grades'] = $this->Common_model->getAllGrades();
@@ -65,7 +67,6 @@ class Education extends CI_Controller
         foreach ($results as $result)
         {
             $result['rating'] = $this->Common_model->getAvgRating('education', $result['id']);
-            $result['jobs'] = $this->getJobCount('education', $result['id']);
 
             $returnVal[] = $result;
         }
@@ -102,7 +103,7 @@ class Education extends CI_Controller
         foreach ($results as $result)
         {
             $data = array();
-            $data['name'] = $result['name'];
+          $data['name'] = substr($result['name'], 0, 3).'xxx';
             $data['avatar'] = $result['avatar'];
             $data['time'] = $result['post_date'];
             $data['description'] = $result['description'];
@@ -128,22 +129,6 @@ class Education extends CI_Controller
         $studentName = $this->session->userdata('logged_user');
 
         return $this->Education_model->canOfferReview($this->Common_model->getTableID('tbl_student', $studentName), $education_id);
-    }
-
-    function getJobCount($type, $id)
-    {
-        $cnt = $this->Common_model->getJobCount($type, $id);
-
-        if ($cnt == 1)
-        {
-            return '(' . $cnt . ' job completed)';
-        }
-        else if ($cnt > 1)
-        {
-            return '(' . $cnt . ' jobs completed)';
-        }
-
-        return '';
     }
 
     function makeComma($var)

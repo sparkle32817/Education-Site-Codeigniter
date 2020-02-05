@@ -29,6 +29,7 @@ class Tutor extends CI_Controller
         $data['subjects'] = $this->Common_model->getAllSubjects();
         $data['grades'] = $this->Common_model->getAllGrades();
         $data['locations'] = $this->Common_model->getLocations();
+        $data['userName'] = $this->loggedUserInfo['name'];
 
         $this->load->view('common/header', $headerData);
         $this->load->view('tutor/index', $data);
@@ -69,8 +70,8 @@ class Tutor extends CI_Controller
         {
             $result['grade'] = $this->getSelectedName('tbl_grade', $result['grade']);
             $result['subject'] = $this->getSelectedName('tbl_subject', $result['subject']);
+            $result['qualification'] = $this->getSelectedName('tbl_qualification', $result['qualification']);
             $result['rating'] = $this->Common_model->getAvgRating('tutor', $result['id']);
-            $result['jobs'] = $this->getJobCount('tutor', $result['id']);
 
             $returnVal[] = $result;
         }
@@ -91,7 +92,6 @@ class Tutor extends CI_Controller
             $result['subject'] = $this->getSelectedName('tbl_subject', $result['subject']);
             $result['location'] = $this->getSelectedName('tbl_location', $result['location']);
             $result['rating'] = $this->Common_model->getAvgRating('tutor', $result['id']);
-            $result['jobs'] = $this->getJobCount('tutor', $result['id']);
 
             $returnVal[] = $result;
         }
@@ -128,7 +128,7 @@ class Tutor extends CI_Controller
         foreach ($results as $result)
         {
             $data = array();
-            $data['name'] = $result['name'];
+            $data['name'] = substr($result['name'], 0, 3).'xxx';
             $data['avatar'] = $result['avatar'];
             $data['time'] = $result['post_date'];
             $data['description'] = $result['description'];
@@ -154,22 +154,6 @@ class Tutor extends CI_Controller
         $studentName = $this->session->userdata('logged_user');
 
         return $this->Tutor_model->canOfferReview($this->Common_model->getTableID('tbl_student', $studentName), $tutorID);
-    }
-
-    function getJobCount($type, $id)
-    {
-        $cnt = $this->Common_model->getJobCount($type, $id);
-
-        if ($cnt == 1)
-        {
-            return '(' . $cnt . ' job completed)';
-        }
-        else if ($cnt > 1)
-        {
-            return '(' . $cnt . ' jobs completed)';
-        }
-
-        return '';
     }
 
     function makeComma($var)

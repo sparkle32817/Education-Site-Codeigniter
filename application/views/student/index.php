@@ -7,7 +7,7 @@
                     <div class="inner-header wform">
                         <div class="job-search-sec">
                             <div class="job-search">
-                                <h4>Welcome Student Center</h4>
+                                <h4>Welcome <?= $userName; ?></h4>
                             </div>
                         </div>
                     </div>

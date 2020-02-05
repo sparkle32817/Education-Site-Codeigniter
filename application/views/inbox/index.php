@@ -2,12 +2,12 @@
         <div class="col-xlg-10 col-lg-9 col-md-8 border-left">
             <div class="card-body">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-danger" id="inbox-delete">
+                    <button type="button" class="btn btn-danger" id="inbox-delete" title="Trash">
                         <i class="la la-trash"></i>
                     </button>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-secondary btn-info" id="inbox-reload">
+                    <button type="button" class="btn btn-secondary btn-info" id="inbox-reload" title="Refresh">
                         <i class="la la-refresh"></i>
                     </button>
                 </div>
@@ -25,7 +25,7 @@
                             <thead>
                                 <th width="10%">
                                     <div class="custom-control custom-checkbox mr-sm-2">
-                                        <input type="checkbox" class="custom-control-input checkbox" id="checkbox_all">
+                                        <input type="checkbox" class="custom-control-input" id="checkbox_all">
                                         <label class="custom-control-label" for="checkbox_all"></label>
                                     </div>
                                 </th>
