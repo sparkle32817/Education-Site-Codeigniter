@@ -1,9 +1,4 @@
-<style>
-    a.btn-hide, a.btn-hide:hover {
-        background-color: #f4f5fa;
-        cursor: default;
-    }
-</style>
+
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url(<?= base_url('assets/build/images/resource/mslider1.jpg'); ?>) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
@@ -43,7 +38,7 @@
                                             <li>Limited to leave message to the candidate cases and recruit tutors</li>
                                             <li>Limited to  reply to the messages from the parents/tutor</li>
                                         </ul>
-                                        <a class="<?= $membership_type==0? 'selected': 'hide-button'; ?>" href="javascript:;" title=""><?= $membership_type==0? 'SELECTED': ''; ?></a>
+                                        <a class="<?= $membership_type==0? 'selected': 'btn-hide'; ?>" href="javascript:;" title=""><?= $membership_type==0? 'SELECTED': ''; ?></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">

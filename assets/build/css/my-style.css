@@ -372,6 +372,10 @@
         cursor: default;
     }
 
+    a.btn-hide, a.btn-hide:hover {
+        background-color: #f4f5fa;
+        cursor: default;
+    }
 /*
 *   FAQ Page
 */

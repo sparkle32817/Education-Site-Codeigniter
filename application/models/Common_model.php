@@ -119,7 +119,14 @@ class Common_model extends CI_Model
 
     public function getSelectedName($tableName ,$ids)
     {
-        return $this->db->select('name')->where_in(explode(',', $ids))->get($tableName)->result_array();
+        $this->db->select('name');
+
+        foreach (explode(',', $ids) as $id)
+        {
+            $this->db->or_where('id', $id);
+        }
+
+        return $this->db->get($tableName)->result_array();
     }
 
     public function getLoggedUserInfo()
