@@ -16,6 +16,7 @@ class Student_model extends CI_Model
 
     public function getStudent($postedData)
     {
+        $this->db->select('id, name, location, grade, subject, avatar');
         if (!empty($postedData['location']))
         {
             $this->db->where('location', $postedData['location']);

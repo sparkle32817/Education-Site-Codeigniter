@@ -59,8 +59,23 @@
                                         <div class="col-lg-12">
                                             <span class="pf-title mt-0">Address</span>
                                             <div class="pf-field">
-                                                <input type="text" class="address" name="address" value="<?= $information['address'] ?>" readonly/>
+                                                <select name="address" disabled>
+                                                    <option value="">-Select Location-</option>
+                                                    <?php
+                                                    foreach ($locations as $location) {
+                                                        if ($location['name'] != 'Home') {
+                                                            ?>
+                                                            <option value="<?= $location['id']; ?>"
+                                                                <?= $location['id']==$information['address']? "selected": ""; ?>
+                                                            ><?= $location['name']; ?></option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <div class="error"></div>
                                             </div>
+
                                         </div>
                                         <?php
                                     }
@@ -234,106 +249,53 @@
                                         }
                                         ?>
                                         <span class="pf-title mt-0">Avialable time</span>
-                                        <div class="pf-field profile-select2">
-                                            <?php $timeline = json_decode($information['timeline'], true); ?>
-                                            <table class="table time-picker-table">
-                                                <thead class="thead-dark">
-                                                    <tr>
-                                                        <th scope="col" width="10%"></th>
-                                                        <th scope="col">MON</th>
-                                                        <th scope="col">TUE</th>
-                                                        <th scope="col">WEN</th>
-                                                        <th scope="col">THU</th>
-                                                        <th scope="col">FRI</th>
-                                                        <th scope="col">SAT</th>
-                                                        <th scope="col">SUN</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" value="From" readonly/>
+                                        <div class="pf-field opening-time pb-4">
+                                            <div class="calendar-head">
+                                                <div class="calendar-head-cell-blank"></div>
+                                                <div class="calendar-head-cell">Mon</div>
+                                                <div class="calendar-head-cell">Tue</div>
+                                                <div class="calendar-head-cell">Wed</div>
+                                                <div class="calendar-head-cell">Thu</div>
+                                                <div class="calendar-head-cell">Fri</div>
+                                                <div class="calendar-head-cell">Sat</div>
+                                                <div class="calendar-head-cell">Sun</div>
+                                            </div>
+                                            <div class="calendar-body">
+                                                <div class="calendar-time">
+                                                    <?php
+                                                        for($i=8; $i<23; $i++){
+                                                        ?>
+                                                            <div class="caldendar-time-cell subhead"><?= $i<10? '0'.$i.':00' : $i.':00'; ?></div>
+                                                        <?php
+                                                        }
+                                                    ?>
+                                                </div>
+                                                <?php
+                                                    $timeline = explode(',', $information['timeline']);
+                                                    for($i=1; $i<8; $i++){
+                                                    ?>
+                                                        <div class="calendar-week-day">
+                                                        <?php
+                                                            for($j=8; $j<23; $j++){
+                                                                $time = 'cell-'.$i.'-'.$j;
+                                                            ?>
+                                                                <div class="caption calendar-cell-container">
+                                                                    <div
+                                                                        class="
+                                                                            calendar-cell
+                                                                            <?= in_array($time, $timeline)? 'calendar-cell-actived': ''; ?>
+                                                                        "
+                                                                        a-time="<?= 'cell-'.$i.'-'.$j; ?>"
+                                                                    ></div>
                                                                 </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" value="To" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row schedule" day="mon">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="start" value="<?= $timeline['mon_start'] ?>" readonly/>
-                                                                </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="end" value="<?= $timeline['mon_end'] ?>" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row schedule" day="tue">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="start" value="<?= $timeline['tue_start'] ?>" readonly/>
-                                                                </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="end" value="<?= $timeline['tue_end'] ?>" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row schedule" day="wen">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="start" value="<?= $timeline['wen_start'] ?>" readonly/>
-                                                                </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="end" value="<?= $timeline['wen_end'] ?>" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row schedule" day="thu">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="start" value="<?= $timeline['thu_start'] ?>" readonly/>
-                                                                </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="end" value="<?= $timeline['thu_end'] ?>" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row schedule" day="fri">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="start" value="<?= $timeline['fri_start'] ?>" readonly/>
-                                                                </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="end" value="<?= $timeline['fri_end'] ?>" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row schedule" day="sat">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="start" value="<?= $timeline['sat_start'] ?>" readonly/>
-                                                                </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="end" value="<?= $timeline['sat_end'] ?>" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="col-md-12 m-0 p-0 row schedule" day="sun">
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="start" value="<?= $timeline['sun_start'] ?>" readonly/>
-                                                                </div>
-                                                                <div class="col-md-12 px-0 my-1">
-                                                                    <input type="text" class="timepicker" status="end" value="<?= $timeline['sun_end'] ?>" readonly/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                            <?php
+                                                            }
+                                                        ?>
+                                                        </div>
+                                                    <?php                                                        
+                                                    }
+                                                ?>
+                                            </div>
                                         </div>
                                         <?php
                                         if ($type == 'education' || $type == 'tutor')

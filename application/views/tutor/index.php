@@ -41,9 +41,11 @@
                         <h>Ratings</h>
                         <select id="tutor-education-rating">
                             <option value="">-Select Ratings-</option>
-                            <option value="1">Meezan Job</option>
-                            <option value="2">Speicalize Jobs</option>
-                            <option value="3">Business Jobs</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
                     </div>
                 </div>

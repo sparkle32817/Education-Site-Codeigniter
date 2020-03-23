@@ -232,6 +232,78 @@
         padding: 0 0 0 1em;
     }
 
+    /* Timeline */
+    .opening-time {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1000px;
+        text-align: center;
+        font-weight: 300;
+    }
+    .calendar-head-cell-blank, .calendar-time {
+        flex: 1 1;
+    }
+    .subhead {
+        font-size: 14px;
+    }    
+    .calendar-head {
+        background-color: #212529;
+        display: flex;
+        margin: 0 auto;
+        padding: 10px 0;
+        width: 100%;
+        max-width: 960px;
+        border-radius: 5px 5px 0 0;
+        color: white;
+    }
+    .calendar-head-cell {
+        flex: 1 1;
+        justify-content: center;
+        text-align: center;
+    }
+    .calendar-body {
+        display: flex;
+        border-radius: 0 0 5px 5px;
+        border: 1px solid #ddd;
+        overflow: hidden;
+    }
+    .caldendar-time-cell:first-child {
+        visibility: hidden;
+    }
+    .caldendar-time-cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+    .calendar-cell-container, .calendar-week-day {
+        display: flex;
+        flex: 1 1;
+        flex-direction: column;
+    }
+    .calendar-week-day .calendar-cell-container:first-child {
+        border-top: 0;
+    }    
+    .caption {
+        font-size: 12px;
+    }
+    .calendar-cell-container {
+        border-left: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+    }
+    .calendar-cell {
+        flex: 1 1;
+    }
+    .opening-time.editable .calendar-cell {
+        cursor: pointer;
+    }
+    .calendar-cell.calendar-cell-actived {
+        background: #7ec937;
+    }
+
 /*
 * Education page
  */
@@ -283,10 +355,6 @@
 
     table.time-picker-table {
         margin-left: 20px;
-    }
-
-    div.commentform-sec {
-        margin: 0;
     }
 
     span.recommend-rating-text {

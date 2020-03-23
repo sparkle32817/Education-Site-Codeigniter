@@ -26,7 +26,7 @@
                                     <img src="<?= $information['avatar'] ?>" alt="" />
                                 </div>
                                 <div class="can-detail-s" style="text-align: left;">
-                                    <h7 style="font-color:red;"><?= $information['name'] ?></h7>
+                                    <h7 class="text-danger"><?= $information['name'] ?></h7>
                                     <span>Age: <i><?= $information['age'] ?></i></span>
                                     <span>Gender: <i><?= $information['gender'] == 1? "Male": "Female"; ?></i></span>
                                     <span>Subject: <i><?= $information['subject'] ?></i></span>
@@ -59,45 +59,49 @@
                                     </h6>
 
                                     <h6>Expecte fee:&nbsp;&nbsp;$<span><?= $information['hourly_rate']; ?></span></h6>
+                                    
                                     <h6>Avialable time</h6>
-                                    <div class="pf-field">
-                                        <?php $timeline = json_decode($information['timeline'], true); ?>
-                                        <table class="table time-picker-table">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th scope="col"></th>
-                                                    <th scope="col">MON</th>
-                                                    <th scope="col">TUE</th>
-                                                    <th scope="col">WEN</th>
-                                                   <th scope="col">THU</th>
-                                                    <th scope="col">FRI</th>
-                                                    <th scope="col">SAT</th>
-                                                    <th scope="col">SUN</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="text" class="timepicker" value="From" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['mon_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['tue_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['wen_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['thu_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['fri_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['sat_start'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['sun_start'] ?>" readonly/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="text" class="timepicker" value="To" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['mon_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['tue_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['wen_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['thu_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['fri_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['sat_end'] ?>" readonly/></td>
-                                                    <td><input type="text" class="timepicker" value="<?= $timeline['sun_end'] ?>" readonly/></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="pf-field opening-time">
+                                        <div class="calendar-head">
+                                            <div class="calendar-head-cell-blank"></div>
+                                            <div class="calendar-head-cell">Mon</div>
+                                            <div class="calendar-head-cell">Tue</div>
+                                            <div class="calendar-head-cell">Wed</div>
+                                            <div class="calendar-head-cell">Thu</div>
+                                            <div class="calendar-head-cell">Fri</div>
+                                            <div class="calendar-head-cell">Sat</div>
+                                            <div class="calendar-head-cell">Sun</div>
+                                        </div>
+                                        <div class="calendar-body">
+                                            <div class="calendar-time">
+                                                <?php
+                                                    for($i=8; $i<23; $i++){
+                                                    ?>
+                                                        <div class="caldendar-time-cell subhead"><?= $i<10? '0'.$i.':00' : $i.':00'; ?></div>
+                                                    <?php
+                                                    }
+                                                ?>
+                                            </div>
+                                            <?php
+                                                $timeline = explode(',', $information['timeline']);
+                                                for($i=1; $i<8; $i++){
+                                                ?>
+                                                    <div class="calendar-week-day">
+                                                    <?php
+                                                        for($j=8; $j<23; $j++){
+                                                            $time = 'cell-'.$i.'-'.$j;
+                                                        ?>
+                                                            <div class="caption calendar-cell-container">
+                                                                <div class="calendar-cell <?= in_array($time, $timeline)? 'calendar-cell-actived': ''; ?>"></div>
+                                                            </div>
+                                                        <?php
+                                                        }
+                                                    ?>
+                                                    </div>
+                                                <?php                                                        
+                                                }
+                                            ?>
+                                        </div>
                                     </div>
                                     <h6>&nbsp;</h6>
                                     <h6>Self description</h6>
@@ -123,9 +127,9 @@
                             <?php
                             if ($curUserType == 'student' && $offer_able) {
                                 ?>
-                                <div class="commentform-sec" id="div-review" style="margin-top: 30px;">
+                                <div class="commentform-sec mt-0" id="div-review" style="margin-top: 30px;">
                                     <h3>Review Content</h3>&nbsp;&nbsp;<span class="recommend-rating"></span>&nbsp;&nbsp;<span class="recommend-rating-text">1</span>
-                                    <form class="form-review" action="javascript:;">
+                                    <form class="form-review p-0" action="javascript:;">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <span class="pf-title">Description</span>

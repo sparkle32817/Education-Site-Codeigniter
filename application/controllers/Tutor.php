@@ -68,8 +68,8 @@ class Tutor extends CI_Controller
         $returnVal = array();
         foreach ($results as $result)
         {
-            $result['grade'] = $this->getSelectedName('tbl_grade', $result['grade']);
-            $result['subject'] = $this->getSelectedName('tbl_subject', $result['subject']);
+            // $result['grade'] = $this->getSelectedName('tbl_grade', $result['grade']);
+            // $result['subject'] = $this->getSelectedName('tbl_subject', $result['subject']);
             $result['qualification'] = $this->getSelectedName('tbl_qualification', $result['qualification']);
             $result['rating'] = $this->Common_model->getAvgRating('tutor', $result['id']);
 

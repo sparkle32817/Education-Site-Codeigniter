@@ -1,57 +1,17 @@
 $(document).ready(function () {
 
-    // console.log("this", $(this).context.location.origin);
+    let clickable = false;
 
     InitGrade();
     InitActivity();
 
-    $(".timepicker").timepicker({
-        autoclose: true,
-        minuteStep: 5,
-        showSeconds: false,
-        showMeridian: false,
-        disableFocus: false,
-        showInputs: false,
-        change: function(time) {
-            // the input field
-            var element = $(this), text;
-            // get access to this Timepicker instance
-            var timepicker = element.timepicker();
-            text = 'Selected time is: ' + timepicker.format(time);
-            console.log("time", text);
-            element.siblings('span.help-line').text(text);
-        }
-    });
-
-    $(".timepicker").timepicker('hideWidget');
-
-    $('.timepicker').on('click',function(e) {
-        if ($(".btn-edit-profile").attr("status") == "readonly") {
-            $(this).timepicker('hideWidget');
-        } else {
-            $(this).timepicker('showWidget');
-        }
-    });
-
-    $('.timepicker').timepicker().on('changeTime.timepicker', function(e) {
-        let hour = e.time.hours, minute = e.time.minutes;
-        if($(this).attr("status")=="start")
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=end]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour >= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours + 1) + ":" + e.time.minutes);
-            }
-        }
-        else
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=start]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour <= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours - 1) + ":" + e.time.minutes);
-            }
+    $('.calendar-cell').on('click', function(){
+        if (!clickable) return;
+        
+        if( $(this).hasClass('calendar-cell-actived') ){
+            $(this).removeClass('calendar-cell-actived');
+        }else{
+            $(this).addClass('calendar-cell-actived');
         }
     });
 
@@ -134,11 +94,9 @@ $(document).ready(function () {
             return false;
         }
 
-        let timepicker = {};
-        $("input.timepicker").each(function (index, obj) {
-            timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
-        });
-
+        let timeline = [];
+        $('.calendar-cell-actived').each((index, element) => timeline.push($(element).attr('a-time')));
+        
         if ($(this).valid())
         {
             var values = {
@@ -146,7 +104,7 @@ $(document).ready(function () {
                 "grade": $("select[name=grade]").val()==null? null: $("select[name=grade]").val().toString(),
                 "subject": $("select[name=subject]").val()==null? null: $("select[name=subject]").val().toString(),
                 "activity": $("select[name=activity]").val()==null? null: $("select[name=activity]").val().toString(),
-                "timeline": JSON.stringify(timepicker)
+                "timeline": timeline.toString()
             };
 
             $.each($('.profile-form').serializeArray(), function(i, field) {
@@ -159,8 +117,6 @@ $(document).ready(function () {
                     values[field.name] = field.value;
                 }
             });
-
-            console.log(values);
 
             let response = "";
             $.ajax({
@@ -405,6 +361,7 @@ $(document).ready(function () {
     }
     
     function enabledForm() {
+        clickable = true;
 
         $(".profile-form").find(".alert").find(".close").click();
 
@@ -426,6 +383,8 @@ $(document).ready(function () {
             }
         });
 
+        $('.opening-time').addClass('editable');
+
         $('.profile-form textarea').prop("readonly", false);
 
         $(".upload-button-div").css("display", "block");
@@ -435,6 +394,8 @@ $(document).ready(function () {
     }
 
     function disabledForm() {
+        clickable = false;
+
         $.each($('.profile-form input'), function(i, element) {
             if ($(this).attr("class")!=null && $(this).attr("class").includes("timepicker"))
             {

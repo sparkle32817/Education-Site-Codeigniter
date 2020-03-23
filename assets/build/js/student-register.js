@@ -4,33 +4,11 @@ $(document).ready(function () {
     $(".select2-subject").selectpicker();
     setActivity();
 
-    $('.timepicker').timepicker({
-        autoclose: true,
-        minuteStep: 5,
-        showSeconds: false,
-        showMeridian: false,
-        disableFocus: false
-    });
-
-    $('.timepicker').timepicker().on('changeTime.timepicker', function(e) {
-        let hour = e.time.hours, minute = e.time.minutes;
-        if($(this).attr("status")=="start")
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=end]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour >= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours + 1) + ":" + e.time.minutes);
-            }
-        }
-        else
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=start]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour <= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours - 1) + ":" + e.time.minutes);
-            }
+    $('.calendar-cell').on('click', function(){
+        if( $(this).hasClass('calendar-cell-actived') ){
+            $(this).removeClass('calendar-cell-actived');
+        }else{
+            $(this).addClass('calendar-cell-actived');
         }
     });
 
@@ -66,10 +44,8 @@ $(document).ready(function () {
 
         e.preventDefault();
 
-        let timepicker = {};
-        $("input.timepicker").each(function (index, obj) {
-            timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
-        });
+        let timeline = [];
+        $('.calendar-cell-actived').each((index, element) => timeline.push($(element).attr('a-time')));
 
         checkValidate();
 
@@ -91,7 +67,7 @@ $(document).ready(function () {
                 "grade": $("#student-grade").val()==null? null: $("#student-grade").val().toString(),
                 "subject": $("#student-subject").val()==null? null: $("#student-subject").val().toString(),
                 "activity": $("#student-activity").val()==null? null: $("#student-activity").val().toString(),
-                "timeline": JSON.stringify(timepicker)
+                "timeline": timeline.toString()
             };
 
             $.each($('.student-form').serializeArray(), function(i, field) {
@@ -198,13 +174,11 @@ $(document).ready(function () {
                 equalTo: 'Confirm password should be same with password'
             },
             age: {
-                required: 'Please enter phone number',
+                required: 'Please enter your age',
                 number: 'Age should be number'
             },
             gender: 'Please select gender',
             address: 'Please enter address',
-            qualification: 'Please enter personal highest qualification',
-            certification: 'Please enter personal certification',
             available_time: 'Please enter available time',
             lesson_week: {
                 required: 'Please enter lesson per week',
@@ -236,7 +210,7 @@ $(document).ready(function () {
         $("div.pf-field").find("div.error>span.error").remove();
 
         if (grade.val() == null && subject.val() == null && activity.val() == null) {
-            grade.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select grade</span>`));
+            // grade.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select grade</span>`));
             subject.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select subject</span>`));
             activity.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select activity</span>`));
 
@@ -252,11 +226,11 @@ $(document).ready(function () {
         return true;
     }
 
-    function setSubject(gradIDs) {
+    function setSubject(gradID) {
         $.ajax( {
             url: base_url + 'register/getSubjects',
             method: "post",
-            data: {ids: gradIDs},
+            data: {id: gradID},
             dataType: "json",
             async: false,
             success: function (subjects) {
@@ -265,11 +239,7 @@ $(document).ready(function () {
 
                 let subject_html = "";
                 $.each(subjects, function (index, subject) {
-                    subject_html += `<optgroup label="` + subject.text + `">`;
-                    $.each(subject.children, function (i, child){
-                        subject_html += `<option value="` + child.id + `">` + child.text + `</option>`;
-                    });
-                    subject_html += `</optgroup>`;
+                    subject_html += `<option value="` + subject.id + `">` + subject.text + `</option>`;
                 });
 
                 $(".select2-subject").selectpicker("destroy");

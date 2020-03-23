@@ -76,7 +76,7 @@ class Common_model extends CI_Model
 
     public function getSubjects($gradeID)
     {
-        $this->db->where('grade_id', $gradeID);
+        $this->db->where_in('grade_id', $gradeID);
         return $this->db->get('tbl_subject')->result_array();
     }
 

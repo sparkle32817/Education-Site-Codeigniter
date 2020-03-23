@@ -16,7 +16,7 @@ class Tutor_model extends CI_Model
 
     public function getTutor($postedData)
     {
-        $this->db->select('id, name, age, gender, location, grade, subject, activity, qualification, certification, hourly_rate, avatar, service_area, description, timeline, experience');
+        $this->db->select('id, name, age, gender, qualification, hourly_rate, avatar, description');
         if (!empty($postedData['hourly_rate']))
         {
             $hourly = explode("to", $postedData['hourly_rate']);

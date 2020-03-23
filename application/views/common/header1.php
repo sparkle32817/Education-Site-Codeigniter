@@ -99,23 +99,7 @@
                         <a href="<?= base_url('home'); ?>" title="">Home</a>
                     </li>
                     <?php
-                    if (!isset($loggedUserType)) {
-                        ?>
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('education'); ?>" title="">Education Center</a>
-
-                        </li>
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('tutor'); ?>" title="">Tutor Center</a>
-                        </li>
-                        <li class="menu_widgets">
-                            <a href="<?= base_url('student'); ?>" title="">Parent Center</a>
-
-                        </li>
-                        <?php
-                    }
-                    else
-                    {
+                    if (isset($loggedUserType)) {
                         if ($loggedUserType == 'education')
                         {
                             ?>
@@ -236,23 +220,7 @@
                             <a href="<?= base_url('home'); ?>" class="<?= isset($loggedUserType)? 'text-white': ''; ?>" title="">Home</a>
                         </li>
                         <?php
-                        if (!isset($loggedUserType)) {
-                            ?>
-                            <li class="menu_widgets">
-                                <a href="<?= base_url('education'); ?>" title="">Education Center</a>
-
-                            </li>
-                            <li class="menu_widgets">
-                                <a href="<?= base_url('tutor'); ?>" title="">Tutor Center</a>
-                            </li>
-                            <li class="menu_widgets">
-                                <a href="<?= base_url('student'); ?>" title="">Parent Center</a>
-
-                            </li>
-                            <?php
-                        }
-                        else
-                        {
+                        if (isset($loggedUserType)) {
                             if ($loggedUserType == 'education')
                             {
                                 ?>

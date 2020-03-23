@@ -23,33 +23,11 @@ $(document).ready(function () {
         checkValidate2();
     });
 
-    $('.timepicker').timepicker({
-        autoclose: true,
-        minuteStep: 5,
-        showSeconds: false,
-        showMeridian: false,
-        disableFocus: false
-    });
-
-    $('.timepicker').timepicker().on('changeTime.timepicker', function(e) {
-        let hour = e.time.hours, minute = e.time.minutes;
-        if($(this).attr("status")=="start")
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=end]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour >= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours + 1) + ":" + e.time.minutes);
-            }
-        }
-        else
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=start]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour <= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours - 1) + ":" + e.time.minutes);
-            }
+    $('.calendar-cell').on('click', function(){
+        if( $(this).hasClass('calendar-cell-actived') ){
+            $(this).removeClass('calendar-cell-actived');
+        }else{
+            $(this).addClass('calendar-cell-actived');
         }
     });
 
@@ -57,10 +35,8 @@ $(document).ready(function () {
 
         e.preventDefault();
 
-        let timepicker = {};
-        $("input.timepicker").each(function (index, obj) {
-            timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
-        });
+        let timeline = [];
+        $('.calendar-cell-actived').each((index, element) => timeline.push($(element).attr('a-time')));
 
         checkValidate1();
         checkValidate2();
@@ -84,7 +60,7 @@ $(document).ready(function () {
                 "subject": $("#tutor-subject").val()==null? null: $("#tutor-subject").val().toString(),
                 "activity": $("#tutor-activity").val()==null? null: $("#tutor-activity").val().toString(),
                 "location": $("#tutor-service-area").val().toString(),
-                "timeline": JSON.stringify(timepicker)
+                "timeline": timeline.toString()
             };
 
             $.each($('.tutor-form').serializeArray(), function(i, field) {
@@ -194,8 +170,9 @@ $(document).ready(function () {
                 equalTo: 'Confirm password should be same with password'
             },
             age: {
-                required: 'Please enter phone number',
-                number: 'Age should be number'
+                required: 'Please enter age',
+                number: 'Age should be number',
+                min: 'Age should be greater than or equal to 15'
             },
             gender: 'Please select gender',
             address: 'Please enter address',

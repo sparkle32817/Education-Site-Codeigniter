@@ -46,6 +46,7 @@ class Education extends CI_Controller
         $headerData['userName'] = $this->loggedUserInfo['name'];
 
         $result = $this->Education_model->getPersonalInfo($id);
+        $result['address'] = $this->getSelectedName('tbl_location', $result['address']);
 
         $data['information'] = $result;
         $data['curUserType'] = $this->session->userdata('logged_type');
@@ -62,13 +63,17 @@ class Education extends CI_Controller
     public function getEducation()
     {
         $results = $this->Education_model->getAllEducation($this->input->post());
+        $rating = $this->input->post('rating');
 
         $returnVal = array();
         foreach ($results as $result)
         {
             $result['rating'] = $this->Common_model->getAvgRating('education', $result['id']);
+            $result['address'] = $this->getSelectedName('tbl_location', $result['address']);
 
-            $returnVal[] = $result;
+            if (empty($rating) || (!empty($rating) && $result['rating']>=$rating)){
+                $returnVal[] = $result;
+            }
         }
 
         echo json_encode($returnVal);

@@ -23,6 +23,7 @@ class Register extends CI_Controller
         $data['activities'] = array();
         $data['subjects'] = $this->Common_model->getAllSubjects();
         $data['grades'] = $this->Common_model->getAllGrades();
+        $data['locations'] = $this->Common_model->getLocations();
 
         $this->load->view('common/header', $headerData);
         $this->load->view('register/education', $data);
@@ -107,9 +108,10 @@ class Register extends CI_Controller
     {
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
+        $grades = $this->Common_model->getAllGrades();
         $data['activities'] = array();
-        $data['subjects'] = $this->Common_model->getAllSubjects();
-        $data['grades'] = $this->Common_model->getAllGrades();
+        $data['subjects'] = empty($grades)? array(): $this->Common_model->getSubjects($grades[0]['id']);
+        $data['grades'] = $grades;
         $data['locations'] = $this->Common_model->getLocations();
 
         $this->load->view('common/header', $headerData);
@@ -132,24 +134,15 @@ class Register extends CI_Controller
             exit;
         }
 
-        $results = $this->Common_model->getGrades($postedData["ids"]);
+        $subjects = $this->Common_model->getSubjects($postedData["ids"]);
 
-        $returnVal = array();
-        foreach ($results as $result) {
-
-            $subjects = $this->Common_model->getSubjects($result['id']);
-
-            $data = array();
-            $data['text'] = $result['name'];
-            foreach ($subjects as $subject)
-            {
-                $data['children'][] = array('id'=>$subject['id'], 'text'=>$subject['name']);
-            }
-
-            $returnVal[] = $data;
+        $data = array();
+        foreach ($subjects as $subject)
+        {
+            $data[] = array('id'=>$subject['id'], 'text'=>$subject['name']);
         }
 
-        echo json_encode($returnVal);
+        echo json_encode($data);
     }
 
     public function getActivities()

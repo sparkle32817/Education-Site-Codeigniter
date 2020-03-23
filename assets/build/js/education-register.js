@@ -4,33 +4,11 @@ $(document).ready(function () {
     $(".select2-subject").selectpicker();
     setActivity();
 
-    $('.timepicker').timepicker({
-        autoclose: true,
-        minuteStep: 5,
-        showSeconds: false,
-        showMeridian: false,
-        disableFocus: false
-    });
-
-    $('.timepicker').timepicker().on('changeTime.timepicker', function(e) {
-        let hour = e.time.hours, minute = e.time.minutes;
-        if($(this).attr("status")=="start")
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=end]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour >= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours + 1) + ":" + e.time.minutes);
-            }
-        }
-        else
-        {
-            let sibling = $(this).closest("div.schedule").find("input[status=start]"); //find sibling element
-            let time = sibling.val().split(":");
-            if (hour <= time[0])
-            {
-                sibling.timepicker("setTime", (e.time.hours - 1) + ":" + e.time.minutes);
-            }
+    $('.calendar-cell').on('click', function(){
+        if( $(this).hasClass('calendar-cell-actived') ){
+            $(this).removeClass('calendar-cell-actived');
+        }else{
+            $(this).addClass('calendar-cell-actived');
         }
     });
 
@@ -52,10 +30,8 @@ $(document).ready(function () {
 
         e.preventDefault();
 
-        let timepicker = {};
-        $("input.timepicker").each(function (index, obj) {
-            timepicker[$(this).closest("div.schedule").attr("day")+"_"+$(this).attr("status")] = $(this).val();
-        });
+        let timeline = [];
+        $('.calendar-cell-actived').each((index, element) => timeline.push($(element).attr('a-time')));
 
         checkValidate();
 
@@ -77,7 +53,7 @@ $(document).ready(function () {
                 "grade": $("#education-grade").val()==null? null: $("#education-grade").val().toString(),
                 "subject": $("#education-subject").val()==null? null: $("#education-subject").val().toString(),
                 "activity": $("#education-activity").val()==null? null: $("#education-activity").val().toString(),
-                "timeline": JSON.stringify(timepicker)
+                "timeline": timeline.toString()
             };
 
             $.each($('.education-form').serializeArray(), function(i, field) {

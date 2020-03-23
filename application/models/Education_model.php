@@ -16,6 +16,12 @@ class Education_model extends CI_Model
 
     public function getAllEducation($postedData)
     {
+        $this->db->select('id, name, address, description, avatar');
+        if (!empty($postedData['location']))
+        {
+            $this->db->where('address', $postedData['location']);
+        }
+
         return $this->db->get('tbl_education')->result_array();
     }
 
