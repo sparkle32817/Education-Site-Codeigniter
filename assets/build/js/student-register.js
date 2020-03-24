@@ -209,14 +209,18 @@ $(document).ready(function () {
         let activity = $("#student-activity");
         $("div.pf-field").find("div.error>span.error").remove();
 
-        if (grade.val() == null && subject.val() == null && activity.val() == null) {
-            // grade.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select grade</span>`));
+        console.log('grade::', grade.val());
+        console.log('subject::', subject.val());
+        console.log('activity::', activity.val());
+
+        if (grade.val() === "" && subject.val() == null && activity.val() == null) {
+            grade.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select grade</span>`));
             subject.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select subject</span>`));
             activity.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select activity</span>`));
 
             return false;
         }
-        else if (grade.val() != null && subject.val() == null)
+        else if (grade.val() !== "" && subject.val() == null)
         {
             subject.closest("div.pf-field").find("div.error").append($(`<span class="error">Please select subject</span>`));
 
@@ -230,7 +234,7 @@ $(document).ready(function () {
         $.ajax( {
             url: base_url + 'register/getSubjects',
             method: "post",
-            data: {id: gradID},
+            data: {ids: gradID, multiple: false},
             dataType: "json",
             async: false,
             success: function (subjects) {

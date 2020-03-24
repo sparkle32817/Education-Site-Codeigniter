@@ -24,7 +24,7 @@ $(document).ready(function () {
     let location = '';
     $("#location1").on("change", function () {
 
-        if ($(this).val()==1)
+        if ($(this).val()==1 || $(this).val()==="")
         {
             location = '1';
 

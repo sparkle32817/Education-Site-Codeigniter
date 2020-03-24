@@ -1,4 +1,3 @@
-
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url(<?= base_url('assets/build/images/resource/mslider1.jpg'); ?>) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
@@ -35,8 +34,7 @@
                                             </span>
                                             <div class="upload-button-div">
                                                 <label class="browse-button" data-toggle="tooltip">Browse...
-                                                    <input type="file" class="sr-only" id="input-avatar-change" name="image"
-                                                           accept="image/*" style="width: 220px">
+                                                    <input type="file" class="sr-only" id="input-avatar-change" name="image" accept="image/*" style="width: 220px">
                                                 </label>
                                             </div>
                                         </div>
@@ -90,9 +88,9 @@
                                                 <?php
                                                 foreach ($locations as $location) {
                                                     if ($location['name'] != 'Home') {
-                                                        ?>
-                                                        <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
-                                                        <?php
+                                                ?>
+                                                    <option value="<?= $location['id']; ?>"><?= $location['name']; ?></option>
+                                                <?php
                                                     }
                                                 }
                                                 ?>
@@ -101,13 +99,13 @@
 
                                         <span class="pf-title">Grade</span>
                                         <div class="pf-field">
-                                            <select id="student-grade" name="grade" title="Please select grade" required>
+                                            <select id="student-grade" name="grade">
                                                 <option value="">-Select Grade-</option>
                                                 <?php
                                                 foreach ($grades as $grade) {
-                                                    ?>
+                                                ?>
                                                     <option value="<?= $grade['id']; ?>"><?= $grade['name']; ?></option>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                             </select>
@@ -119,13 +117,13 @@
                                         <span class="pf-title">School Subject</span>
                                         <div class="pf-field">
                                             <select class="form-control select2-subject width-100" id="student-subject" name="subject" title="Select School Subject" multiple>
-                                              <?php
-                                              foreach ($subjects as $subject) {
-                                                ?>
-                                                  <option value="<?= $subject['id']; ?>"><?= $subject['name']; ?></option>
                                                 <?php
-                                              }
-                                              ?>
+                                                //   foreach ($subjects as $subject) {
+                                                ?>
+                                                <!-- <option value="<?= $subject['id']; ?>"><?= $subject['name']; ?></option> -->
+                                                <?php
+                                                //   }
+                                                ?>
                                             </select>
                                             <div class="error"></div>
                                         </div>
@@ -152,29 +150,29 @@
                                             <div class="calendar-body">
                                                 <div class="calendar-time">
                                                     <?php
-                                                        for($i=8; $i<23; $i++){
-                                                        ?>
-                                                            <div class="caldendar-time-cell subhead"><?= $i<10? '0'.$i.':00' : $i.':00'; ?></div>
-                                                        <?php
-                                                        }
+                                                    for ($i = 8; $i < 23; $i++) {
+                                                    ?>
+                                                        <div class="caldendar-time-cell subhead"><?= $i < 10 ? '0' . $i . ':00' : $i . ':00'; ?></div>
+                                                    <?php
+                                                    }
                                                     ?>
                                                 </div>
                                                 <?php
-                                                    for($i=1; $i<8; $i++){
-                                                    ?>
-                                                        <div class="calendar-week-day">
+                                                for ($i = 1; $i < 8; $i++) {
+                                                ?>
+                                                    <div class="calendar-week-day">
                                                         <?php
-                                                            for($j=8; $j<23; $j++){
-                                                            ?>
-                                                                <div class="caption calendar-cell-container">
-                                                                    <div class="calendar-cell" a-time="<?= 'cell-'.$i.'-'.$j; ?>"></div>
-                                                                </div>
-                                                            <?php
-                                                            }
+                                                        for ($j = 8; $j < 23; $j++) {
                                                         ?>
-                                                        </div>
-                                                    <?php                                                        
-                                                    }
+                                                            <div class="caption calendar-cell-container">
+                                                                <div class="calendar-cell" a-time="<?= 'cell-' . $i . '-' . $j; ?>"></div>
+                                                            </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                <?php
+                                                }
                                                 ?>
                                             </div>
                                         </div>
@@ -234,6 +232,7 @@
 
 <script>
     let canvas_pic;
+
     function toDataURL(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
@@ -252,7 +251,7 @@
         canvas_pic = dataUrl;
         document.getElementById('avatar-img').src = canvas_pic;
     })
-    window.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('DOMContentLoaded', function() {
 
         let avatar = document.getElementById('avatar-img');
         let image = document.getElementById('crop-image');
@@ -260,10 +259,10 @@
         let $modal = $('#image-crop-modal');
         let cropper;
 
-        input.addEventListener('change', function (e) {
+        input.addEventListener('change', function(e) {
 
             let files = e.target.files;
-            let done = function (url) {
+            let done = function(url) {
                 image.src = url;
                 $modal.modal('show');
             };
@@ -275,7 +274,7 @@
                     done(URL.createObjectURL(file));
                 } else if (FileReader) {
                     let reader = new FileReader();
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
                         done(reader.result);
                     };
                     reader.readAsDataURL(file);
@@ -283,17 +282,17 @@
             }
         });
 
-        $modal.on('shown.bs.modal', function () {
+        $modal.on('shown.bs.modal', function() {
             cropper = new Cropper(image, {
                 aspectRatio: 1,
                 viewMode: 1,
             });
-        }).on('hidden.bs.modal', function () {
+        }).on('hidden.bs.modal', function() {
             cropper.destroy();
             cropper = null;
         });
 
-        document.getElementById('crop-button').addEventListener('click', function () {
+        document.getElementById('crop-button').addEventListener('click', function() {
 
             $modal.modal('hide');
 

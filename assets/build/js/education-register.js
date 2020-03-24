@@ -194,7 +194,7 @@ $(document).ready(function () {
         $.ajax( {
             url: base_url + 'register/getSubjects',
             method: "post",
-            data: {ids: gradIDs},
+            data: {ids: gradIDs, multiple: true},
             dataType: "json",
             async: false,
             success: function (subjects) {

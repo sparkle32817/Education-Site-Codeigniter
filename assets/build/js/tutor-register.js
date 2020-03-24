@@ -20,6 +20,16 @@ $(document).ready(function () {
     });
 
     $("#tutor-activity").on("change", function () {
+        if($(this).val() == null){
+            $(".qualification").prop("required", true);
+            $(".certification").prop("required", true);
+        } else {
+            $(".qualification").prop("required", false);
+            $(".certification").prop("required", false);
+
+            $("#qualification-error").remove();
+            $("#certification-error").remove();
+        }
         checkValidate2();
     });
 
@@ -141,8 +151,8 @@ $(document).ready(function () {
             },
             gender: 'required',
             address: 'required',
-            qualification: 'required',
-            certification: 'required',
+            // qualification: 'required',
+            // certification: 'required',
             experience: 'required',
             hourly_rate: {
                 required: true,
@@ -176,8 +186,8 @@ $(document).ready(function () {
             },
             gender: 'Please select gender',
             address: 'Please enter address',
-            qualification: 'Please enter personal highest qualification',
-            certification: 'Please enter personal certification',
+            // qualification: 'Please enter personal highest qualification',
+            // certification: 'Please enter personal certification',
             experience: 'Please enter year of the experience',
             hourly_rate: {
                 required: 'Please enter expect hourly rate',
@@ -245,7 +255,7 @@ $(document).ready(function () {
         $.ajax( {
             url: base_url + 'register/getSubjects',
             method: "post",
-            data: {ids: gradIDs},
+            data: {ids: gradIDs, multiple:true},
             dataType: "json",
             async: false,
             success: function (subjects) {

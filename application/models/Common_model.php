@@ -87,12 +87,7 @@ class Common_model extends CI_Model
 
     public function getGrades($IDs)
     {
-        foreach ($IDs as $id)
-        {
-            $this->db->or_where('id', $id);
-        }
-
-        return $this->db->get('tbl_grade')->result_array();
+        return $this->db->where_in('id', $IDs)->get('tbl_grade')->result_array();
     }
 
     public function getQualifications()

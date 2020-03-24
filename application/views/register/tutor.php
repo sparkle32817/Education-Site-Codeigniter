@@ -122,7 +122,7 @@
 
                                         <span class="pf-title">Personal highest qualification</span>
                                         <div class="pf-field">
-                                            <select name="qualification">
+                                            <select class="qualification" name="qualification" title="Please enter personal highest qualification" required>
                                                 <option value="">-Select Qualification-</option>
                                                 <?php
                                                 foreach ($qualifications as $qualification) {
@@ -137,7 +137,7 @@
 
                                         <span class="pf-title">Personal Certification</span>
                                         <div class="pf-field">
-                                            <select name="certification">
+                                            <select class="certification" name="certification"  title="Please enter personal certification" required>
                                                 <option value="">-Select Certification-</option>
                                                 <?php
                                                 foreach ($certifications as $certification) {

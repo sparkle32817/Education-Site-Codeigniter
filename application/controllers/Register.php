@@ -33,11 +33,10 @@ class Register extends CI_Controller
     public function registerEducation()
     {
         $postedData = $this->input->post('formData');
-        
+
         $result = $this->Common_model->register('tbl_education', $postedData);
 
-        if ($result == 'success')
-        {
+        if ($result == 'success') {
             $this->session->set_userdata('registered_type', 'education');
             $this->session->set_userdata('registered_email', $postedData['email']);
         }
@@ -49,8 +48,7 @@ class Register extends CI_Controller
     {
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
-        if ($this->session->userdata('registered_type') != 'education')
-        {
+        if ($this->session->userdata('registered_type') != 'education') {
             redirect('home');
         }
 
@@ -81,8 +79,7 @@ class Register extends CI_Controller
 
         $result = $this->Common_model->register('tbl_tutor', $postedData);
 
-        if ($result == 'success')
-        {
+        if ($result == 'success') {
             $this->session->set_userdata('registered_type', 'tutor');
             $this->session->set_userdata('registered_email', $postedData['email']);
         }
@@ -94,8 +91,7 @@ class Register extends CI_Controller
     {
         $headerData['loggedUserType'] = $this->session->userdata('logged_type');
 
-        if ($this->session->userdata('registered_type') != 'tutor')
-        {
+        if ($this->session->userdata('registered_type') != 'tutor') {
             redirect('home');
         }
 
@@ -110,7 +106,7 @@ class Register extends CI_Controller
 
         $grades = $this->Common_model->getAllGrades();
         $data['activities'] = array();
-        $data['subjects'] = empty($grades)? array(): $this->Common_model->getSubjects($grades[0]['id']);
+        // $data['subjects'] = empty($grades)? array(): $this->Common_model->getSubjects($grades[0]['id']);
         $data['grades'] = $grades;
         $data['locations'] = $this->Common_model->getLocations();
 
@@ -127,22 +123,37 @@ class Register extends CI_Controller
     public function getSubjects()
     {
         $postedData = $this->input->post();
+        // var_dump($postedData);exit;
 
-        if (empty($postedData["ids"]))
-        {
+        if (empty($postedData["ids"])) {
             echo json_encode(array());
             exit;
         }
 
-        $subjects = $this->Common_model->getSubjects($postedData["ids"]);
+        $results = $this->Common_model->getGrades($postedData["ids"]);
 
-        $data = array();
-        foreach ($subjects as $subject)
-        {
-            $data[] = array('id'=>$subject['id'], 'text'=>$subject['name']);
+        $returnVal = array();
+        foreach ($results as $result) {
+
+            $subjects = $this->Common_model->getSubjects($result['id']);
+               
+            $data = array();
+            if ($postedData['multiple']==='true') {
+                $data['text'] = $result['name'];
+                foreach ($subjects as $subject)
+                {
+                    $data['children'][] = array('id'=>$subject['id'], 'text'=>$subject['name']);
+                }
+                $returnVal[] = $data;
+            } else {
+                foreach ($subjects as $subject) {
+                    $data[] = array('id' => $subject['id'], 'text' => $subject['name']);
+                }
+                $returnVal = $data;
+            }
         }
 
-        echo json_encode($data);
+        echo json_encode($returnVal);
     }
 
     public function getActivities()
@@ -156,9 +167,8 @@ class Register extends CI_Controller
 
             $data = array();
             $data['text'] = $result['name'];
-            foreach ($subjects as $subject)
-            {
-                $data['children'][] = array('id'=>$subject['id'], 'text'=>$subject['name']);
+            foreach ($subjects as $subject) {
+                $data['children'][] = array('id' => $subject['id'], 'text' => $subject['name']);
             }
 
             $returnVal[] = $data;
@@ -166,5 +176,4 @@ class Register extends CI_Controller
 
         echo json_encode($returnVal);
     }
-
 }
