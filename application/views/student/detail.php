@@ -46,51 +46,6 @@
                 <h3>Student Center</h3>
               </div>
               <div class="profile-form-edit">
-                <h6>Avialable time</h6>
-                <div class="pf-field opening-time">
-                  <div class="calendar-head">
-                    <div class="calendar-head-cell-blank"></div>
-                    <div class="calendar-head-cell">Mon</div>
-                    <div class="calendar-head-cell">Tue</div>
-                    <div class="calendar-head-cell">Wed</div>
-                    <div class="calendar-head-cell">Thu</div>
-                    <div class="calendar-head-cell">Fri</div>
-                    <div class="calendar-head-cell">Sat</div>
-                    <div class="calendar-head-cell">Sun</div>
-                  </div>
-                  <div class="calendar-body">
-                    <div class="calendar-time">
-                      <?php
-											for ($i = 8; $i < 23; $i++) {
-											?>
-                      <div class="caldendar-time-cell subhead"><?= $i < 10 ? '0' . $i . ':00' : $i . ':00'; ?></div>
-                      <?php
-											}
-											?>
-                    </div>
-                    <?php
-										$timeline = explode(',', $information['timeline']);
-										for ($i = 1; $i < 8; $i++) {
-										?>
-                    <div class="calendar-week-day">
-                      <?php
-												for ($j = 8; $j < 23; $j++) {
-													$time = 'cell-' . $i . '-' . $j;
-												?>
-                      <div class="caption calendar-cell-container">
-                        <div class="calendar-cell <?= in_array($time, $timeline) ? 'calendar-cell-actived' : ''; ?>">
-                        </div>
-                      </div>
-                      <?php
-												}
-												?>
-                    </div>
-                    <?php
-										}
-										?>
-                  </div>
-                </div>
-                <h6>&nbsp;</h6>
                 <h6 style="margin: 0;">Lessons/week &nbsp;&nbsp; <span><?= $information['lesson_week']; ?></span>
                   lessons per week</h6>
                 <h6>Priavte/Group &nbsp;&nbsp; <span><?= $information['private_group']; ?></span></h6>
