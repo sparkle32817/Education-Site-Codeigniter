@@ -37,6 +37,7 @@ class Home extends CI_Controller
     $returnVal = array();
     $results = $this->Education_model->getFifthData();
     foreach ($results as $result) {
+      $result['address'] = $this->getSelectedName('tbl_location', $result['address']);
       $result['ratingHtml'] = $this->getAvgRating('education', $result['id']);
 
       $returnVal[] = $result;

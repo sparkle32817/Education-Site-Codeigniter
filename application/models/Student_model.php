@@ -11,7 +11,11 @@ class Student_model extends CI_Model
 
   public function getFifthData()
   {
-    return $this->db->order_by('id', 'DESC')->limit(5)->get('tbl_student')->result_array();
+    return $this->db->select('id, name, avatar, subject, location')
+      ->order_by('id', 'DESC')
+      ->limit(5)
+      ->get('tbl_student')
+      ->result_array();
   }
 
   public function getStudent($postedData)
@@ -38,9 +42,6 @@ class Student_model extends CI_Model
       $this->db->or_like('grade', $postedData['grade'], 'before');
       $this->db->group_end();
     }
-
-    //        $this->db->get('tbl_student');
-    //        return $this->db->last_query();
 
     return $this->db->get('tbl_student')->result_array();
   }

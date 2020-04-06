@@ -46,6 +46,7 @@ $(document).ready(function() {
       success: function(data) {
         if (data == "success") {
           $("#div-review").css("display", "none");
+          location.reload();
         }
       }
     });

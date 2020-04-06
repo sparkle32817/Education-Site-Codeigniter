@@ -11,7 +11,11 @@ class Tutor_model extends CI_Model
 
   public function getFifthData()
   {
-    return $this->db->order_by('id', 'DESC')->limit(5)->get('tbl_tutor')->result_array();
+    return $this->db->select('id, name, avatar, location, subject')
+      ->order_by('id', 'DESC')
+      ->limit(5)
+      ->get('tbl_tutor')
+      ->result_array();
   }
 
   public function getTutor($postedData)
@@ -59,9 +63,6 @@ class Tutor_model extends CI_Model
         $this->db->where('location', $postedData['grade']);
       }
     }
-
-    //        $this->db->get('tbl_tutor');
-    //        return $this->db->last_query();
 
     return $this->db->get('tbl_tutor')->result_array();
   }

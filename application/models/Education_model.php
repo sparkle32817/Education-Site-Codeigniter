@@ -11,7 +11,11 @@ class Education_model extends CI_Model
 
   public function getFifthData()
   {
-    return $this->db->order_by('id', 'DESC')->limit(5)->get('tbl_education')->result_array();
+    return $this->db->select('id, name, avatar, address')
+      ->order_by('id', 'DESC')
+      ->limit(5)
+      ->get('tbl_education')
+      ->result_array();
   }
 
   public function getAllEducation($postedData)
