@@ -10,8 +10,6 @@ $(document).ready(function() {
   $(".login-form").on("submit", function(e) {
     e.preventDefault();
 
-    console.log("here");
-
     if (type == "") {
       showMessage($(".account-popup"), "warning", "Please select user type!");
 
@@ -44,6 +42,8 @@ $(document).ready(function() {
 
       if (response == "success") {
         window.location.href = base_url + type;
+      } else if (response == "non-activated") {
+        showMessage($(".login-form"), "warning", "Your account is blocked. Please contact with us!");
       } else {
         showMessage($(".login-form"), "danger", "Username or password is wrong!");
       }

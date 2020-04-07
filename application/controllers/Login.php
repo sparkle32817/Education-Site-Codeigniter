@@ -7,6 +7,7 @@ class Login extends CI_Controller
   {
     parent::__construct();
 
+    $this->load->library('email');
     $this->load->model('Login_model');
     $this->load->model('Common_model');
   }
@@ -55,21 +56,36 @@ class Login extends CI_Controller
     $password = $this->randomPassword();
     $result = $this->Login_model->resetPassword($postedData, $password);
 
-    if (!$result) {
-      echo "fail";
-      exit;
+    if ($this->Login_model->resetPassword($postedData, $password)) {
+      $to = $postedData['email'];
+      $message = '
+                  <html>
+                  <head>
+                      <title>Recovery Password</title>
+                  </head>
+                  <body>
+                      <h2>Please use new password</h2>
+                      <h4>' . $password . '</h4>
+                  </body>
+                  </html>';
+
+      $config = array(
+        'mailtype' => 'html',
+        'charset'  => 'utf-8',
+        'priority' => '1'
+      );
+      $this->email->initialize($config);
+      $this->email->from('education@noreply.education.com', 'Education-Website');
+      $this->email->to($postedData['email']);
+      $this->email->subject('Recovery Password');
+      $this->email->message($message);
+      if ($this->email->send()) {
+        echo 'success';
+        exit;
+      }
     }
 
-    $to = $postedData['email'];
-    $subject = "Reset Password";
-    $message = "Password:" . $password;
-
-    $headers = 'From: education@mail.com' . "\r\n" .
-      'Reply-To: education@mail.com';
-
-    //        mail($to, $subject, $message, $headers);
-
-    echo 'success';
+    echo 'fail';
   }
 
   function randomPassword()

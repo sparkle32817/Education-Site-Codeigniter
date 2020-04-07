@@ -10,7 +10,7 @@
               <div class="widget">
                 <div class="about_widget">
                   <div class="logo">
-                    <a href="javascript:;" title=""><img src="<?= base_url('assets/build/images/resource/logo_4_1.png'); ?>" alt="" /></a>
+                    <a href="<?= base_url(); ?>" title=""><img src="<?= base_url('assets/build/images/resource/logo_4_1.png'); ?>" alt="" /></a>
                   </div>
                   <span>Collin Street West, Victor 8007, Hong Kong.</span>
                   <span>2117 6789</span>
